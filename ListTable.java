@@ -62,7 +62,7 @@ public class ListTable {
             String character_name = rs.getString(character_name);
             int experience = rs.getInt(experience);
 
-            System.out.println("Name: " + character_name + "| |EXP: " + experience);
+            System.out.println("Name: " + character_name + "| EXP: " + experience);
         }
 
         conn.close();

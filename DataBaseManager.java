@@ -23,6 +23,7 @@ public class DataBaseManager {
 
             pstm.close();
             conn.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -58,11 +59,11 @@ public class DataBaseManager {
             Connection conn = DriverManager.getConnection(url);
             int id = 1;
             int id_resolution = 2;
-            int volume_effects = 60;
-            int volume_music = 100;
-            int volume_geral = 90;
+            int volume_effects = -5;
+            int volume_music = 1;
+            int volume_geral = -2;
             boolean full_screen = true;
-            int save_date = 12042000;
+            int save_date = '2023-09-11 18:43:22';
             String sql = "INSERT INTO Settings VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement pstm = conn.prepareStatement(sql);

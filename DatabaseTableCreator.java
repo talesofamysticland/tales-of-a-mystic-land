@@ -6,34 +6,52 @@ import java.sql.PreparedStatement;
 
 Public Class DatabaseTableCreator{
         String url = "jdbc:mysql://localhost/estudante?user=estudante&password=estudante&useSSl=true";
-        Try {
+
+        try {
             Connection conn = DriverManager.getConnection(url);
             Statement stm = conn.createStatement();
 
-            String sql = "CREATE TABLE Item(id INT PRIMARY KEY, name VARCHAR(50));";
+            String sql = 
+            "CREATE TABLE Resolution(
+                id INT,
+                width INT,
+                height INT,
+
+                PRIMARY KEY (id)
+            );";
+
             stm.execute(sql);
 
-        sql = "CREATE TABLE Save_point(" +
-        "id INT PRIMARY KEY," +
-        "name VARCHAR(50)," +
-        "map INT," +
-        "world_x INT," +
-        "world_y INT);";
-        stm.execute(sql);
+            sql = "CREATE TABLE Settings(
+                id INT,
+                id_resolution INT,
+                volume_effects NUMERIC(3,1),
+                volume_music NUMERIC(3,1),
+                volume_geral NUMERIC(3,1),
+                full_screen BOOLEAN,
+                save_date DATETIME,
+                
+                PRIMARY KEY (id),
+                FOREIGN KEY (id_resolution) REFERENCES Resolution(id)
+            );";
 
-        sql = "CREATE TABLE Save_state (" +
-        "id INT PRIMARY KEY," +
-        "id_save_point INT," +
-        "play_time INT," +
-        "date DATETIME," +
-        "experience INT," +
-        "coins INT," +
-        "strength INT," +
-        "resistence INT," +
-        "constitution INT," +
-        "dexterity INT," +
-        "wisdom INT," +
-        "FOREIGN KEY (id_save_point) REFERENCES Save_point(id));";
+            stm.execute(sql);
+
+            sql = 
+            "CREATE TABLE Player(
+                id INT,
+                id_settings INT,
+                name VARCHAR(30),
+                email VARCHAR(50),
+                password CHAR(60),
+                verified BOOLEAN,
+                verification_token CHAR(36),
+                register_date DATETIME,
+
+                PRIMARY KEY (id),
+                FOREIGN KEY (id_settings) REFERENCES Settings(id)
+            );";
+
             stm.execute(sql);
 
             sql = "CREATE TABLE Item_in_inventory(" + 
@@ -47,25 +65,25 @@ Public Class DatabaseTableCreator{
             stm.execute(sql);
 
             sql = "CREATE TABLE Save_slot(" +
-            "id INT PRIMARY KEY," +
-            "id_save INT," +
-            "id_save_state INT," +
-            "position INT," +
-            "FOREIGN KEY (id_save) REFERENCES Save(id)," +
-            "FOREIGN KEY (id_save_state) REFERENCES Save_state(id));";
+                "id INT PRIMARY KEY," +
+                "id_save INT," +
+                "id_save_state INT," +
+                "position INT," +
+                "FOREIGN KEY (id_save) REFERENCES Save(id)," +
+                "FOREIGN KEY (id_save_state) REFERENCES Save_state(id));";
             stm.execute(sql);
 
             sql = "CREATE TABLE Save(" +
-            "id INT PRIMARY KEY," +
-            "id_player INT," +
-            "id_class INT," +
-            "character_name VARCHAR(20)," +
-            "FOREIGN KEY (id_player) REFERENCES Player(id)," +
-            "FOREIGN KEY (id_class) REFERENCES Class(id));";
+                "id INT PRIMARY KEY," +
+                "id_player INT," +
+                "id_class INT," +
+                "character_name VARCHAR(20)," +
+                "FOREIGN KEY (id_player) REFERENCES Player(id)," +
+                "FOREIGN KEY (id_class) REFERENCES Class(id));";
             stm.execute(sql);
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 }
