@@ -11,7 +11,7 @@ public class InsertSettings {
         String url = "jdbc:mysql://localhost/estudante?user=estudante&password=estudante&useSSL=true";
         Connection conn = DriverManager.getConnection(url);
         int id = 1;
-        int id_resolution = 2;
+        int id_resolution = 1;
         int volume_effects = -5;
         int volume_music = 1;
         int volume_geral = -2;
