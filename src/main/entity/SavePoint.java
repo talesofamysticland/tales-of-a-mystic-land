@@ -7,7 +7,7 @@ public class SavePoint{
     private Integer worldX;
     private Integer worldY;
 
-    public Item(Integer id, String name, Integer map, Integer worldX, Integer worldY){
+    public SavePoint(Integer id, String name, Integer map, Integer worldX, Integer worldY){
         this.id = id;
         this.name = name;
         this.map = map;
@@ -15,19 +15,48 @@ public class SavePoint{
         this.worldY = worldY;
     }
 
-    public String getName(){
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public Integer map(){
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getMap(){
         return map;
     }
 
-    public Integer worldX(){
+    public void setMap(Integer map) {
+        this.map = map;
+    }
+
+    public Integer getWorldX() {
         return worldX;
     }
 
-    public Integer worldY(){
+    public void setWorldX(Integer worldX) {
+        this.worldX = worldX;
+    }
+
+    public Integer getWorldY() {
         return worldY;
+    }
+
+    public void setWorldY(Integer worldY) {
+        this.worldY = worldY;
+    }
+
+    @Override
+    public String toString() {
+        return "[ " + getId() + ", " + getName() + ", " + getMap() + ", " + getWorldX() + ", " + getWorldY() + " ]";
     }
 }   

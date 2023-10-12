@@ -8,15 +8,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.Conexao;
+
 public class ItemDAO {
 
-    public Aluno findById(Integer id) {
+    public Item findById(Integer id) {
         String sql = "SELECT * FROM Item WHERE id = ?;";
 
         try (
             Connection connection = Conexao.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
+            statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
@@ -52,7 +55,13 @@ public class ItemDAO {
             e.printStackTrace();
             return null;
         }
-    
+    }
+
+    private Item resultSetToItem(ResultSet rs) throws SQLException {
+        return new Item(
+            rs.getInt("id"),
+            rs.getString("name")
+        );
     }
 
 }

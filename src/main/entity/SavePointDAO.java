@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.Conexao;
+
 public class SavePointDAO{
 
     public SavePoint findById(Integer id) {
@@ -19,7 +21,7 @@ public class SavePointDAO{
         ) {
             ResultSet rs = statement.executeQuery();
 
-            if (rs.next()) {
+            if(rs.next()) {
                 return resultSetToSavePoint(rs);
             }
 
@@ -34,8 +36,8 @@ public class SavePointDAO{
     }
 
     public List<SavePoint> findAll() {
-        String sql = "SELECT * FROM Save_Point;";
-        List<SavePoint> SavePoints = new ArrayList<>();
+        String sql = "SELECT * FROM Save_point;";
+        List<SavePoint> savePoints = new ArrayList<>();
 
         try (
             Connection connection = Conexao.getConnection();
@@ -43,16 +45,25 @@ public class SavePointDAO{
             ResultSet rs = statement.executeQuery(sql);
         ) {
             while(rs.next()) {
-                SavePoint.add(resultSetToSavePoint(rs));
+                savePoints.add(resultSetToSavePoint(rs));
             }
 
-            return SavePoint;
+            return savePoints;
         
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-    
+    }
+
+    private SavePoint resultSetToSavePoint(ResultSet rs) throws SQLException {
+        return new SavePoint(
+            rs.getInt("id"),
+            rs.getString("name"),
+            rs.getInt("map"),
+            rs.getInt("world_x"),
+            rs.getInt("world_y")
+        );
     }
 
 }
