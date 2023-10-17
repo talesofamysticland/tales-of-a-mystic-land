@@ -1,6 +1,7 @@
-package main.entity;
+package main.model;
 
 public class Item{
+
     private Integer id;
     private String name;
 
@@ -27,6 +28,6 @@ public class Item{
 
     @Override
     public String toString() {
-        return "[ " + getId() + ", " + getName() + " ]";
+        return "Item [id=" + id + ", name=" + name + "]\n";
     }
 }   

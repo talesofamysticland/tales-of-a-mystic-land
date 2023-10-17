@@ -1,6 +1,7 @@
-package main.entity;
+package main.model;
 
 public class SavePoint{
+
     private Integer id;
     private String name;
     private Integer map;
@@ -57,6 +58,7 @@ public class SavePoint{
 
     @Override
     public String toString() {
-        return "[ " + getId() + ", " + getName() + ", " + getMap() + ", " + getWorldX() + ", " + getWorldY() + " ]";
+        return "SavePoint [id=" + id + ", name=" + name + ", map=" + map + ", worldX=" + worldX + ", worldY=" + worldY
+                + "]\n";
     }
 }   

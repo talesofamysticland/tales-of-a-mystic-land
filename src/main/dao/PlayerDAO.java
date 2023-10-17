@@ -1,4 +1,4 @@
-package main.entity;
+package main.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,29 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 
-import main.Conexao;
+import main.database.ConnectionManager;
+import main.model.Player;
 
 public class PlayerDAO {
 
     public Player create(Player player) throws SQLException {
         String sql = """
-            INSERT INTO Player(id_settings, username, email, password, verified, verification_token, register_date)
-            VALUES (?, ?, ?, ?, ?, ?, ?);
+            INSERT INTO Player(username, email, password, verified, verification_token, register_date) 
+            VALUES (?, ?, ?, ?, ?, ?);
         """;
         
         try (
-            Connection connection = Conexao.getConnection();
+            Connection connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection
                 .prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         ) {
             
-            statement.setInt(1, player.getIdSettings());
-            statement.setString(2, player.getUsername());
-            statement.setString(3, player.getEmail());
-            statement.setString(4, player.getPassword());
-            statement.setBoolean(5, player.isVerified());
-            statement.setString(6, player.getVerificationToken());
-            statement.setObject(7, player.getRegisterDate());
+            statement.setString(1, player.getUsername());
+            statement.setString(2, player.getEmail());
+            statement.setString(3, player.getPassword());
+            statement.setBoolean(4, player.isVerified());
+            statement.setString(5, player.getVerificationToken());
+            statement.setObject(6, player.getRegisterDate());
 
             statement.executeUpdate();
 
@@ -44,31 +44,28 @@ public class PlayerDAO {
             rs.close();
 
             return player;
-            
         } 
-        
     }
 
     public Player update(Player player) throws SQLException {
         String sql = """
             UPDATE Player 
-            SET id_settings = ?, username = ?, email = ?, password = ?, verified = ?, verification_token = ?, register_date = ?
+            SET username = ?, email = ?, password = ?, verified = ?, verification_token = ?, register_date = ?
             WHERE id = ?;
         """;
 
         try (
-            Connection connection = Conexao.getConnection();
+            Connection connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
 
-            statement.setInt(1, player.getIdSettings());
-            statement.setString(2, player.getUsername());
-            statement.setString(3, player.getEmail());
-            statement.setString(4, player.getPassword());
-            statement.setBoolean(5, player.isVerified());
-            statement.setString(6, player.getVerificationToken());
-            statement.setObject(7, player.getRegisterDate());
-            statement.setInt(8, player.getId());
+            statement.setString(1, player.getUsername());
+            statement.setString(2, player.getEmail());
+            statement.setString(3, player.getPassword());
+            statement.setBoolean(4, player.isVerified());
+            statement.setString(5, player.getVerificationToken());
+            statement.setObject(6, player.getRegisterDate());
+            statement.setInt(7, player.getId());
             
             int linhasAfetadas = statement.executeUpdate();
 
@@ -83,32 +80,62 @@ public class PlayerDAO {
         }
     }
 
-    public void delete(Integer id) {
-        String sql = "DELETE FROM Player WHERE id = ?;";
-
-        try (
-            Connection connection = Conexao.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
-        ) {
-            statement.setInt(1, id);
-            statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void delete(Player player) {
-        delete(player.getId());
-    }
-
     public Player findById(Integer id) {
         String sql = "SELECT * FROM Player WHERE id = ?;";
 
         try (
-            Connection connection = Conexao.getConnection();
+            Connection connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                return resultSetToPlayer(rs);
+            }
+
+            rs.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return null;
+    }
+
+    public Player findByUsername(String username) {
+        String sql = "SELECT * FROM Player WHERE username = ?;";
+
+        try (
+            Connection connection = ConnectionManager.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                return resultSetToPlayer(rs);
+            }
+
+            rs.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return null;
+    }
+
+    public Player findByEmail(String email) {
+        String sql = "SELECT * FROM Player WHERE email = ?;";
+
+        try (
+            Connection connection = ConnectionManager.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setString(1, email);
             ResultSet rs = statement.executeQuery();
 
             if (rs.next()) {
@@ -130,7 +157,7 @@ public class PlayerDAO {
         List<Player> alunos = new ArrayList<>();
 
         try (
-            Connection connection = Conexao.getConnection();
+            Connection connection = ConnectionManager.getConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
         ) {
@@ -149,7 +176,6 @@ public class PlayerDAO {
     private Player resultSetToPlayer(ResultSet rs) throws SQLException {
         return new Player(
             rs.getInt("id"),
-            rs.getInt("id_settings"),
             rs.getString("username"),
             rs.getString("email"),
             rs.getString("password"),

@@ -1,11 +1,10 @@
-package main.entity;
+package main.model;
 
 import java.time.LocalDateTime;
 
 public class Player {
     
     private Integer id;
-    private Integer idSettings;
     private String username;
     private String email;
     private String password;
@@ -13,10 +12,9 @@ public class Player {
     private String verificationToken;
     private LocalDateTime registerDate;
 
-    public Player(Integer id, Integer idSettings, String username, String email, String password, boolean verified,
+    public Player(Integer id, String username, String email, String password, boolean verified,
             String verificationToken, LocalDateTime registerDate) {
         this.id = id;
-        this.idSettings = idSettings;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -25,15 +23,26 @@ public class Player {
         this.registerDate = registerDate;
     }
 
-    public Player(Integer idSettings, String username, String email, String password, boolean verified,
+    public Player(Integer id, String username, String email, String password, boolean verified,
+            String verificationToken) {
+
+        this(id, username, email, password, verified, verificationToken, LocalDateTime.now());
+    }
+
+    public Player(String username, String email, String password, boolean verified,
             String verificationToken, LocalDateTime registerDate) {
-        this.idSettings = idSettings;
         this.username = username;
         this.email = email;
         this.password = password;
         this.verified = verified;
         this.verificationToken = verificationToken;
         this.registerDate = registerDate;
+    }
+
+    public Player(String username, String email, String password, boolean verified,
+            String verificationToken) {
+
+        this(username, email, password, verified, verificationToken, LocalDateTime.now());
     }
 
     public Integer getId() {
@@ -42,14 +51,6 @@ public class Player {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getIdSettings() {
-        return idSettings;
-    }
-
-    public void setIdSettings(Integer idSettings) {
-        this.idSettings = idSettings;
     }
 
     public String getUsername() {
@@ -98,5 +99,12 @@ public class Player {
 
     public void setRegisterDate(LocalDateTime registerDate) {
         this.registerDate = registerDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Player [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
+                + ", verified=" + verified + ", verificationToken=" + verificationToken + ", registerDate="
+                + registerDate + "]\n";
     }
 }

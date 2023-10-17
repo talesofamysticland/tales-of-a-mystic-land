@@ -1,4 +1,4 @@
-package main.entity;
+package main.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.Conexao;
+import main.database.ConnectionManager;
+import main.model.Item;
 
 public class ItemDAO {
 
@@ -16,13 +17,37 @@ public class ItemDAO {
         String sql = "SELECT * FROM Item WHERE id = ?;";
 
         try (
-            Connection connection = Conexao.getConnection();
+            Connection connection = ConnectionManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
 
-            if (rs.next()) {
+            if(rs.next()) {
+                return resultSetToItem(rs);
+            }
+
+            rs.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return null;
+    }
+
+    public Item findByName(String name) {
+        String sql = "SELECT * FROM Item WHERE name = ?;";
+
+        try (
+            Connection connection = ConnectionManager.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+            statement.setString(1, name);
+            ResultSet rs = statement.executeQuery();
+
+            if(rs.next()) {
                 return resultSetToItem(rs);
             }
 
@@ -41,7 +66,7 @@ public class ItemDAO {
         List<Item> items = new ArrayList<>();
 
         try (
-            Connection connection = Conexao.getConnection();
+            Connection connection = ConnectionManager.getConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
         ) {
