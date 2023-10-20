@@ -25,24 +25,21 @@ public class Settings {
         this.saveDate = saveDate;
     }
 
+    public Settings(Integer playerId, Float volumeEffects, Float volumeMusic, Float volumeGeral,
+            boolean fullScreen, String resolution, LocalDateTime saveDate) {
+
+        this(null, playerId, volumeEffects, volumeMusic, volumeGeral, fullScreen, resolution, saveDate);
+    }
+
     public Settings(Integer id, Integer playerId, Float volumeEffects, Float volumeMusic, Float volumeGeral,
             boolean fullScreen, String resolution) {
+
         this(id, playerId, volumeEffects, volumeMusic, volumeGeral, fullScreen, resolution, LocalDateTime.now());
     }
 
     public Settings(Integer playerId, Float volumeEffects, Float volumeMusic, Float volumeGeral,
-            boolean fullScreen, String resolution, LocalDateTime saveDate) {
-        this.playerId = playerId;
-        this.volumeEffects = volumeEffects;
-        this.volumeMusic = volumeMusic;
-        this.volumeGeral = volumeGeral;
-        this.fullScreen = fullScreen;
-        this.resolution = resolution;
-        this.saveDate = saveDate;
-    }
-
-    public Settings(Integer playerId, Float volumeEffects, Float volumeMusic, Float volumeGeral,
             boolean fullScreen, String resolution) {
+
         this(playerId, volumeEffects, volumeMusic, volumeGeral, fullScreen, resolution, LocalDateTime.now());
     }
     

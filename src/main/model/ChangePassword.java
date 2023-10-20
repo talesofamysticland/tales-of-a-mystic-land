@@ -3,33 +3,31 @@ package main.model;
 import java.time.LocalDateTime;
 
 public class ChangePassword {
+
     private Integer id;
-    private Integer idPlayer;
+    private Integer playerId;
     private boolean validated;
     private LocalDateTime verificationDate;
     private String verificationToken;
 
-    public ChangePassword (Integer id, Integer idPlayer, boolean validated, LocalDateTime verificationDate, String verificationToken){
+    public ChangePassword(Integer id, Integer playerId, boolean validated, LocalDateTime verificationDate, String verificationToken) {
         this.id = id;
-        this.idPlayer = idPlayer;
+        this.playerId = playerId;
         this.validated = validated;
         this.verificationDate = verificationDate;
         this.verificationToken = verificationToken;
     }
 
-    public ChangePassword (Integer id, Integer idPlayer, boolean validated, String verificationToken){
-        this(id, idPlayer, validated, LocalDateTime.now(), verificationToken);
+    public ChangePassword(Integer playerId, boolean validated, LocalDateTime verificationDate, String verificationToken) {
+        this(null, playerId, validated, verificationDate, verificationToken);
     }
 
-    public ChangePassword (Integer idPlayer, boolean validated, LocalDateTime verificationDate, String verificationToken){
-        this.idPlayer = idPlayer;
-        this.validated = validated;
-        this.verificationDate = verificationDate;
-        this.verificationToken = verificationToken;
+    public ChangePassword(Integer id, Integer playerId, boolean validated, String verificationToken) {
+        this(id, playerId, validated, LocalDateTime.now(), verificationToken);
     }
 
-    public ChangePassword (Integer idPlayer, boolean validated, String verificationToken){
-        this(idPlayer, validated, LocalDateTime.now(), verificationToken);
+    public ChangePassword(Integer playerId, boolean validated, String verificationToken) {
+        this(playerId, validated, LocalDateTime.now(), verificationToken);
     }
 
     public Integer getId() {
@@ -39,29 +37,29 @@ public class ChangePassword {
     public void setId(Integer id) {
         this.id = id;
     }
-    
-    public Integer getIdPlayer() {
-        return idPlayer;
+
+    public Integer getPlayerId() {
+        return playerId;
     }
 
-    public void setIdPlayer(Integer idPlayer) {
-        this.idPlayer = idPlayer;
+    public void setPlayerId(Integer playerId) {
+        this.playerId = playerId;
     }
 
-    public LocalDateTime getVerificationDate() {
-        return verificationDate;
-    }
-    
-    public void setVerificationDate(LocalDateTime verificationDate) {
-        this.verificationDate = verificationDate;
-    }
-
-    public boolean getValidated() {
+    public boolean isValidated() {
         return validated;
     }
 
     public void setValidated(boolean validated) {
         this.validated = validated;
+    }
+
+    public LocalDateTime getVerificationDate() {
+        return verificationDate;
+    }
+
+    public void setVerificationDate(LocalDateTime verificationDate) {
+        this.verificationDate = verificationDate;
     }
 
     public String getVerificationToken() {
@@ -72,4 +70,9 @@ public class ChangePassword {
         this.verificationToken = verificationToken;
     }
 
+    @Override
+    public String toString() {
+        return "ChangePassword [id=" + id + ", playerId=" + playerId + ", validated=" + validated
+                + ", verificationDate=" + verificationDate + ", verificationToken=" + verificationToken + "]";
+    }
 }

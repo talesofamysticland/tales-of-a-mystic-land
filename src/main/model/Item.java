@@ -10,6 +10,10 @@ public class Item{
         this.name = name;
     }
 
+    public Item(String name){
+        this(null, name);
+    }
+
     public Integer getId() {
         return id;
     }

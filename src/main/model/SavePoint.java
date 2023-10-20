@@ -16,6 +16,10 @@ public class SavePoint{
         this.worldY = worldY;
     }
 
+    public SavePoint(String name, Integer map, Integer worldX, Integer worldY){
+        this(null, name, map, worldX, worldY);
+    }
+
     public Integer getId() {
         return id;
     }

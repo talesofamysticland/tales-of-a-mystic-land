@@ -15,9 +15,7 @@ public class Save {
     }
 
     public Save(Integer playerId, String characterName, String characterClass) {
-        this.playerId = playerId;
-        this.characterName = characterName;
-        this.characterClass = characterClass;
+        this(null, playerId, characterName, characterClass);
     }
 
     public Integer getId() {

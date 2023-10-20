@@ -23,20 +23,16 @@ public class Player {
         this.registerDate = registerDate;
     }
 
+    public Player(String username, String email, String password, boolean verified,
+            String verificationToken, LocalDateTime registerDate) {
+                
+        this(null, username, email, password, verified, verificationToken, registerDate);
+    }
+
     public Player(Integer id, String username, String email, String password, boolean verified,
             String verificationToken) {
 
         this(id, username, email, password, verified, verificationToken, LocalDateTime.now());
-    }
-
-    public Player(String username, String email, String password, boolean verified,
-            String verificationToken, LocalDateTime registerDate) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.verified = verified;
-        this.verificationToken = verificationToken;
-        this.registerDate = registerDate;
     }
 
     public Player(String username, String email, String password, boolean verified,

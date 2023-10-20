@@ -1,18 +1,23 @@
 package main.model;
 
 public class ItemInInventory {
+
     private Integer id;
-    private Integer idCharacterState;
-    private Integer idItem;
+    private Integer characterStateId;
+    private Integer itemId;
     private Integer amount;
     private Integer position;
 
-    public ItemInInventory(Integer id, Integer idCharacterState, Integer idItem, Integer amount, Integer position){
+    public ItemInInventory(Integer id, Integer characterStateId, Integer itemId, Integer amount, Integer position){
         this.id = id;
-        this.idCharacterState = idCharacterState;
-        this.idItem = idItem;
+        this.characterStateId = characterStateId;
+        this.itemId = itemId;
         this.amount = amount;
         this.position = position;
+    }
+
+    public ItemInInventory(Integer characterStateId, Integer itemId, Integer amount, Integer position){
+        this(null, characterStateId, itemId, amount, position);
     }
     
     public Integer getId() {
@@ -23,21 +28,21 @@ public class ItemInInventory {
         this.id = id;
     }
     
-    public Integer getIdCharacterState() {
-        return idCharacterState;
+    public Integer getcharacterStateId() {
+        return characterStateId;
     }
 
-    public void setIdCharacterState(Integer idCharacterState) {
-        this.idCharacterState = idCharacterState;
+    public void setcharacterStateId(Integer characterStateId) {
+        this.characterStateId = characterStateId;
     }
 
     
-    public Integer getIdItem() {
-        return idItem;
+    public Integer getitemId() {
+        return itemId;
     }
 
-    public void setIdItem(Integer idItem) {
-        this.idItem = idItem;
+    public void setitemId(Integer itemId) {
+        this.itemId = itemId;
     }
     
     public Integer getAmount() {
@@ -54,5 +59,11 @@ public class ItemInInventory {
 
     public void setPosition(Integer position) {
         this.position = position;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemInInventory [id=" + id + ", characterStateId=" + characterStateId + ", itemId=" + itemId
+                + ", amount=" + amount + ", position=" + position + "]\n";
     }
 }

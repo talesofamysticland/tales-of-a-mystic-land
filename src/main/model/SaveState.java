@@ -3,41 +3,31 @@ package main.model;
 import java.time.LocalDateTime;
 
 public class SaveState {
+
     private Integer id;
-    private Integer idSave;
-    private Integer idCharacterState;
-    private Integer idSavePoint;
+    private Integer saveId;
+    private Integer characterStateId;
+    private Integer savePointId;
     private LocalDateTime date;
 
-    public SaveState (Integer id, Integer idSave, Integer idCharacterState, Integer idSavePoint, LocalDateTime date){
+    public SaveState (Integer id, Integer saveId, Integer characterStateId, Integer savePointId, LocalDateTime date) {
         this.id = id;
-        this.idSave = idSave;
-        this.idCharacterState = idCharacterState;
-        this.idSavePoint = idSavePoint;
+        this.saveId = saveId;
+        this.characterStateId = characterStateId;
+        this.savePointId = savePointId;
         this.date = date;
     }
 
-    public SaveState (Integer id, Integer idSave, Integer idCharacterState, Integer idSavePoint){
-        this(id, idSave, idCharacterState, idSavePoint, LocalDateTime.now());
+    public SaveState (Integer saveId, Integer characterStateId, Integer savePointId, LocalDateTime date) {
+        this(null, saveId, characterStateId, savePointId, date);
     }
 
-    public SaveState (Integer idSave, Integer idCharacterState, Integer idSavePoint, LocalDateTime date){
-        this.idSave = idSave;
-        this.idCharacterState = idCharacterState;
-        this.idSavePoint = idSavePoint;
-        this.date = date;
+    public SaveState (Integer id, Integer saveId, Integer characterStateId, Integer savePointId) {
+        this(id, saveId, characterStateId, savePointId, LocalDateTime.now());
     }
 
-    public SaveState (Integer idSave, Integer idCharacterState, Integer idSavePoint){
-        this(idSave, idCharacterState, idSavePoint, LocalDateTime.now());
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public SaveState (Integer saveId, Integer characterStateId, Integer savePointId) {
+        this(saveId, characterStateId, savePointId, LocalDateTime.now());
     }
 
     public Integer getId() {
@@ -48,27 +38,41 @@ public class SaveState {
         this.id = id;
     }
 
-    public Integer getIdCharacterState() {
-        return idCharacterState;
+    public Integer getSaveId() {
+        return saveId;
     }
 
-    public void setIdCharacterState(Integer idCharacterState) {
-        this.idCharacterState = idCharacterState;
+    public void setSaveId(Integer saveId) {
+        this.saveId = saveId;
     }
 
-    public Integer getIdSave() {
-        return idSave;
+    public Integer getCharacterStateId() {
+        return characterStateId;
     }
 
-    public void setIdSave(Integer idSave) {
-        this.idSave = idSave;
+    public void setCharacterStateId(Integer characterStateId) {
+        this.characterStateId = characterStateId;
     }
 
-    public Integer getIdSavePoint() {
-        return idSavePoint;
+    public Integer getSavePointId() {
+        return savePointId;
     }
 
-    public void setIdSavePoint(Integer idSavePoint) {
-        this.idSavePoint = idSavePoint;
+    public void setSavePointId(Integer savePointId) {
+        this.savePointId = savePointId;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "SaveState [id=" + id + ", saveId=" + saveId + ", characterStateId=" + characterStateId
+                + ", savePointId=" + savePointId + ", date=" + date + "]\n";
     }
 }
