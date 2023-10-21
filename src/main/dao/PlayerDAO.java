@@ -154,7 +154,7 @@ public class PlayerDAO {
 
     public List<Player> findAll() {
         String sql = "SELECT * FROM Player;";
-        List<Player> alunos = new ArrayList<>();
+        List<Player> players = new ArrayList<>();
 
         try (
             Connection connection = ConnectionManager.getConnection();
@@ -162,10 +162,10 @@ public class PlayerDAO {
             ResultSet rs = statement.executeQuery(sql);
         ) {
             while(rs.next()) {
-                alunos.add(resultSetToPlayer(rs));
+                players.add(resultSetToPlayer(rs));
             }
 
-            return alunos;
+            return players;
         
         } catch (Exception e) {
             e.printStackTrace();

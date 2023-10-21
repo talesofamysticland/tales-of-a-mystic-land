@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import main.database.ConnectionManager;
 import main.model.ItemInInventory;
@@ -113,6 +116,27 @@ public class ItemInInventoryDAO {
         }
 
         return null;
+    }
+
+    public List<ItemInInventory> findAll() {
+        String sql = "SELECT * FROM Player;";
+        List<ItemInInventory> itemsInInventories = new ArrayList<>();
+
+        try (
+            Connection connection = ConnectionManager.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+        ) {
+            while(rs.next()) {
+                itemsInInventories.add(resultSetToItemInInventory(rs));
+            }
+
+            return itemsInInventories;
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private ItemInInventory resultSetToItemInInventory(ResultSet rs) throws SQLException {
