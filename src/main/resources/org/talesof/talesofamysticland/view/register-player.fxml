@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER_LEFT" spacing="15.0" xmlns:fx="http://javafx.com/fxml"
+fx:controller="org.talesof.talesofamysticland.controller.RegisterPlayerController">
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <ImageView onMouseClicked="#onMouseClickedOpenConfigurations">
+        <fitWidth>35</fitWidth>
+        <preserveRatio>true</preserveRatio>
+            <image>
+                <Image url="@../media/config-icon.png"/>
+            </image>
+    </ImageView> 
+
+    <VBox alignment="CENTER" spacing="15.0">
+        <Label text="Junte-se a nossa Guilda!" />
+    </VBox>
+
+    <VBox spacing="20.0">
+        <VBox spacing="5.0">
+            <Label text="Nome de usuário" />
+            <TextField fx:id="txfUsername" />
+        </VBox>
+
+        <VBox spacing="5.0">
+            <Label text="E-mail" />
+            <TextField fx:id="txfEmail" />
+        </VBox>
+
+        <VBox spacing="5.0">
+            <Label text="Senha" />
+            <TextField fx:id="txfPassword" />
+        </VBox>
+
+        <VBox spacing="5.0">
+            <Label text="Confirmar senha" />
+            <TextField fx:id="txfConfirmedPassword" />
+        </VBox>
+    </VBox>
+
+    <VBox alignment="CENTER" spacing="10.0">
+        <Button text="Criar conta" onAction="#onActionRegisterPlayer"/>
+        <Hyperlink text="Já tenho uma conta." />
+    </VBox>
+
+    <Button text="Voltar" />
+</VBox>

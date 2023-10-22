@@ -25,7 +25,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'org.talesof.talesofamysticland'
-    mainClass = 'org.talesof.talesofamysticland.Main'
+    mainClass = 'org.talesof.talesofamysticland.TalesOfAMysticLandApplication'
 }
 
 javafx {
