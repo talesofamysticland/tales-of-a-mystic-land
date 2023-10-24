@@ -14,5 +14,5 @@ fx:controller="org.talesof.talesofamysticland.controller.LoadingScreenController
 
     <Label text="Tales of a Mystic Land" />
 
-    <ProgressBar fx:id="pgbLoading" />
+    <ProgressBar onProgress="#onProgressLoading" fx:id="pgbLoading" />
 </VBox>

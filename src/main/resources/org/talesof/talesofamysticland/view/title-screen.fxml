@@ -26,10 +26,10 @@ fx:controller="org.talesof.talesofamysticland.controller.TitleScreenController">
 
     <VBox alignment="CENTER" spacing="13.0">
 
-        <Button text="Jogar" onAction="#onActionBtnPlay" />
+        <Button styleClass="continueButton" text="Jogar" onAction="#onActionBtnPlay" />
 
-        <Button text="Sair" onAction="#onActionBtnExit" />
+        <Button styleClass="backButton" text="Sair" onAction="#onActionBtnExit" />
 
-        <Hyperlink text="Criar conta." onAction="#onActionHplRedirectToRegisterPlayer" />
+        <Hyperlink styleClass="hyperlink" text="Criar conta." onAction="#onActionHplRedirectToRegisterPlayer" />
     </VBox>
 </VBox>

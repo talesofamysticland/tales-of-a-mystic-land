@@ -7,4 +7,9 @@ public class LoadingScreenController {
     
     @FXML
     private ProgressBar pgbLoading;
+
+    @FXML
+    public void onProgressLoading() {
+        
+    }
 }

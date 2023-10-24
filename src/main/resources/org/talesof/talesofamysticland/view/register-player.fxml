@@ -4,13 +4,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.VBox?>
+<?import java.net.*?>
 
-<VBox alignment="CENTER_LEFT" spacing="25.0" xmlns:fx="http://javafx.com/fxml"
+<VBox styleClass="root" xmlns:fx="http://javafx.com/fxml"
 fx:controller="org.talesof.talesofamysticland.controller.RegisterPlayerController">
-
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
 
     <ImageView onMouseClicked="#onClickImgOpenConfigurations">
         <fitWidth>33</fitWidth>
@@ -20,41 +17,43 @@ fx:controller="org.talesof.talesofamysticland.controller.RegisterPlayerControlle
             </image>
     </ImageView> 
 
-    <VBox alignment="CENTER" spacing="15.0">
-        <Label text="Junte-se a nossa Guilda!" />
-    </VBox>
+    <VBox styleClass="form">
 
-    <VBox spacing="20.0">
-
-        <padding>
-            <Insets bottom="20.0" left="320.0" right="320.0" top="20.0"/>
-        </padding>
-
-        <VBox spacing="5.0">
-            <Label text="Nome de usuário" />
-            <TextField fx:id="txfUsername" />
+        <VBox styleClass="formTitle">
+            <Label text="Junte-se a nossa Guilda!" />
         </VBox>
 
-        <VBox spacing="5.0">
-            <Label text="E-mail" />
-            <TextField fx:id="txfEmail" />
-        </VBox>
+        <VBox styleClass="formInsertData"> 
+            <VBox styleClass="formSubVBox">
+                <Label styleClass="formLabel" text="Nome de usuário" />
+                <TextField styleClass="formTextField" fx:id="txfUsername" />
+            </VBox>
 
-        <VBox spacing="5.0">
-            <Label text="Senha" />
-            <PasswordField fx:id="pwfPassword" />
-        </VBox>
+            <VBox styleClass="formSubVBox">
+                <Label styleClass="formLabel" text="E-mail" />
+                <TextField styleClass="formTextField" fx:id="txfEmail" />
+            </VBox>
 
-        <VBox spacing="5.0">
-            <Label text="Confirmar senha" />
-            <PasswordField fx:id="pwfConfirmedPassword" />
+            <VBox styleClass="formSubVBox">
+                <Label styleClass="formLabel" text="Senha" />
+                <PasswordField styleClass="formTextField" fx:id="pwfPassword" />
+            </VBox>
+
+            <VBox styleClass="formSubVBox">
+                <Label styleClass="formLabel" text="Confirmar senha" />
+                <PasswordField styleClass="formTextField" fx:id="pwfConfirmedPassword" />
+            </VBox>
         </VBox>
     </VBox>
 
     <VBox alignment="CENTER" spacing="10.0">
-        <Button text="Criar conta" onAction="#onActionBtnRegisterPlayer"/>
-        <Hyperlink text="Já tenho uma conta." onAction="#onActionHplRedirectToLogin" />
+        <Button styleClass="continueButton" text="Criar conta" onAction="#onActionBtnRegisterPlayer"/>
+        <Hyperlink styleClass="hyperlink" text="Já tenho uma conta." onAction="#onActionHplRedirectToLogin" />
     </VBox>
 
-    <Button text="Voltar" onAction="#onActionBtnBack" />
+    <Button styleClass="backButton" text="Voltar" onAction="#onActionBtnBack" />
+
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
 </VBox>

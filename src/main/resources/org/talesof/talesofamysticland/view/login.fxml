@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.VBox?>
+<?import java.net.*?>
 
 <VBox alignment="TOP_LEFT" spacing="25.0" xmlns:fx="http://javafx.com/fxml"
 fx:controller="org.talesof.talesofamysticland.controller.LoginController">
@@ -20,7 +21,7 @@ fx:controller="org.talesof.talesofamysticland.controller.LoginController">
             </image>
     </ImageView> 
 
-    <VBox alignment="CENTER">
+    <VBox alignment="CENTER" styleClass="formTitle">
         <Label text="Bem-vindo de volta, aventureiro!" />
     </VBox>
 
@@ -31,22 +32,27 @@ fx:controller="org.talesof.talesofamysticland.controller.LoginController">
         </padding>
 
         <VBox spacing="5.0">
-            <Label text="Nome de usuário ou e-mail" />
+            <Label styleClass="formLabel" text="Nome de usuário ou e-mail" />
             <TextField fx:id="txfUsernameOrEmail" />
         </VBox>
 
         <VBox spacing="5.0">
-            <Label text="Senha" />
+            <Label styleClass="formLabel" text="Senha" />
             <PasswordField fx:id="pwfPassword" />
         </VBox>
 
-        <Hyperlink text="Esqueci minha senha." onAction="#onActionHplRedirectToChangePassword" />
+        <Hyperlink styleClass="redefinePassword" text="Esqueci minha senha." onAction="#onActionHplRedirectToChangePassword" />
     </VBox>
 
     <VBox alignment="CENTER" spacing="12.0">
-        <Button text="Entrar" onAction="#onActionBtnLogin"/>
-        <Hyperlink text="Registrar." onAction="#onActionHplRedirectToRegisterPlayer" />
+        <Button styleClass="continueButton" text="Entrar" onAction="#onActionBtnLogin"/>
+        <Hyperlink styleClass="hyperlink" text="Registrar" onAction="#onActionHplRedirectToRegisterPlayer" />
     </VBox>
 
-    <Button text="Voltar" onAction="#onActionBtnBack" />
+    <Button styleClass="backButton" text="Voltar" onAction="#onActionBtnBack" />
+
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+
 </VBox> 

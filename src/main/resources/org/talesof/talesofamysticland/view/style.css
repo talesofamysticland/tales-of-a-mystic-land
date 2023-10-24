@@ -1,0 +1,58 @@
+.root {
+    -fx-alignment: center-left;
+    -fx-spacing: 30px;
+    -fx-padding: 20px;
+}
+
+.form {
+    -fx-spacing: 50px;
+    -fx-padding: 0px 100px;
+}
+
+.formInsertData {
+    -fx-spacing: 15px;
+    -fx-padding: 0px 190px;
+}
+
+.formTitle {
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+    -fx-font-size: 35px;
+    -fx-spacing: 15px;
+    -fx-padding: 0px 100px;
+}
+
+.formLabel {
+    -fx-font-size: 14.0;
+    -fx-spacing: 12px;
+    -fx-text-fill: rgb(41, 41, 41);
+    -fx-label-padding: 0px 0px 0px 5px;
+}
+
+.formTextField {
+    -fx-padding: 100px;
+}
+
+.redefinePassword {
+    -fx-font-size: 14.0;
+    -fx-spacing: 9px;
+    -fx-text-fill: #630d94;
+    -fx-label-padding: 0px 0px 0px 5px;
+    -fx-underline: "true";
+}
+
+.continueButton {
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #630d94;
+    -fx-label-padding: 10px 15px 10px 15px;
+}
+
+.backButton{
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #FF3F3F;
+    -fx-label-padding: 5px 10px 5px 10px;
+}
+
+.hyperlink{
+    -fx-text-fill: #630d94;
+}
