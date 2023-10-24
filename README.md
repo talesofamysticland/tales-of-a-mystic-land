@@ -8,6 +8,7 @@ Nos laboratórios de informática do IFSP é necessário configurar o proxy para
 
 ```bash
 export JAVA_TOOL_OPTIONS="-Djava.net.useSystemProxies=true"
+chmod +x gradlew
 ```
 
 No mesmo terminal que foi configurado o proxy executar o comando:
