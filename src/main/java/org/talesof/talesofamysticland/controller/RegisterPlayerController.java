@@ -12,23 +12,23 @@ public class RegisterPlayerController {
     private TextField txfEmail;
 
     @FXML
-    private TextField txfPassword;
+    private PasswordField pwfPassword;
 
     @FXML
-    private TextField txfConfirmedPassword;
+    private PasswordField pwfConfirmedPassword;
 
     @FXML
-    public void onMouseClickedOpenConfigurations() {
+    public void onClickImgOpenConfigurations() {
         // TODO
     }
 
     @FXML
-    public void onActionRegisterPlayer() {
+    public void onActionBtnRegisterPlayer() {
 
         String username = txfUsername.getText();
         String email = txfEmail.getText();
-        String password = txfPassword.getText().trim();
-        String confirmedPassword = txfConfirmedPassword.getText().trim();
+        String password = pwfPassword.getText().trim();
+        String confirmedPassword = pwfConfirmedPassword.getText().trim();
 
         if(!confirmedPassword.equals(password)) {
             // TODO
@@ -36,5 +36,14 @@ public class RegisterPlayerController {
             System.out.println(username + ", " + email + ", " + password + ", " + confirmedPassword);
         }
     }
-    
+
+    @FXML
+    public void onActionHplRedirectToLogin() {
+        // TODO
+    }
+
+    @FXML
+    public void onActionBtnBack() {
+        // TODO
+    }
 }
