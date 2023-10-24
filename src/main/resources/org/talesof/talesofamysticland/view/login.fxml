@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_LEFT" spacing="25.0" xmlns:fx="http://javafx.com/fxml"
+fx:controller="org.talesof.talesofamysticland.controller.LoginController">
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <ImageView onMouseClicked="#onClickImgOpenConfigurations">
+        <fitWidth>33</fitWidth>
+        <preserveRatio>true</preserveRatio>
+            <image>
+                <Image url="@../media/config-icon.png"/>
+            </image>
+    </ImageView> 
+
+    <VBox alignment="CENTER">
+        <Label text="Bem-vindo de volta, aventureiro!" />
+    </VBox>
+
+    <VBox alignment="CENTER" spacing="15.0"> 
+
+        <padding>
+            <Insets bottom="20.0" left="320.0" right="320.0" top="20.0"/>
+        </padding>
+
+        <VBox spacing="5.0">
+            <Label text="Nome de usuário ou e-mail" />
+            <TextField fx:id="txfUsernameOrEmail" />
+        </VBox>
+
+        <VBox spacing="5.0">
+            <Label text="Senha" />
+            <PasswordField fx:id="pwfPassword" />
+        </VBox>
+
+        <Hyperlink text="Esqueci minha senha." onAction="#onActionHplRedirectToChangePassword" />
+    </VBox>
+
+    <VBox alignment="CENTER" spacing="12.0">
+        <Button text="Entrar" onAction="#onActionBtnLogin"/>
+        <Hyperlink text="Registrar." onAction="#onActionHplRedirectToRegisterPlayer" />
+    </VBox>
+
+    <Button text="Voltar" onAction="#onActionBtnBack" />
+</VBox> 
