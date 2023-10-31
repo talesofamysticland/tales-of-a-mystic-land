@@ -2,6 +2,7 @@
     -fx-alignment: center-left;
     -fx-spacing: 30px;
     -fx-padding: 20px;
+    padding: 20px;
 }
 
 .form {
@@ -12,6 +13,7 @@
 .formInsertData {
     -fx-spacing: 15px;
     -fx-padding: 0px 190px;
+    padding: 0px 190px;
 }
 
 .formTitle {
