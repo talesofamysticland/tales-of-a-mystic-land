@@ -1,9 +1,85 @@
 .root {
-    -fx-alignment: center-left;
     -fx-spacing: 30px;
     -fx-padding: 20px;
     padding: 20px;
+    -fx-font-size: 17px;
+    font-size: 17px;
 }
+
+.header-box {
+    -fx-alignment: top-left;
+}
+
+.header-box__config-icon {
+    -fx-fitwidth: 40px;
+    -fx-preserve-ratio: true;
+}
+
+.footer-box {
+    -fx-alignment: bottom-left;
+}
+
+.footer-box__back-button {
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #FF3F3F;
+        background-color: #FF3F3F;
+    -fx-label-padding: 3px 15px;
+}
+
+.body-box {
+    -fx-alignment: center;
+    -fx-spacing: 50px;
+}
+
+.txf-character-name {
+    -fx-max-width: 300px;
+        max-width: 300px;
+}
+
+.classes-view {
+    -fx-spacing: 60px;
+    -fx-alignment: center;
+}
+
+.classes-view__class-box {
+    -fx-spacing: 18px;
+    -fx-alignment: center;
+    -fx-pref-width: 300px;  
+}
+
+.class-box__catchphrase {
+    -fx-text-fill: rgb(123, 118, 118);
+    -fx-text-alignment: center;
+        text-align: center;
+    -fx-wrap-text: true;
+}
+
+.class-box__name {
+    -fx-font-size: 18px;
+        font-size: 18px;
+    -fx-font-weight: bold;
+        font-weight: bold;
+}
+
+.class-box__description {
+    -fx-text-alignment: center;
+        text-align: center;
+    -fx-wrap-text: true;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .form {
     -fx-spacing: 50px;
@@ -47,12 +123,6 @@
     -fx-text-fill: #FFFFFF;
     -fx-background-color: #630d94;
     -fx-label-padding: 10px 15px 10px 15px;
-}
-
-.backButton{
-    -fx-text-fill: #FFFFFF;
-    -fx-background-color: #FF3F3F;
-    -fx-label-padding: 5px 10px 5px 10px;
 }
 
 .hyperlink{

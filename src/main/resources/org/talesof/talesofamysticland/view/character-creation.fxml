@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<BorderPane 
+    styleClass="root" 
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="org.talesof.talesofamysticland.controller.CharacterCreationController"
+    stylesheets="@style.css"
+>
+
+    <top>
+        <VBox styleClass="header-box">
+            <ImageView styleClass="header-box__config-icon" onMouseClicked="#onClickImgOpenConfigurations">
+                <image>
+                    <Image url="@../media/config-icon.png"/>
+                </image>
+            </ImageView>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox styleClass="body-box"> 
+
+            <TextField styleClass="txf-character-name" promptText="Nome do personagem" />
+
+            <HBox styleClass="classes-view">
+                <VBox styleClass="classes-view__class-box"> 
+                    <Label styleClass="class-box__catchphrase" text="“As pessoas buscam por uma força que já existe dentro delas.”" />
+                    
+                    <ImageView styleClass="class-box__icon">
+                        <fitWidth>60</fitWidth>
+                        <preserveRatio>true</preserveRatio>
+                            <image>
+                                <Image url="@../media/warrior-icon.png"/>
+                            </image>
+                    </ImageView>
+
+                    <Label styleClass="class-box__name" text="Guerreiro" />
+
+                    <Label styleClass="class-box__description" text="Um poderoso e resiliente mestre das armas, pronto para qualquer desafio" />
+
+                    <Label styleClass="class-box__attributes --warrior" text="+ ataque e defesa" />
+                </VBox>
+
+                <VBox styleClass="classes-view__class-box"> 
+                    <Label styleClass="class-box__catchphrase" text="“Um mago não comete erros, ele cria possibilidades inesperadas.”" />
+                    
+                    <ImageView styleClass="class-box__icon">
+                        <fitWidth>60</fitWidth>
+                        <preserveRatio>true</preserveRatio>
+                            <image>
+                                <Image url="@../media/wizard-icon.png"/>
+                            </image>
+                    </ImageView>
+
+                    <Label styleClass="class-box__name" text="Mago" />
+
+                    <Label styleClass="class-box__description" text="Um quieto e ambicioso entusiasta da magia celestial" />
+
+                    <Label styleClass="class-box__attributes" text="+ magia e mana" />
+                </VBox>
+
+                <VBox styleClass="classes-view__class-box"> 
+                    <Label styleClass="class-box__catchphrase" text="“Exploradores de verdade seguem a bússola do seu instinto.”" />
+                    
+                    <ImageView styleClass="class-box__icon">
+                        <fitWidth>60</fitWidth>
+                        <preserveRatio>true</preserveRatio>
+                            <image>
+                                <Image url="@../media/archer-icon.png"/>
+                            </image>
+                    </ImageView>
+
+                    <Label styleClass="class-box__name" text="Arqueiro" />
+
+                    <Label styleClass="class-box__description" text="Um aventureiro prodígio, de talento e inteligência natos" />
+
+                    <Label styleClass="class-box__attributes" text="+ destreza e precisão" />
+                </VBox>
+            </HBox>
+
+            <Button text="Inicie sua jornada!" />
+        </VBox>
+    </center>
+
+    <bottom>
+        <VBox styleClass="footer-box">
+            <Button styleClass="footer-box__back-button" text="Voltar" onAction="#onActionBtnBack" />
+        </VBox>
+    </bottom>
+</BorderPane> 
