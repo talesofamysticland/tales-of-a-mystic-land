@@ -6,75 +6,77 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<VBox alignment="TOP_LEFT" spacing="25.0" xmlns:fx="http://javafx.com/fxml"
-fx:controller="org.talesof.talesofamysticland.controller.SaveSelectionController">
+<BorderPane 
+    styleClass="root"
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="org.talesof.talesofamysticland.controller.SaveSelectionController"
+    stylesheets="@style.css"
+>
 
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <ImageView onMouseClicked="#onClickImgOpenConfigurations">
-        <fitWidth>33</fitWidth>
-        <preserveRatio>true</preserveRatio>
+    <top>
+        <ImageView styleClass="header-box__config-icon" onMouseClicked="#onClickImgOpenConfigurations">
             <image>
                 <Image url="@../media/config-icon.png"/>
             </image>
-    </ImageView> 
+        </ImageView> 
+    </top>
  
-    <VBox>
-        <HBox>
-            <ImageView>
-                <fitWidth>50</fitWidth>
-                <preserveRatio>true</preserveRatio>
-                <image>
-                    <Image url="@../media/wizard-icon.png"/>
-                </image>
-            </ImageView> 
-
+    <center>
+        <VBox styleClass="body-box">
             <HBox>
-                <Label text="Nome" fx:id="lblCharacterName1" />
-                <Label text="0:51" fx:id="lblPlayTime1" />
-                <Label text="21/05/2023" fx:id="lblLastSaved1" />
+                <ImageView>
+                    <fitWidth>50</fitWidth>
+                    <preserveRatio>true</preserveRatio>
+                    <image>
+                        <Image url="@../media/wizard-icon.png"/>
+                    </image>
+                </ImageView> 
+
+                <HBox>
+                    <Label text="Nome" fx:id="lblCharacterName1" />
+                    <Label text="0:51" fx:id="lblPlayTime1" />
+                    <Label text="21/05/2023" fx:id="lblLastSaved1" />
+                </HBox>
+
+                <Button text="x" />
             </HBox>
 
-            <Button text="x" />
-        </HBox>
-
-        <HBox>
-            <ImageView>
-                <fitWidth>50</fitWidth>
-                <preserveRatio>true</preserveRatio>
-            </ImageView> 
-            
             <HBox>
-                <Label text="Nome" fx:id="lblCharacterName2" />
-                <Label text="0:51" fx:id="lblPlayTime2" />
-                <Label text="21/05/2023" fx:id="lblLastSaved2" />
+                <ImageView>
+                    <fitWidth>50</fitWidth>
+                    <preserveRatio>true</preserveRatio>
+                </ImageView> 
+                
+                <HBox>
+                    <Label text="Nome" fx:id="lblCharacterName2" />
+                    <Label text="0:51" fx:id="lblPlayTime2" />
+                    <Label text="21/05/2023" fx:id="lblLastSaved2" />
+                </HBox>
+
+                <Button text="x" />
             </HBox>
 
-            <Button text="x" />
-        </HBox>
-
-        <HBox>
-            <ImageView>
-                <fitWidth>50</fitWidth>
-                <preserveRatio>true</preserveRatio>
-            </ImageView> 
-
             <HBox>
-                <Label text="Nome" fx:id="lblCharacterName3" />
-                <Label text="0:51" fx:id="lblPlayTime3" />
-                <Label text="21/05/2023" fx:id="lblLastSaved3" />
+                <ImageView>
+                    <fitWidth>50</fitWidth>
+                    <preserveRatio>true</preserveRatio>
+                </ImageView> 
+
+                <HBox>
+                    <Label text="Nome" fx:id="lblCharacterName3" />
+                    <Label text="0:51" fx:id="lblPlayTime3" />
+                    <Label text="21/05/2023" fx:id="lblLastSaved3" />
+                </HBox>
+
+                <Button text="x" />
             </HBox>
+        </VBox>
+    </center>
 
-            <Button text="x" />
-        </HBox>
-    </VBox>
+    <bottom>
+        <VBox styleClass="footer-box">
+            <Button styleClass="footer-box__back-button" text="Voltar" onAction="#onActionBtnBack" />
+        </VBox>
+    </bottom>
 
-    <Button styleClass="backButton" text="Voltar" onAction="#onActionBtnBack" />
-
-    <stylesheets>
-        <URL value="@style.css" />
-    </stylesheets>
-
-</VBox> 
+</BorderPane> 

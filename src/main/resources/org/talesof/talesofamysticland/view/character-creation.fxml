@@ -84,7 +84,7 @@
                 </VBox>
             </HBox>
 
-            <Button text="Inicie sua jornada!" />
+            <Button styleClass="play-button" text="Inicie sua jornada!" />
         </VBox>
     </center>
 
