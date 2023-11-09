@@ -1,59 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<VBox styleClass="root" xmlns:fx="http://javafx.com/fxml"
-fx:controller="org.talesof.talesofamysticland.controller.RegisterPlayerController">
+<BorderPane 
+    styleClass="root" 
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="org.talesof.talesofamysticland.controller.RegisterPlayerController"
+    stylesheets="@style.css"
+>
 
-    <ImageView onMouseClicked="#onClickImgOpenConfigurations">
-        <fitWidth>33</fitWidth>
-        <preserveRatio>true</preserveRatio>
+    <top>
+        <ImageView styleClass="header-box__config-icon" onMouseClicked="#onClickImgOpenConfigurations">
             <image>
                 <Image url="@../media/config-icon.png"/>
             </image>
-    </ImageView> 
+        </ImageView> 
+    </top>
 
-    <VBox styleClass="form">
+    <center>
+        <VBox styleClass="form">
 
-        <VBox styleClass="formTitle">
-            <Label text="Junte-se a nossa Guilda!" />
+            <VBox styleClass="formTitle">
+                <Label text="Junte-se a nossa Guilda!" />
+            </VBox>
+
+            <VBox styleClass="formInsertData"> 
+                <VBox styleClass="formSubVBox">
+                    <Label styleClass="formLabel" text="Nome de usuário" />
+                    <TextField styleClass="formTextField" fx:id="txfUsername" />
+                </VBox>
+
+                <VBox styleClass="formSubVBox">
+                    <Label styleClass="formLabel" text="E-mail" />
+                    <TextField styleClass="formTextField" fx:id="txfEmail" />
+                </VBox>
+
+                <VBox styleClass="formSubVBox">
+                    <Label styleClass="formLabel" text="Senha" />
+                    <PasswordField styleClass="formTextField" fx:id="pwfPassword" />
+                </VBox>
+
+                <VBox styleClass="formSubVBox">
+                    <Label styleClass="formLabel" text="Confirmar senha" />
+                    <PasswordField styleClass="formTextField" fx:id="pwfConfirmedPassword" />
+                </VBox>
+            </VBox>
         </VBox>
 
-        <VBox styleClass="formInsertData"> 
-            <VBox styleClass="formSubVBox">
-                <Label styleClass="formLabel" text="Nome de usuário" />
-                <TextField styleClass="formTextField" fx:id="txfUsername" />
-            </VBox>
-
-            <VBox styleClass="formSubVBox">
-                <Label styleClass="formLabel" text="E-mail" />
-                <TextField styleClass="formTextField" fx:id="txfEmail" />
-            </VBox>
-
-            <VBox styleClass="formSubVBox">
-                <Label styleClass="formLabel" text="Senha" />
-                <PasswordField styleClass="formTextField" fx:id="pwfPassword" />
-            </VBox>
-
-            <VBox styleClass="formSubVBox">
-                <Label styleClass="formLabel" text="Confirmar senha" />
-                <PasswordField styleClass="formTextField" fx:id="pwfConfirmedPassword" />
-            </VBox>
+        <VBox>
+            <Button styleClass="continueButton" text="Criar conta" onAction="#onActionBtnRegisterPlayer"/>
+            <Hyperlink styleClass="hyperlink" text="Já tenho uma conta." onAction="#onActionHplRedirectToLogin" />
         </VBox>
-    </VBox>
+    </center>
 
-    <VBox alignment="CENTER" spacing="10.0">
-        <Button styleClass="continueButton" text="Criar conta" onAction="#onActionBtnRegisterPlayer"/>
-        <Hyperlink styleClass="hyperlink" text="Já tenho uma conta." onAction="#onActionHplRedirectToLogin" />
-    </VBox>
+    <bottom>
+        <HBox styleClass="footer-box">
+            <Button styleClass="footer-box__back-button" text="Voltar" onAction="#onActionBtnBack" />
+        </HBox>
+    <bottom>
 
-    <Button styleClass="backButton" text="Voltar" onAction="#onActionBtnBack" />
-
-    <stylesheets>
-        <URL value="@style.css" />
-    </stylesheets>
-</VBox>
+</BorderPane>
