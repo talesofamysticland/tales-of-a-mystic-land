@@ -9,14 +9,14 @@ import javafx.stage.Stage;
 
 public class TalesOfAMysticLandApplication extends Application {
 
-    final int originalTileSize = 16;  // 16x16
+    final int originalTileSize = 16;
     final int scale = 5;
 
-    public final int tileSize = originalTileSize * scale;  // 48x48
-    public final int maxScreenCol = 16; //5x4, 16x9, 21x9
-    public final int maxScreenRow = 9; //5x4, 16x9, 21x9
-    public final int screenWidth = tileSize * maxScreenCol;  // 960px
-    public final int screenHeight = tileSize * maxScreenRow;  // 576px
+    public final int tileSize = originalTileSize * scale;  
+    public final int maxScreenCol = 16; 
+    public final int maxScreenRow = 9; 
+    public final int screenWidth = tileSize * maxScreenCol;  
+    public final int screenHeight = tileSize * maxScreenRow;  
 
     @Override
     public void start(Stage stage) throws IOException {

@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
 <BorderPane 
@@ -50,6 +50,6 @@
         <HBox styleClass="footer-box">
             <Button styleClass="footer-box__back-button" text="Voltar" onAction="#onActionBtnBack" />
         </HBox>
-    <bottom>
+    </bottom>
 
 </BorderPane> 

@@ -16,6 +16,7 @@
     padding: 20px;
     -fx-font-size: 17px;
     font-size: 17px;
+
 }
 
 .header-box {
@@ -27,6 +28,10 @@
     -fx-fitwidth: 40px;
     -fx-preserve-ratio: true;
     -fx-image: url('../media/icons/config-icon.png');
+}
+
+.header-box__config-icon:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 10, 0, 0, 2);
 }
 
 .footer-box {
@@ -56,6 +61,7 @@
     -fx-alignment: center;
     -fx-font-size: 90px;
     -fx-padding: 30px 0px 0px 0px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 10, 0, 0, 5);
 }
 
 .main-box__options {
@@ -69,6 +75,13 @@
     -fx-font-size: 28px;
     -fx-background-color: #6b0ea1;
     -fx-pref-width: 480px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 10, 0, 0, 2);
+}
+
+.options__button:hover {
+    -fx-font-size: 30px;
+    -fx-pref-width: 490px;
+    -fx-pref-height: 8px;
 }
 
 .options__hyperlinks {

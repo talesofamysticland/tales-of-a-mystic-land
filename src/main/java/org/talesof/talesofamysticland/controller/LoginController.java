@@ -5,6 +5,8 @@ import javafx.scene.control.*;
 
 public class LoginController {
 
+    public static boolean userIsLogged = false;
+
     @FXML
     private TextField txfUsernameOrEmail;
 
