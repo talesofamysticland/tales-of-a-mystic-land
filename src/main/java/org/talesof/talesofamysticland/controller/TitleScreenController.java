@@ -23,4 +23,9 @@ public class TitleScreenController {
     public void onActionHplRedirectToRegisterPlayer() {
         // TODO
     }
+
+    @FXML
+    public void onActionHplRedirectToLogin() {
+        // TODO
+    }
 }

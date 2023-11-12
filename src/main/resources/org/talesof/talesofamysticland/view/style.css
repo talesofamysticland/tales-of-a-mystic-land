@@ -1,3 +1,15 @@
+/* GERAL */
+
+@font-face {
+    font-family: 'alagard';
+    src: url('../media/fonts/alagard.ttf');
+}
+
+@font-face {
+    font-family: 'maruMonica';
+    src: url('../media/fonts/x12y16pxMaruMonica.ttf');
+}
+
 .root {
     -fx-spacing: 30px;
     -fx-padding: 20px;
@@ -8,11 +20,13 @@
 
 .header-box {
     -fx-alignment: top-left;
+    -fx-spacing: 30px;
 }
 
 .header-box__config-icon {
     -fx-fitwidth: 40px;
     -fx-preserve-ratio: true;
+    -fx-image: url('../media/icons/config-icon.png');
 }
 
 .footer-box {
@@ -26,10 +40,51 @@
     -fx-label-padding: 3px 15px;
 }
 
-.body-box {
+.main-box {
     -fx-alignment: center;
     -fx-spacing: 50px;
 }
+
+/* TITLE SCREEN */
+
+.header-box__title-box {
+    -fx-alignment: center;
+}
+
+.title-box__game-title {
+    -fx-font-family: 'alagard';
+    -fx-alignment: center;
+    -fx-font-size: 90px;
+    -fx-padding: 30px 0px 0px 0px;
+}
+
+.main-box__options {
+    -fx-alignment: center;
+    -fx-spacing: 20px;
+}
+
+.options__button {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: 'x12y16pxMaruMonica';
+    -fx-font-size: 28px;
+    -fx-background-color: #6b0ea1;
+    -fx-pref-width: 480px;
+}
+
+.options__hyperlinks {
+    -fx-alignment: center;
+    -fx-spacing: 3px;
+}
+
+.hyperlinks__link {
+    -fx-text-fill: #6b0ea1;
+    -fx-font-family: 'x12y16pxMaruMonica';
+    -fx-font-size: 24px;
+}
+
+
+
+
 
 .txf-character-name {
     -fx-max-width: 300px;
