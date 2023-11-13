@@ -12,18 +12,14 @@
     stylesheets="@style.css"
 >
 
-    <top>
+    <top> 
         <VBox styleClass="header-box">
-            <ImageView styleClass="header-box__config-icon" onMouseClicked="#onClickImgOpenConfigurations">
-                <image>
-                    <Image url="@../media/config-icon.png"/>
-                </image>
-            </ImageView>
+            <ImageView styleClass="header-box__config-icon" onMouseClicked="#onClickImgOpenConfigurations" />
         </VBox>
     </top>
 
     <center>
-        <VBox styleClass="body-box"> 
+        <VBox styleClass="main-box"> 
 
             <TextField styleClass="txf-character-name" promptText="Nome do personagem" />
 
@@ -31,13 +27,11 @@
                 <VBox styleClass="classes-view__class-box"> 
                     <Label styleClass="class-box__catchphrase" text="“As pessoas buscam por uma força que já existe dentro delas.”" />
                     
-                    <ImageView styleClass="class-box__icon">
-                        <fitWidth>60</fitWidth>
-                        <preserveRatio>true</preserveRatio>
-                            <image>
-                                <Image url="@../media/warrior-icon.png"/>
-                            </image>
-                    </ImageView>
+                    <ImageView 
+                        styleClass="warrior-icon"
+                        fitWidth="60"
+                        preserveRatio="true"
+                    />
 
                     <Label styleClass="class-box__name" text="Guerreiro" />
 
@@ -49,13 +43,11 @@
                 <VBox styleClass="classes-view__class-box"> 
                     <Label styleClass="class-box__catchphrase" text="“Um mago não comete erros, ele cria possibilidades inesperadas.”" />
                     
-                    <ImageView styleClass="class-box__icon">
-                        <fitWidth>60</fitWidth>
-                        <preserveRatio>true</preserveRatio>
-                            <image>
-                                <Image url="@../media/wizard-icon.png"/>
-                            </image>
-                    </ImageView>
+                    <ImageView 
+                        styleClass="wizard-icon"
+                        fitWidth="60"
+                        preserveRatio="true"
+                    />
 
                     <Label styleClass="class-box__name" text="Mago" />
 
@@ -67,13 +59,11 @@
                 <VBox styleClass="classes-view__class-box"> 
                     <Label styleClass="class-box__catchphrase" text="“Exploradores de verdade seguem a bússola do seu instinto.”" />
                     
-                    <ImageView styleClass="class-box__icon">
-                        <fitWidth>60</fitWidth>
-                        <preserveRatio>true</preserveRatio>
-                            <image>
-                                <Image url="@../media/archer-icon.png"/>
-                            </image>
-                    </ImageView>
+                    <ImageView 
+                        styleClass="archer-icon"
+                        fitWidth="60"
+                        preserveRatio="true"
+                    />
 
                     <Label styleClass="class-box__name" text="Arqueiro" />
 

@@ -156,10 +156,10 @@
 
 .txf-character-name {
     -fx-max-width: 300px;
-        max-width: 300px;
 }
 
 .classes-view {
+    -fx-font-family: 'System';
     -fx-spacing: 60px;
     -fx-alignment: center;
 }
