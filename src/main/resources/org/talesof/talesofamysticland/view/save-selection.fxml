@@ -6,30 +6,31 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<VBox alignment="TOP_LEFT" spacing="25.0" xmlns:fx="http://javafx.com/fxml"
-fx:controller="org.talesof.talesofamysticland.controller.SaveSelectionController">
+<BorderPane 
+    styleClass="root"
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="org.talesof.talesofamysticland.controller.SaveSelectionController"
+    stylesheets="@style.css"
+>
 
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <ImageView onMouseClicked="#onClickImgOpenConfigurations">
-        <fitWidth>33</fitWidth>
-        <preserveRatio>true</preserveRatio>
-            <image>
-                <Image url="@../media/config-icon.png"/>
-            </image>
-    </ImageView> 
+    <top> 
+        <VBox styleClass="header-box">
+            <ImageView styleClass="header-box__config-icon" onMouseClicked="#onClickImgOpenConfigurations" />
+            
+            <VBox styleClass="header-box__title-box">
+                <Label styleClass="title-box__title" text="Escolha um save para iniciar" />
+            </VBox>
+        </VBox>
+    </top>
  
-    <VBox>
-        <HBox>
-            <ImageView>
-                <fitWidth>50</fitWidth>
-                <preserveRatio>true</preserveRatio>
-                <image>
-                    <Image url="@../media/wizard-icon.png"/>
-                </image>
-            </ImageView> 
+    <center>
+        <VBox styleClass="main-box">
+            <HBox>
+                <ImageView 
+                    styleClass="save-selection__wizard-icon" 
+                    fitWidth="60"
+                    preserveRatio="true"
+                />
 
                 <HBox>
                     <Label text="Nome" fx:id="lblCharacterName1" />
@@ -37,14 +38,19 @@ fx:controller="org.talesof.talesofamysticland.controller.SaveSelectionController
                     <Label text="21/05/2023" fx:id="lblLastSaved1" />
                 </HBox>
 
-                <Button text="x" />
+                <ImageView 
+                    styleClass="save-selection__trash-icon" 
+                    fitWidth="60"
+                    preserveRatio="true"
+                />
             </HBox>
 
             <HBox>
-                <ImageView>
-                    <fitWidth>50</fitWidth>
-                    <preserveRatio>true</preserveRatio>
-                </ImageView> 
+                <ImageView 
+                    styleClass="save-selection__wizard-icon" 
+                    fitWidth="60"
+                    preserveRatio="true"
+                />
                 
                 <HBox>
                     <Label text="Nome" fx:id="lblCharacterName2" />
@@ -52,29 +58,39 @@ fx:controller="org.talesof.talesofamysticland.controller.SaveSelectionController
                     <Label text="21/05/2023" fx:id="lblLastSaved2" />
                 </HBox>
 
-                <Button text="x" />
+                <ImageView 
+                    styleClass="save-selection__trash-icon" 
+                    fitWidth="60"
+                    preserveRatio="true"
+                />
             </HBox>
 
-            <HBox>
-                <ImageView>
-                    <fitWidth>50</fitWidth>
-                    <preserveRatio>true</preserveRatio>
-                </ImageView> 
+            <HBox styleClass="save__outerbox">
+                <HBox styleClass="save__innerbox">
+                    <ImageView 
+                        styleClass="wizard-icon" 
+                        fitWidth="60"
+                        preserveRatio="true"
+                    />
 
-                <HBox>
-                    <Label text="Nome" fx:id="lblCharacterName3" />
-                    <Label text="0:51" fx:id="lblPlayTime3" />
-                    <Label text="21/05/2023" fx:id="lblLastSaved3" />
+                    <Label styleClass="save__label" text="Nome" fx:id="lblCharacterName3" />
+                    <Label styleClass="save__label" text="0:51" fx:id="lblPlayTime3" />
+                    <Label styleClass="save__label" text="21/05/2023" fx:id="lblLastSaved3" />
                 </HBox>
 
-            <Button text="x" />
+                <ImageView 
+                    styleClass="save__trash-icon" 
+                    fitWidth="35"
+                    preserveRatio="true"
+                />
+            </HBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox styleClass="footer-box">
+            <Button styleClass="footer-box__back-button" text="Voltar" onAction="#onActionBtnBack" />
         </HBox>
-    </VBox>
+    </bottom>
 
-    <Button styleClass="backButton" text="Voltar" onAction="#onActionBtnBack" />
-
-    <stylesheets>
-        <URL value="@style.css" />
-    </stylesheets>
-
-</VBox> 
+</BorderPane> 

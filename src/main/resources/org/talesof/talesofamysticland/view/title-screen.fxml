@@ -16,7 +16,7 @@
             <ImageView styleClass="header-box__config-icon" onMouseClicked="#onClickImgOpenConfigurations" />
 
             <VBox styleClass="header-box__title-box">
-                <Label styleClass="title-box__game-title" text="Tales of a Mystic Land" />
+                <Label styleClass="title-box__title" text="Tales of a Mystic Land" />
             </VBox>
         </VBox>
     </top>
@@ -25,9 +25,9 @@
         <VBox styleClass="main-box">
 
             <VBox styleClass="main-box__options">
-                <Button styleClass="options__button" text="Jogar" onAction="#onActionBtnPlay" />
+                <Button styleClass="options__button-big" text="Jogar" onAction="#onActionBtnPlay" />
 
-                <Button styleClass="options__button" text="Sair" onAction="#onActionBtnExit" />
+                <Button styleClass="options__button-big" text="Sair" onAction="#onActionBtnExit" />
 
                 <VBox styleClass="options__hyperlinks">
                     <Hyperlink styleClass="hyperlinks__link" text="Criar conta." onAction="#onActionHplRedirectToRegisterPlayer" />
