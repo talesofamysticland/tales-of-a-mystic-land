@@ -22,7 +22,7 @@
 
 .header-box {
     -fx-alignment: top-left;
-    -fx-spacing: 30px;
+    -fx-spacing: 0px;
 }
 
 .header-box__config-icon {
@@ -36,6 +36,7 @@
 
 .header-box__title-box {
     -fx-alignment: center;
+    -fx-padding: 0px 0px 30px 0px;
 }
 
 .title-box__title {
@@ -43,7 +44,13 @@
     -fx-alignment: center;
     -fx-font-size: 60px;
     -fx-wrap-text: true;
-    -fx-padding: 25px 0px 0px 0px;
+}
+
+.title-box__title-medium {
+    -fx-font-family: 'Pixellari';
+    -fx-alignment: center;
+    -fx-font-size: 35px;
+    -fx-wrap-text: true;
 }
 
 .footer-box {
@@ -54,7 +61,7 @@
     -fx-text-fill: #FF3F3F;
     -fx-background-color: #FFFFFF;
     -fx-pref-width: 110px;
-    -fx-pref-height: 40px;
+    -fx-pref-height: 45px;
     -fx-border-color: #FF3F3F;
     -fx-border-width: 2px;
 }
@@ -230,20 +237,26 @@
 
 .save__outerbox {
     -fx-alignment: center;
-    -fx-spacing: 25px;
+    -fx-spacing: 50px;
 }
 
 .save__innerbox {
-    -fx-pref-width: 500px;
+    -fx-pref-width: 650px;
+    -fx-pref-height: 150px;
     -fx-padding: 20px;
     -fx-background-color: #b6b6b6;
-    -fx-spacing: 50px;
+    -fx-spacing: 90px;
     -fx-alignment: center;
-    -fx-border-width: 2px;
+    -fx-border-width: 2.5px;
     -fx-border-color: #818181;
 }
 
+.save__innerbox:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.7), 10, 0, 0, 2);
+}
+
 .save__label {
+    -fx-font-size: 18px;
     -fx-wrap-text: true;
 }
 
@@ -259,6 +272,6 @@
     -fx-image: url('../media/icons/archer-icon.png');
 }
 
-.save__trash-icon {
+.trash-icon {
     -fx-image: url('../media/icons/trash-icon.png');
 }

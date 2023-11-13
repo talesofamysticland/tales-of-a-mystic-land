@@ -18,50 +18,31 @@
             <ImageView styleClass="header-box__config-icon" onMouseClicked="#onClickImgOpenConfigurations" />
             
             <VBox styleClass="header-box__title-box">
-                <Label styleClass="title-box__title" text="Escolha um save para iniciar" />
+                <Label styleClass="title-box__title-medium" text="Escolha um save para iniciar" />
             </VBox>
         </VBox>
     </top>
  
     <center>
         <VBox styleClass="main-box">
-            <HBox>
-                <ImageView 
-                    styleClass="save-selection__wizard-icon" 
-                    fitWidth="60"
-                    preserveRatio="true"
-                />
+            <HBox styleClass="save__outerbox">
+                <HBox styleClass="save__innerbox">
+                    <ImageView 
+                        styleClass="wizard-icon" 
+                        fitWidth="70"
+                        preserveRatio="true"
+                    />
 
-                <HBox>
-                    <Label text="Nome" fx:id="lblCharacterName1" />
-                    <Label text="0:51" fx:id="lblPlayTime1" />
-                    <Label text="21/05/2023" fx:id="lblLastSaved1" />
+                    <Label styleClass="save__label" text="Nome" fx:id="lblCharacterName1" />
+                    <Label styleClass="save__label" text="0:51" fx:id="lblPlayTime1" />
+                    <Label styleClass="save__label" text="21/05/2023" fx:id="lblLastSaved1" />
                 </HBox>
 
                 <ImageView 
-                    styleClass="save-selection__trash-icon" 
-                    fitWidth="60"
+                    styleClass="trash-icon" 
+                    fitWidth="40"
                     preserveRatio="true"
-                />
-            </HBox>
-
-            <HBox>
-                <ImageView 
-                    styleClass="save-selection__wizard-icon" 
-                    fitWidth="60"
-                    preserveRatio="true"
-                />
-                
-                <HBox>
-                    <Label text="Nome" fx:id="lblCharacterName2" />
-                    <Label text="0:51" fx:id="lblPlayTime2" />
-                    <Label text="21/05/2023" fx:id="lblLastSaved2" />
-                </HBox>
-
-                <ImageView 
-                    styleClass="save-selection__trash-icon" 
-                    fitWidth="60"
-                    preserveRatio="true"
+                    onMouseClicked="#onClickImgDeleteSave"
                 />
             </HBox>
 
@@ -69,7 +50,28 @@
                 <HBox styleClass="save__innerbox">
                     <ImageView 
                         styleClass="wizard-icon" 
-                        fitWidth="60"
+                        fitWidth="70"
+                        preserveRatio="true"
+                    />
+
+                    <Label styleClass="save__label" text="Nome" fx:id="lblCharacterName2" />
+                    <Label styleClass="save__label" text="0:51" fx:id="lblPlayTime2" />
+                    <Label styleClass="save__label" text="21/05/2023" fx:id="lblLastSaved2" />
+                </HBox>
+
+                <ImageView 
+                    styleClass="trash-icon" 
+                    fitWidth="40"
+                    preserveRatio="true"
+                    onMouseClicked="#onClickImgDeleteSave"
+                />
+            </HBox>
+
+            <HBox styleClass="save__outerbox">
+                <HBox styleClass="save__innerbox">
+                    <ImageView 
+                        styleClass="wizard-icon" 
+                        fitWidth="70"
                         preserveRatio="true"
                     />
 
@@ -79,9 +81,10 @@
                 </HBox>
 
                 <ImageView 
-                    styleClass="save__trash-icon" 
-                    fitWidth="35"
+                    styleClass="trash-icon" 
+                    fitWidth="40"
                     preserveRatio="true"
+                    onMouseClicked="#onClickImgDeleteSave"
                 />
             </HBox>
         </VBox>
