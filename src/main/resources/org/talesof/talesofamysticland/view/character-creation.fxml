@@ -21,7 +21,7 @@
     <center>
         <VBox styleClass="main-box"> 
 
-            <TextField styleClass="txf-character-name" promptText="Nome do personagem" />
+            <TextField styleClass="txf-character-name" fx:id="txfCharacterName" promptText="Nome do personagem" />
 
             <HBox styleClass="classes-view">
                 <VBox 

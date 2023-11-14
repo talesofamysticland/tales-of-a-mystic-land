@@ -1,10 +1,14 @@
 package org.talesof.talesofamysticland.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 public class CharacterCreationController {
+
+    @FXML
+    private TextField txfCharacterName;
 
     @FXML
     private VBox warriorBox, wizardBox, archerBox;
@@ -17,11 +21,16 @@ public class CharacterCreationController {
     }
 
     @FXML
-    public void onClickSelectClass(MouseEvent event) {
+    public void initialize() {
+        txfCharacterName.setFocusTraversable(false);
+
         setHoverEffect(warriorBox);
         setHoverEffect(wizardBox);
         setHoverEffect(archerBox);
-        
+    }
+
+    @FXML
+    public void onClickSelectClass(MouseEvent event) {
         VBox clickedBox = (VBox) event.getSource();
         setBorderStyle(clickedBox);
     }
