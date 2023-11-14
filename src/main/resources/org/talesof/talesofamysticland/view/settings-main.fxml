@@ -17,12 +17,21 @@
     </top>
 
     <left>
+        <VBox styleClass="config__optionsbox">
+            <Button styleClass="config__optionsbox__optionButton" text="Controles" onAction="#onActionOpenControlScreen"/>
+            <Button styleClass="config__optionsbox__optionButton" text="Audio" onAction="#onActionOpenAudioScreen"/>
+            <Button styleClass="config__optionsbox__optionButton" text="Resolucao" onAction="#onActionOpenResolutionScreen"/>
+        </VBox>
     </left>
 
     <center>
     </center>
 
     <bottom>
+        <HBox>
+            <Button styleClass="footer-box__save-button" text="salvar" onAction="#onActionSaveSettings"/>
+            <Button styleClass="footer-box__back-button" text="cancelar" onAction="#onActionCancelSettings"/>
+        </HBox>
     </bottom>
 
 </BorderPane> 

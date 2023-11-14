@@ -20,7 +20,7 @@ public class TitleScreenController {
         FXMLLoader loader = new FXMLLoader(TitleScreenController.class.getResource("/org/talesof/talesofamysticland/view/settings-main.fxml"));
         Scene scene = new Scene(loader.load());
         Stage stage = new Stage();
-        stage.initStyle(StageStyle.UNDECORATED);
+        //stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setWidth(700);

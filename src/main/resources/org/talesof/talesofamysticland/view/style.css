@@ -297,3 +297,41 @@
 .trash-icon {
     -fx-image: url('../media/icons/trash-icon.png');
 }
+
+/* Settings */
+
+.config__optionsbox__optionButton{
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #6b0ea1;
+    -fx-border-color: #6b0ea1;
+    -fx-border-width: 2px;
+    -fx-pref-width: 240px;
+    -fx-pref-height: 40px;
+}
+.config__optionsbox__optionButton:hover{
+    -fx-text-fill: #6b0ea1;
+    -fx-background-color: #FFFFFF;
+}
+
+.config__optionsbox__optionButton__clicked{
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #4a0870;
+    -fx-border-color: #4a0870;
+    -fx-border-width: 2px;
+    -fx-pref-width: 240px;
+    -fx-pref-height: 40px;
+}
+
+.footer-box__save-button {
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #6b0ea1;
+    -fx-pref-width: 110px;
+    -fx-pref-height: 45px;
+    -fx-border-color: #6b0ea1;
+    -fx-border-width: 2px;
+}
+
+.footer-box__save-button:hover {
+    -fx-text-fill: #6b0ea1;
+    -fx-background-color: #FFFFFF;
+}
