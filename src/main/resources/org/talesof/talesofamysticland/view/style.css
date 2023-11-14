@@ -137,11 +137,6 @@
     -fx-font-weight: bold;
 }
 
-.form__textfield {
-    -fx-font-family: 'sans-serif';
-    -fx-font-size: 20px;
-}
-
 .form__options {
     -fx-spacing: 15px;
     -fx-alignment: center;
@@ -235,16 +230,6 @@
 
 .class-box__name {
     -fx-font-size: 22px;
-    -fx-font-weight: bold;
-}
-
-.class-box__description {
-    -fx-text-alignment: center;
-    -fx-wrap-text: true;
-}
-
-.class-box__attributes-warrior {
-    -fx-text-fill: #e72020;
 }
 
 .class-box__attributes-wizard {
@@ -300,7 +285,22 @@
 
 /* Settings */
 
-.config__optionsbox__optionButton{
+.config__title-box__title-medium{
+    -fx-font-family: 'Pixellari';
+    -fx-alignment: center;
+    -fx-font-size: 35px;
+    -fx-wrap-text: true;
+    -fx-padding: 10px;
+}
+
+.config__title-box{
+    -fx-alignment: top-center;
+    -fx-border-width: 3px;
+    -fx-border-color: #6b0ea1;
+}
+
+.config__options-box__option-button{
+    -fx-font-family: 'Minecraft';
     -fx-text-fill: #FFFFFF;
     -fx-background-color: #6b0ea1;
     -fx-border-color: #6b0ea1;
@@ -308,12 +308,12 @@
     -fx-pref-width: 240px;
     -fx-pref-height: 40px;
 }
-.config__optionsbox__optionButton:hover{
+.config__options-box__option-button:hover{
     -fx-text-fill: #6b0ea1;
     -fx-background-color: #FFFFFF;
 }
 
-.config__optionsbox__optionButton__clicked{
+.config__options-box__option-button__clicked{
     -fx-text-fill: #FFFFFF;
     -fx-background-color: #4a0870;
     -fx-border-color: #4a0870;
@@ -322,16 +322,77 @@
     -fx-pref-height: 40px;
 }
 
-.footer-box__save-button {
+
+.config__options-box{
+    -fx-padding: 10px 0;
+    -fx-spacing: 6px;
+}
+
+.config__content-box-margin{
+    -fx-padding: 10px 0px 10px 10px;
+}
+
+.config__content-box{
+    -fx-border-width: 4px;
+    -fx-border-color: #6b0ea1;
+}
+
+.config__content-box__keys {
+    -fx-font-family: 'Minecraft';
+    -fx-text-alignment: center;
+    -fx-padding: 5px;
+    -fx-pref-width: 120px;
+    -fx-wrap-text: true;
+    -fx-content-display: center;
+}
+
+.config__content-box__description__move {
+    -fx-font-family: 'Minecraft';
+    -fx-padding: 20px 0px;
+    -fx-wrap-text: true;
+    -fx-pref-width: 300px;
+    -fx-content-display: center;
+}
+
+.config__content-box__description {
+    -fx-font-family: 'Minecraft';
+    -fx-padding: 5px 0px;
+    -fx-wrap-text: true;
+    -fx-content-display: center;
+}
+
+.config__footer-box__save-button {
     -fx-text-fill: #FFFFFF;
+    -fx-text-alignment: center;
     -fx-background-color: #6b0ea1;
-    -fx-pref-width: 110px;
+    -fx-pref-width: 120px;
     -fx-pref-height: 45px;
     -fx-border-color: #6b0ea1;
     -fx-border-width: 2px;
+    -fx-border-radius: 3px;
 }
 
-.footer-box__save-button:hover {
+.config__footer-box__save-button:hover {
     -fx-text-fill: #6b0ea1;
     -fx-background-color: #FFFFFF;
+}
+
+.config__footer-box__cancel-button {
+    -fx-text-fill: #FFFFFF;
+    -fx-text-alignment: center;
+    -fx-background-color: #FF3F3F;
+    -fx-pref-height: 45px;
+    -fx-pref-width: 120px;
+    -fx-border-color: #FF3F3F;
+    -fx-border-width: 2px;
+    -fx-border-radius: 3px;
+}
+
+.config__footer-box__cancel-button:hover {
+    -fx-text-fill: #FF3F3F;
+    -fx-background-color: #FFFFFF;
+}
+
+.config__footer-box{
+    -fx-spacing: 6px;
 }

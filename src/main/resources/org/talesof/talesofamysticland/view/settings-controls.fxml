@@ -13,41 +13,57 @@
 >
 
     <top>
-        <Label styleClass="title-box__title-medium" text="Configurações" />
+        <HBox styleClass="config__title-box">
+            <Label styleClass="config__title-box__title-medium" text="Configurações" />
+        </HBox>
     </top>
 
     <left>
-        <VBox>
-            <Button styleClass="config__optionButton__clicked" text="Controles"/>
-            <Button styleClass="config__optionButton" text="Audio"/>
-            <Button styleClass="config__optionButton" text="Resolução"/>
+        <VBox styleClass="config__options-box">
+            <Button styleClass="config__options-box__option-button__clicked" text="Controles"/>
+            <Button styleClass="config__options-box__option-button" text="Audio" onAction="#onActionOpenAudioScreen"/>
+            <Button styleClass="config__options-box__option-button" text="Resolução" onAction="#onActionOpenResolutionScreen"/>
         </VBox>
     </left>
 
     <center>
-        <HBox>
-            <VBox>
-                <Label text="W A S D / ↑ ← ↓ →"/>
-                <Label text="ENTER"/>
-                <Label text="F"/>
-                <Label text="C"/>
-                <Label text="ESC">
-                <Label text="E">
-            </VBox>
-            <VBox>
-                <Label text="Mover-se"/>
-                <Label text="Confirmar e atacar"/>
-                <Label text="Atirar e conjurar"/>
-                <Label text="Abrir menu de configurações"/>
-                <Label text="Pegar itens e interagir com NPCs"/>
+        <HBox styleClass="config__content-box-margin">
+            <VBox styleClass="config__content-box">
+                <HBox>
+                    <VBox>
+                        <Label styleClass="config__content-box__keys" text="W A S D"/>
+                        <Label styleClass="config__content-box__keys" text="↑ ← ↓ →"/>
+                    </VBox>
+                    <Label styleClass="config__content-box__description__move" text="Mover-se"/>
+                </HBox>
+                <HBox>
+                    <Label styleClass="config__content-box__keys" text="ENTER"/>
+                    <Label styleClass="config__content-box__description" text="Confirmar e atacar"/>
+                </HBox>
+                <HBox>
+                    <Label styleClass="config__content-box__keys" text="F"/>
+                    <Label styleClass="config__content-box__description" text="Atirar e conjurar"/>
+                </HBox>
+                <HBox>
+                    <Label styleClass="config__content-box__keys" text="C"/>
+                    <Label styleClass="config__content-box__description" text="abrir o menu de personagem"/>
+                </HBox>
+                <HBox>
+                    <Label styleClass="config__content-box__keys" text="ESC"/>
+                    <Label styleClass="config__content-box__description" text="Abrir menu de configurações"/>
+                </HBox>
+                <HBox>
+                    <Label styleClass="config__content-box__keys" text="E"/>
+                    <Label styleClass="config__content-box__description" text="Pegar itens e interagir com NPCs"/>
+                </HBox>
             </VBox>
         </HBox>
     </center>
 
     <bottom>
-        <HBox>
-            <Button styleClass="footer-box__save-button" text="salvar" />
-            <Button styleClass="footer-box__back-button" text="cancelar" />
+        <HBox styleClass="config__footer-box">
+            <Button styleClass="config__footer-box__save-button" text="salvar"  onAction="#onActionSaveSettings"/>
+            <Button styleClass="config__footer-box__cancel-button" text="cancelar"  onAction="#onActionCancelSettings"/>
         </HBox>
     </bottom>
 

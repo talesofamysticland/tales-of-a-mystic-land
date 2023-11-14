@@ -13,14 +13,16 @@
 >
 
     <top>
-        <Label styleClass="title-box__title-medium" text="Configurações" />
+        <HBox styleClass="config__title-box">
+            <Label styleClass="config__title-box__title-medium" text="Configurações" />
+        </HBox>
     </top>
 
     <left>
-        <VBox styleClass="config__optionsbox">
-            <Button styleClass="config__optionsbox__optionButton" text="Controles" onAction="#onActionOpenControlScreen"/>
-            <Button styleClass="config__optionsbox__optionButton" text="Audio" onAction="#onActionOpenAudioScreen"/>
-            <Button styleClass="config__optionsbox__optionButton" text="Resolucao" onAction="#onActionOpenResolutionScreen"/>
+        <VBox styleClass="config__options-box">
+            <Button styleClass="config__options-box__option-button" text="Controles" onAction="#onActionOpenControlScreen"/>
+            <Button styleClass="config__options-box__option-button" text="Audio" onAction="#onActionOpenAudioScreen"/>
+            <Button styleClass="config__options-box__option-button" text="Resolução" onAction="#onActionOpenResolutionScreen"/>
         </VBox>
     </left>
 
@@ -28,9 +30,9 @@
     </center>
 
     <bottom>
-        <HBox>
-            <Button styleClass="footer-box__save-button" text="salvar" onAction="#onActionSaveSettings"/>
-            <Button styleClass="footer-box__back-button" text="cancelar" onAction="#onActionCancelSettings"/>
+        <HBox styleClass="config__footer-box">
+            <Button styleClass="config__footer-box__save-button" text="salvar" onAction="#onActionSaveSettings"/>
+            <Button styleClass="config__footer-box__cancel-button" text="cancelar" onAction="#onActionCancelSettings"/>
         </HBox>
     </bottom>
 
