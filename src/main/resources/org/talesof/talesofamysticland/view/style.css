@@ -10,12 +10,14 @@
     src: url('../media/fonts/Pixellari.ttf');
 }
 
+@font-face {
+    font-family: 'Minecraft';
+    src: url('../media/fonts/Minecraft.ttf');
+}
+
 .root {
     -fx-spacing: 30px;
     -fx-padding: 20px;
-    padding: 20px;
-    -fx-font-size: 17px;
-    font-size: 17px;
     -fx-font-family: 'pixelmix';
     -fx-font-size: 16px;
 }
@@ -141,7 +143,7 @@
     -fx-background-color: #6b0ea1;
     -fx-border-color: #6b0ea1;
     -fx-border-width: 2px;
-    -fx-pref-width: 220px;
+    -fx-pref-width: 280px;
     -fx-pref-height: 40px;
 }
 
@@ -156,55 +158,51 @@
 
 .txf-character-name {
     -fx-max-width: 300px;
+    -fx-font-size: 18px;
 }
 
 .classes-view {
-    -fx-font-family: 'System';
+    -fx-font-family: 'Minecraft';
     -fx-spacing: 60px;
     -fx-alignment: center;
+    -fx-pref-height: 340px;
 }
 
-.classes-view__class-box-wizard {
-    -fx-spacing: 18px;
-    -fx-alignment: center;
-    -fx-pref-height: 380px;
-    -fx-pref-width: 320px;  
-    -fx-border-width: 3.5px;
-    -fx-border-radius: 20px;
-    -fx-border-color: #9323df;
-    -fx-fill-color: #9323df9c;
-}
-
-.classes-view__class-box-warrior {
-    -fx-spacing: 18px;
-    -fx-alignment: center;
-    -fx-pref-height: 380px;
-    -fx-pref-width: 320px;  
-    -fx-border-width: 3.5px;
-    -fx-border-radius: 20px;
-    -fx-border-color: #a5630e;
-    -fx-fill-color: #a5630e9c;
-}
-
+.classes-view__class-box-warrior,
+.classes-view__class-box-wizard,
 .classes-view__class-box-archer {
     -fx-spacing: 18px;
     -fx-alignment: center;
-    -fx-pref-height: 380px;
-    -fx-pref-width: 320px;  
-    -fx-border-width: 3.5px;
-    -fx-border-radius: 20px;
-    -fx-border-color: #19850a;
-    -fx-fill-color: #19850a9c;
+    -fx-pref-width: 350px;
+    -fx-padding: 20px;
+    -fx-border-width: 0px;
 }
 
-.classes-view__class-box {
-    -fx-spacing: 18px;
-    -fx-alignment: center;
-    -fx-pref-height: 380px;
-    -fx-pref-width: 320px;  
-    -fx-border-width: 3.5px;
-    -fx-border-radius: 20px;
-    -fx-border-color: black;
+.classes-view__class-box-warrior {
+    -fx-background-color: #ffbbbb;
+    -fx-border-color: #e72020;
+}
+
+.classes-view__class-box-warrior:hover {
+    -fx-border-width: 1px;
+}
+
+.classes-view__class-box-wizard {
+    -fx-background-color: #dfafff;
+    -fx-border-color: #9323df;
+}
+
+.classes-view__class-box-wizard:hover {
+    -fx-border-width: 1px;
+}
+
+.classes-view__class-box-archer {
+    -fx-background-color: #cdffc6;
+    -fx-border-color: #23be0e;
+}
+
+.classes-view__class-box-archer:hover {
+    -fx-border-width: 1px;
 }
 
 .class-box__catchphrase {
@@ -214,23 +212,25 @@
 }
 
 .class-box__name {
-    -fx-font-size: 18px;
-        font-size: 18px;
+    -fx-font-size: 22px;
     -fx-font-weight: bold;
-        font-weight: bold;
 }
 
 .class-box__description {
     -fx-text-alignment: center;
-        text-align: center;
     -fx-wrap-text: true;
 }
 
-.play-button{
-    -fx-label-padding: 10px 15px 10px 15px;
-    -fx-text-fill: #FFFFFF;
-    -fx-background-color: #630d94;
-    -fx-text-alignment: center;
+.class-box__attributes-warrior {
+    -fx-text-fill: #e72020;
+}
+
+.class-box__attributes-wizard {
+    -fx-text-fill: #9323df;
+}
+
+.class-box__attributes-archer {
+    -fx-text-fill: #23be0e;
 }
 
 /* SAVE SELECTION */

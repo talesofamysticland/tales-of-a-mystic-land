@@ -24,56 +24,87 @@
             <TextField styleClass="txf-character-name" promptText="Nome do personagem" />
 
             <HBox styleClass="classes-view">
-                <VBox styleClass="classes-view__class-box"> 
-                    <Label styleClass="class-box__catchphrase" text="“As pessoas buscam por uma força que já existe dentro delas.”" />
+                <VBox 
+                    styleClass="classes-view__class-box-warrior"
+                    onMouseClicked="#onClickSelectClass" 
+                    fx:id="warriorBox"
+                > 
+                    <Label 
+                        styleClass="class-box__catchphrase" 
+                        text="“As pessoas buscam por uma força que já existe dentro delas.”" 
+                    />
                     
                     <ImageView 
                         styleClass="warrior-icon"
-                        fitWidth="60"
+                        fitWidth="70"
                         preserveRatio="true"
                     />
 
                     <Label styleClass="class-box__name" text="Guerreiro" />
 
-                    <Label styleClass="class-box__description" text="Um poderoso e resiliente mestre das armas, pronto para qualquer desafio" />
+                    <Label 
+                        styleClass="class-box__description" 
+                        text="Um poderoso e resiliente mestre das armas, pronto para qualquer desafio" 
+                    />
 
-                    <Label styleClass="class-box__attributes --warrior" text="+ ataque e defesa" />
+                    <Label styleClass="class-box__attributes-warrior" text="+ ataque e defesa" />
                 </VBox>
 
-                <VBox styleClass="classes-view__class-box"> 
-                    <Label styleClass="class-box__catchphrase" text="“Um mago não comete erros, ele cria possibilidades inesperadas.”" />
+                <VBox 
+                    styleClass="classes-view__class-box-wizard" 
+                    onMouseClicked="#onClickSelectClass" 
+                    fx:id="wizardBox"
+                >
+         
+                    <Label 
+                        styleClass="class-box__catchphrase" 
+                        text="“Um mago não comete erros, ele cria possibilidades inesperadas.”" 
+                    />
                     
                     <ImageView 
                         styleClass="wizard-icon"
-                        fitWidth="60"
+                        fitWidth="70"
                         preserveRatio="true"
                     />
 
                     <Label styleClass="class-box__name" text="Mago" />
 
-                    <Label styleClass="class-box__description" text="Um quieto e ambicioso entusiasta da magia celestial" />
+                    <Label 
+                        styleClass="class-box__description" 
+                        text="Um quieto e ambicioso entusiasta da magia celestial" 
+                    />
 
-                    <Label styleClass="class-box__attributes" text="+ magia e mana" />
+                    <Label styleClass="class-box__attributes-wizard" text="+ magia e mana" />
                 </VBox>
 
-                <VBox styleClass="classes-view__class-box"> 
-                    <Label styleClass="class-box__catchphrase" text="“Exploradores de verdade seguem a bússola do seu instinto.”" />
+                <VBox 
+                    styleClass="classes-view__class-box-archer" 
+                    onMouseClicked="#onClickSelectClass" 
+                    fx:id="archerBox"
+                > 
+                    <Label 
+                        styleClass="class-box__catchphrase" 
+                        text="“Exploradores de verdade seguem a bússola do seu instinto.”" 
+                    />
                     
                     <ImageView 
                         styleClass="archer-icon"
-                        fitWidth="60"
+                        fitWidth="70"
                         preserveRatio="true"
                     />
 
                     <Label styleClass="class-box__name" text="Arqueiro" />
 
-                    <Label styleClass="class-box__description" text="Um aventureiro prodígio, de talento e inteligência natos" />
+                    <Label 
+                        styleClass="class-box__description" 
+                        text="Um aventureiro prodígio, de talento e inteligência natos" 
+                    />
 
-                    <Label styleClass="class-box__attributes" text="+ destreza e precisão" />
+                    <Label styleClass="class-box__attributes-archer" text="+ destreza e precisão" />
                 </VBox>
             </HBox>
 
-            <Button styleClass="play-button" text="Inicie sua jornada!" />
+            <Button styleClass="options__continue-button-medium" text="Inicie sua jornada!" />
         </VBox>
     </center>
 
