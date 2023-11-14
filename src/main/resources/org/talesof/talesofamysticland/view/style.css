@@ -110,6 +110,7 @@
     -fx-text-fill: #6b0ea1;
 }
 
+
 /* FORMS: REGISTER PLAYER & LOGIN */
 
 .main-box__form {
@@ -124,13 +125,14 @@
 }
 
 .form__label {
-    -fx-font-size: 12px;
+    -fx-font-family: 'Minecraft';
+    -fx-font-size: 18px;
     -fx-font-weight: bold;
 }
 
 .form__textfield {
     -fx-font-family: 'sans-serif';
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
 }
 
 .form__options {
@@ -143,7 +145,7 @@
     -fx-background-color: #6b0ea1;
     -fx-border-color: #6b0ea1;
     -fx-border-width: 2px;
-    -fx-pref-width: 280px;
+    -fx-pref-width: 260px;
     -fx-pref-height: 40px;
 }
 
@@ -153,8 +155,21 @@
 }
 
 
-/* CHARACTER CREATION */
+/* CHANGE PASSWORD */
 
+.header-box__title-box-low {
+    -fx-alignment: center;
+    -fx-padding: 80px 0px 0px 0px;
+}
+
+.title-box__title-low {
+    -fx-font-family: 'Pixellari';
+    -fx-alignment: center;
+    -fx-font-size: 45px;
+}
+
+
+/* CHARACTER CREATION */
 
 .txf-character-name {
     -fx-max-width: 300px;

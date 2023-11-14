@@ -20,7 +20,7 @@ public class TalesOfAMysticLandApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(TalesOfAMysticLandApplication.class.getResource("view/character-creation.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(TalesOfAMysticLandApplication.class.getResource("view/change-password3-new-password.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.setTitle("Tales of a Mystic Land");
