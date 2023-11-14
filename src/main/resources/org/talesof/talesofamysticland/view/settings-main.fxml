@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane
+    styleClass="root" 
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="org.talesof.talesofamysticland.controller.SettingsController"
+    stylesheets="@style.css"
+>
+
+    <top>
+        <Label styleClass="title-box__title-medium" text="Configurações" />
+    </top>
+
+    <left>
+    </left>
+
+    <center>
+    </center>
+
+    <bottom>
+    </bottom>
+
+</BorderPane> 

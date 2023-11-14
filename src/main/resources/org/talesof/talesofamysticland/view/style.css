@@ -48,6 +48,13 @@
     -fx-wrap-text: true;
 }
 
+.title-box__title-main {
+    -fx-font-family: 'Pixellari';
+    -fx-alignment: center;
+    -fx-font-size: 90px;
+    -fx-wrap-text: true;
+}
+
 .title-box__title-medium {
     -fx-font-family: 'Pixellari';
     -fx-alignment: center;
@@ -106,7 +113,7 @@
 
 .hyperlinks__link {
     -fx-font-family: 'pixelmix';
-    -fx-font-size: 12px;
+    -fx-font-size: 16px;
     -fx-text-fill: #6b0ea1;
 }
 

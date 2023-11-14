@@ -16,7 +16,7 @@
             <ImageView styleClass="header-box__config-icon" onMouseClicked="#onClickImgOpenConfigurations" />
 
             <VBox styleClass="header-box__title-box">
-                <Label styleClass="title-box__title" text="Tales of a Mystic Land" />
+                <Label styleClass="title-box__title-main" text="Tales of a Mystic Land" />
             </VBox>
         </VBox>
     </top>
