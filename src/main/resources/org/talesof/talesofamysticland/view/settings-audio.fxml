@@ -21,7 +21,7 @@
     <left>
         <VBox styleClass="config__options-box">
             <Button styleClass="config__options-box__option-button" text="Controles" onAction="#onActionOpenControlScreen"/>
-            <Button styleClass="config__options-box__option-button" text="Audio" onAction="#onActionOpenAudioScreen"/>
+            <Button styleClass="config__options-box__option-button__clicked" text="Audio"/>
             <Button styleClass="config__options-box__option-button" text="Resolução" onAction="#onActionOpenResolutionScreen"/>
         </VBox>
     </left>

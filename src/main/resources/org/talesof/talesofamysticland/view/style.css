@@ -423,9 +423,10 @@
     -fx-text-fill: #000;
 }
 
-.config__MusicBar{
+.config__SoundBar{
     -fx-major-tick-unit: 100;
     -fx-pref-width: 150px;
+    -fx-show-tick-labels: true;
 }
 
 .config__footer-box__save-button {
