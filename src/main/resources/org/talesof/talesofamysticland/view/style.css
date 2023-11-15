@@ -322,7 +322,6 @@
     -fx-pref-height: 40px;
 }
 
-
 .config__options-box{
     -fx-padding: 10px 0;
     -fx-spacing: 6px;
@@ -358,7 +357,75 @@
     -fx-font-family: 'Minecraft';
     -fx-padding: 5px 0px;
     -fx-wrap-text: true;
+    -fx-pref-width: 300px;
     -fx-content-display: center;
+}
+
+.config__content-box__resolution-box-margin {
+    -fx-padding: 5px 60px;
+}
+
+.config__content-box__resolution-box{
+    -fx-content-display: center;
+    -fx-border-width: 5px;
+    -fx-border-color: #6b0ea1;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+    -fx-text-fill: #6b0ea1;
+}
+
+.config__content-box__resolution-box:hover{
+    -fx-content-display: center;
+    -fx-border-width: 5px;
+    -fx-border-color: #6b0ea1;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+    -fx-background: #6b0ea1;
+    -fx-text-fill: #FFFFFF;
+}
+
+.config__content-box__resolution-box-selected {
+    -fx-content-display: center;
+    -fx-border-width: 5px;
+    -fx-border-color: #4a0870;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+    -fx-background: #4a0870;
+    -fx-text-fill: #FFFFFF;
+}
+
+.config__computer-icon{
+    -fx-content-display: center;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 100px;
+    -fx-image: url('../media/icons/computer-icon.png');
+}
+
+.config__resolution-text{
+    -fx-padding: 2px 0px 0px 0px;
+    -fx-font-family: 'Minecraft';
+    -fx-content-display: center;
+}
+
+.config__content-box__audio-box{
+    -fx-padding: 5px;
+}
+
+.config__content-box__audio-text{
+    -fx-font-family: 'Minecraft';
+    -fx-padding: 1px 0px;
+    -fx-text-fill: #6b0ea1;
+}
+
+.config__content-box__audio-number {
+    -fx-font-family: 'Minecraft';
+    -fx-padding: 1px 5px;
+    -fx-text-fill: #000;
+}
+
+.config__MusicBar{
+    -fx-major-tick-unit: 100;
+    -fx-pref-width: 150px;
 }
 
 .config__footer-box__save-button {

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane
+    styleClass="root" 
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="org.talesof.talesofamysticland.controller.SettingsController"
+    stylesheets="@style.css"
+>
+
+    <top>
+        <HBox styleClass="config__title-box">
+            <Label styleClass="config__title-box__title-medium" text="Configurações" />
+        </HBox>
+    </top>
+
+    <left>
+        <VBox styleClass="config__options-box">
+            <Button styleClass="config__options-box__option-button" text="Controles" onAction="#onActionOpenControlScreen"/>
+            <Button styleClass="config__options-box__option-button" text="Audio" onAction="#onActionOpenAudioScreen"/>
+            <Button styleClass="config__options-box__option-button" text="Resolução" onAction="#onActionOpenResolutionScreen"/>
+        </VBox>
+    </left>
+
+    <center>
+        <HBox styleClass="config__content-box-margin">
+            <VBox styleClass="config__content-box">
+                <HBox styleClass="config__content-box__resolution-box-margin">
+                    <VBox styleClass="config__content-box__resolution-box" onMouseClicked="#onClickSelectResolutionLower">
+                        <ImageView styleClass="config__computer-icon"/>
+                        <Label styleClass="config__resolution-text" text="4:3"/>
+                    </VBox>
+                </HBox>
+                <HBox styleClass="config__content-box__resolution-box-margin">
+                    <VBox styleClass="config__content-box__resolution-box" onMouseClicked="#onClickSelectResolutionStandart">
+                        <ImageView styleClass="config__computer-icon"/>
+                        <Label styleClass="config__resolution-text" text="16:9"/>
+                    </VBox>
+                </HBox>
+                <HBox styleClass="config__content-box__resolution-box-margin">
+                    <VBox styleClass="config__content-box__resolution-box" onMouseClicked="#onClickSelectResolutionHighest">
+                        <ImageView styleClass="config__computer-icon"/>
+                        <Label styleClass="config__resolution-text" text="21:9"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </HBox>
+    </center>
+
+    <bottom>
+        <HBox styleClass="config__footer-box">
+            <Button styleClass="config__footer-box__save-button" text="salvar"  onAction="#onActionSaveSettings"/>
+            <Button styleClass="config__footer-box__cancel-button" text="cancelar"  onAction="#onActionCancelSettings"/>
+        </HBox>
+    </bottom>
+
+</BorderPane> 

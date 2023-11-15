@@ -27,12 +27,15 @@
     </left>
 
     <center>
+        <HBox styleClass="config__content-box-margin">
+            <VBox styleClass="config__content-box"/>
+        </HBox>
     </center>
 
     <bottom>
         <HBox styleClass="config__footer-box">
-            <Button styleClass="config__footer-box__save-button" text="salvar" onAction="#onActionSaveSettings"/>
-            <Button styleClass="config__footer-box__cancel-button" text="cancelar" onAction="#onActionCancelSettings"/>
+            <Button styleClass="config__footer-box__save-button" text="salvar"  onAction="#onActionSaveSettings"/>
+            <Button styleClass="config__footer-box__cancel-button" text="cancelar"  onAction="#onActionCancelSettings"/>
         </HBox>
     </bottom>
 
