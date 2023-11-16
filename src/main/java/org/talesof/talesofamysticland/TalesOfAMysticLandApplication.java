@@ -27,8 +27,10 @@ public class TalesOfAMysticLandApplication extends Application {
     public void start(Stage stage) throws IOException {
         setUpDependecyInjector();
 
-        Parent root = DependencyInjector.load("view/title-screen.fxml");
-        Scene scene = new Scene(root, screenWidth, screenHeight);
+        Parent root = DependencyInjector.load("title-screen.fxml");
+        Scene scene = new Scene(root);
+        stage.setWidth(screenWidth);
+        stage.setHeight(screenHeight);
         stage.setScene(scene);
         stage.setTitle("Tales of a Mystic Land");
         stage.setResizable(true);

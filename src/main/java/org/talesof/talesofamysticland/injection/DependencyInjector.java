@@ -22,7 +22,7 @@ public class DependencyInjector {
 
     public static FXMLLoader getLoader(String location) {
         return new FXMLLoader(
-                DependencyInjector.class.getResource(location),
+                DependencyInjector.class.getResource("/org/talesof/talesofamysticland/view/" + location),
                 null,
                 new JavaFXBuilderFactory(),
                 controllerClass -> constructController(controllerClass));
