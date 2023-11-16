@@ -2,10 +2,15 @@ package org.talesof.talesofamysticland;
 
 import java.io.IOException;
 
+import org.talesof.talesofamysticland.controller.TitleScreenController;
+import org.talesof.talesofamysticland.injection.DependencyInjector;
+import org.talesof.talesofamysticland.service.UserService;
+
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class TalesOfAMysticLandApplication extends Application {
 
@@ -20,17 +25,29 @@ public class TalesOfAMysticLandApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(TalesOfAMysticLandApplication.class.getResource("view/title-screen.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        setUpDependecyInjector();
+
+        Parent root = DependencyInjector.load("view/title-screen.fxml");
+        Scene scene = new Scene(root, screenWidth, screenHeight);
         stage.setScene(scene);
         stage.setTitle("Tales of a Mystic Land");
         stage.setResizable(true);
-        stage.setWidth(screenWidth);
-        stage.setHeight(screenHeight);
         stage.show();
     }
 
     public static void main(String[] args) {
         launch();
+    }
+
+    private void setUpDependecyInjector() {
+
+        Callback<Class<?>, Object> controllerFactory = param -> {
+            UserService userService = new UserService();
+            return new TitleScreenController(userService);
+        };
+
+        DependencyInjector.addInjectionMethod(
+                TitleScreenController.class, controllerFactory
+        );
     }
 }

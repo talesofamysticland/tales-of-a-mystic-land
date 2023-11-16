@@ -2,17 +2,25 @@ package org.talesof.talesofamysticland.controller;
 
 import java.io.IOException;
 
-import javafx.event.ActionEvent;
+import org.talesof.talesofamysticland.service.UserService;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.scene.Node;
 
 public class TitleScreenController {
+
+    private UserService userService;
+
+    @FXML
+    private BorderPane root;
+
+    public TitleScreenController(UserService userService) {
+        this.userService = userService;
+    }
     
     @FXML 
     public void onClickImgOpenConfigurations() throws IOException {
@@ -30,20 +38,12 @@ public class TitleScreenController {
     }
 
     @FXML
-    public void onActionBtnPlay(ActionEvent event) throws IOException {
-        String fxmlPath;
+    public void onActionBtnPlay() {
+        String fxmlFile = "save-selection";
 
-        if (LoginController.userIsLogged) {
-            fxmlPath = "/org/talesof/talesofamysticland/view/save-selection.fxml";
-        } else {
-            fxmlPath = "/org/talesof/talesofamysticland/view/login.fxml";
-        }
+        if(!userService.isLoggedIn()) { fxmlFile = "login"; } 
 
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        redirectTo(fxmlFile);
     }
 
 
@@ -54,11 +54,22 @@ public class TitleScreenController {
 
     @FXML
     public void onActionHplRedirectToRegisterPlayer() {
-        // TODO
+        redirectTo("register-player");
     }
 
     @FXML
     public void onActionHplRedirectToLogin() {
-        // TODO
+        redirectTo("login");
+    }
+
+    private void redirectTo(String fxmlFile) {
+        try {
+            Stage stage = (Stage) root.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/org/talesof/talesofamysticland/view/" + fxmlFile + ".fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

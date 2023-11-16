@@ -9,6 +9,7 @@
     xmlns:fx="http://javafx.com/fxml"
     fx:controller="org.talesof.talesofamysticland.controller.TitleScreenController"
     stylesheets="@style.css"
+    fx:id="root"
 >
 
     <top> 
