@@ -2,8 +2,10 @@ package org.talesof.talesofamysticland;
 
 import java.io.IOException;
 
+import org.talesof.talesofamysticland.controller.LoginController;
 import org.talesof.talesofamysticland.controller.TitleScreenController;
 import org.talesof.talesofamysticland.injection.DependencyInjector;
+import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
 
 import javafx.application.Application;
@@ -43,13 +45,23 @@ public class TalesOfAMysticLandApplication extends Application {
 
     private void setUpDependecyInjector() {
 
-        Callback<Class<?>, Object> controllerFactory = param -> {
-            UserService userService = new UserService();
-            return new TitleScreenController(userService);
+        NavigationService navigationService = new NavigationService();
+        UserService userService = new UserService();
+
+        Callback<Class<?>, Object> titleScreenControllerFactory = param -> {
+            return new TitleScreenController(userService, navigationService);
+        };
+
+        Callback<Class<?>, Object> loginControllerFactory = param -> {
+            return new LoginController(userService, navigationService);
         };
 
         DependencyInjector.addInjectionMethod(
-                TitleScreenController.class, controllerFactory
+                TitleScreenController.class, titleScreenControllerFactory
+        );
+
+        DependencyInjector.addInjectionMethod(
+                LoginController.class, loginControllerFactory
         );
     }
 }

@@ -2,6 +2,7 @@ package org.talesof.talesofamysticland.controller;
 
 import java.io.IOException;
 
+import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
 
 import javafx.fxml.FXML;
@@ -14,12 +15,14 @@ import javafx.stage.Stage;
 public class TitleScreenController {
 
     private UserService userService;
+    private NavigationService navigationService;
 
     @FXML
     private BorderPane root;
 
-    public TitleScreenController(UserService userService) {
+    public TitleScreenController(UserService userService, NavigationService navigationService) {
         this.userService = userService;
+        this.navigationService = navigationService;
     }
     
     @FXML 
@@ -39,11 +42,11 @@ public class TitleScreenController {
 
     @FXML
     public void onActionBtnPlay() {
-        String fxmlFile = "save-selection";
+        String fxmlFile = "save-selection.fxml";
 
-        if(!userService.isLoggedIn()) { fxmlFile = "login"; } 
+        if(!userService.isLoggedIn()) { fxmlFile = "login.fxml"; } 
 
-        redirectTo(fxmlFile);
+        navigationService.navigateTo(root, fxmlFile);
     }
 
 
@@ -54,22 +57,11 @@ public class TitleScreenController {
 
     @FXML
     public void onActionHplRedirectToRegisterPlayer() {
-        redirectTo("register-player");
+        navigationService.navigateTo(root, "register-player.fxml");
     }
 
     @FXML
     public void onActionHplRedirectToLogin() {
-        redirectTo("login");
-    }
-
-    private void redirectTo(String fxmlFile) {
-        try {
-            Stage stage = (Stage) root.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/org/talesof/talesofamysticland/view/" + fxmlFile + ".fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        navigationService.navigateTo(root, "login.fxml");
     }
 }

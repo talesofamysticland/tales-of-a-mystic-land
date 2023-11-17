@@ -10,6 +10,7 @@
     xmlns:fx="http://javafx.com/fxml"
     fx:controller="org.talesof.talesofamysticland.controller.LoginController"
     stylesheets="@style.css"
+    fx:id="root"
 >
 
     <top>
