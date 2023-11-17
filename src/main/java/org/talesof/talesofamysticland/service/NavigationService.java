@@ -7,48 +7,35 @@ import org.talesof.talesofamysticland.injection.DependencyInjector;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class NavigationService implements Navigation {
+public class NavigationService {
 
-    private Stack<String> history = new Stack<>();
-    private String currentView;
+    private Stack<Scene> history = new Stack<>();
+    private Stage primaryStage;
 
-    public NavigationService() {
-        currentView = "title-screen.fxml";
+    public NavigationService(Stage primaryStage) {
+        this.primaryStage = primaryStage;
     }
 
-    @Override
-    public void navigateTo(Parent root, String view) {
-        if(history.isEmpty() || !history.peek().equals(currentView)) {
-            history.add(currentView);
-        }
-
+    public void navigateTo(String viewName) {
         try {
-            Scene scene = root.getScene();
-            root = DependencyInjector.load(view);
-            scene.setRoot(root);
+            Parent root = DependencyInjector.load(viewName);
+            Scene scene = new Scene(root);
+            history.push(primaryStage.getScene());
+
+            primaryStage.setScene(scene);
+            primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Navegando para a view: " + view);
-        currentView = view;
     }
 
-    @Override
     public void navigateBack() {
         if (!history.isEmpty()) {
-            try {
-                String previousView = history.pop();
-                System.out.println(currentView);
-                navigateTo(DependencyInjector.load(currentView), previousView);
-                System.out.println("Voltando para a view anterior: " + previousView);
-
-            }catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Não há histórico para voltar.");
+            Scene previousScene = history.pop();
+            primaryStage.setScene(previousScene);
+            primaryStage.show();
         }
     }
 }

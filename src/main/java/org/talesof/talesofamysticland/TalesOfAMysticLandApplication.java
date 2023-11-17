@@ -16,6 +16,8 @@ import javafx.util.Callback;
 
 public class TalesOfAMysticLandApplication extends Application {
 
+    private Stage stage;
+
     final int originalTileSize = 16;
     final int scale = 5;
 
@@ -27,6 +29,8 @@ public class TalesOfAMysticLandApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        this.stage = stage;
+        
         setUpDependecyInjector();
 
         Parent root = DependencyInjector.load("title-screen.fxml");
@@ -45,7 +49,7 @@ public class TalesOfAMysticLandApplication extends Application {
 
     private void setUpDependecyInjector() {
 
-        NavigationService navigationService = new NavigationService();
+        NavigationService navigationService = new NavigationService(stage);
         UserService userService = new UserService();
 
         Callback<Class<?>, Object> titleScreenControllerFactory = param -> {

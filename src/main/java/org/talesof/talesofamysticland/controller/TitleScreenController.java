@@ -46,7 +46,7 @@ public class TitleScreenController {
 
         if(!userService.isLoggedIn()) { fxmlFile = "login.fxml"; } 
 
-        navigationService.navigateTo(root, fxmlFile);
+        navigationService.navigateTo(fxmlFile);
     }
 
 
@@ -57,11 +57,11 @@ public class TitleScreenController {
 
     @FXML
     public void onActionHplRedirectToRegisterPlayer() {
-        navigationService.navigateTo(root, "register-player.fxml");
+        navigationService.navigateTo("register-player.fxml");
     }
 
     @FXML
     public void onActionHplRedirectToLogin() {
-        navigationService.navigateTo(root, "login.fxml");
+        navigationService.navigateTo("login.fxml");
     }
 }
