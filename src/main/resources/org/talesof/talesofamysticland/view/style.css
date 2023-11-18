@@ -334,6 +334,7 @@
 .config__content-box{
     -fx-border-width: 4px;
     -fx-border-color: #6b0ea1;
+    -fx-pref-width: 420px;
 }
 
 .config__content-box__keys {
@@ -375,11 +376,6 @@
 }
 
 .config__content-box__resolution-box:hover{
-    -fx-content-display: center;
-    -fx-border-width: 5px;
-    -fx-border-color: #6b0ea1;
-    -fx-border-radius: 5px;
-    -fx-padding: 10px;
     -fx-background: #6b0ea1;
     -fx-text-fill: #FFFFFF;
 }
@@ -396,8 +392,6 @@
 
 .config__computer-icon{
     -fx-content-display: center;
-    -fx-pref-width: 100px;
-    -fx-pref-height: 100px;
     -fx-image: url('../media/icons/computer-icon.png');
 }
 
@@ -423,10 +417,22 @@
     -fx-text-fill: #000;
 }
 
-.config__SoundBar{
+.slider{
     -fx-major-tick-unit: 100;
-    -fx-pref-width: 150px;
+    -fx-pref-width: 300px;
     -fx-show-tick-labels: true;
+}
+
+.slider .track{
+    -fx-background-color: #afafaf;
+    -fx-background-radius: 2px;
+}
+
+.slider .thumb{
+    -fx-pref-width: 25px;
+    -fx-pref-height: 10px;
+    -fx-background-color: #6b0ea1;
+    -fx-background-radius: 3px;
 }
 
 .config__footer-box__save-button {
