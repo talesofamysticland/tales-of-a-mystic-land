@@ -30,20 +30,24 @@
 
             <VBox styleClass="main-box__form">
 
-                <VBox styleClass="form__label-txf-box">
-                    <Label styleClass="form__label" text="Nome de usuario ou e-mail" />
-                    <TextField styleClass="form__textfield" fx:id="txfUsernameOrEmail" />
+                <VBox styleClass="form__userdata">
+                    <VBox styleClass="form__label-txf-box">
+                        <Label styleClass="form__label" text="Nome de usuário ou e-mail" />
+                        <TextField styleClass="form__textfield" fx:id="txfUsernameOrEmail" />
+                    </VBox>
+
+                    <VBox styleClass="form__label-txf-box">
+                        <Label styleClass="form__label" text="Senha" />
+                        <PasswordField styleClass="form__textfield" fx:id="pwfPassword" />
+                    </VBox>
                 </VBox>
 
-                <VBox styleClass="form__label-txf-box">
-                    <Label styleClass="form__label" text="Senha" />
-                    <PasswordField styleClass="form__textfield" fx:id="pwfPassword" />
-                </VBox>
-
-                <VBox styleClass="form__options">
+                <VBox styleClass="main-box__options">
                     <Button styleClass="options__continue-button-medium" text="Entrar" onAction="#onActionBtnLogin"/>
-                    <Hyperlink styleClass="hyperlinks__link" text="Esqueci minha senha." onAction="#onActionHplRedirectToChangePassword" />
-                    <Hyperlink styleClass="hyperlinks__link" text="Registrar." onAction="#onActionHplRedirectToRegisterPlayer" />
+                    <VBox styleClass="options__hyperlinks">
+                        <Hyperlink styleClass="hyperlinks__link" text="Esqueci minha senha." onAction="#onActionHplRedirectToChangePassword" />
+                        <Hyperlink styleClass="hyperlinks__link" text="Registrar." onAction="#onActionHplRedirectToRegisterPlayer" />
+                    </VBox>
                 </VBox>
             </VBox>
         </VBox>

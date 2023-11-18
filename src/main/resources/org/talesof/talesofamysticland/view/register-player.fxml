@@ -17,7 +17,7 @@
         <VBox styleClass="header-box">
             <ImageView styleClass="header-box__config-icon" onMouseClicked="#onClickImgOpenConfigurations" />
 
-            <VBox styleClass="header-box__title-box">
+            <VBox styleClass="header-box__title-box-high">
                 <Label styleClass="title-box__title" text="Junte-se a nossa Guilda!" />
             </VBox>
         </VBox>
@@ -28,29 +28,31 @@
 
             <VBox styleClass="main-box__form"> 
 
-                <VBox styleClass="form__label-txf-box">
-                    <Label styleClass="form__label" text="Nome de usuario" />
-                    <TextField styleClass="form__textfield" fx:id="txfUsername" />
+                <VBox styleClass="form__userdata">
+                    <VBox styleClass="form__label-txf-box">
+                        <Label styleClass="form__label" text="Nome de usuário" />
+                        <TextField styleClass="form__textfield" fx:id="txfUsername" />
+                    </VBox>
+
+                    <VBox styleClass="form__label-txf-box">
+                        <Label styleClass="form__label" text="E-mail" />
+                        <TextField styleClass="form__textfield" fx:id="txfEmail" />
+                    </VBox>
+
+                    <VBox styleClass="form__label-txf-box">
+                        <Label styleClass="form__label" text="Senha" />
+                        <PasswordField styleClass="form__textfield" fx:id="pwfPassword" />
+                    </VBox>
+
+                    <VBox styleClass="form__label-txf-box">
+                        <Label styleClass="form__label" text="Confirmar senha" />
+                        <PasswordField styleClass="form__textfield" fx:id="pwfConfirmedPassword" />
+                    </VBox>
                 </VBox>
 
-                <VBox styleClass="form__label-txf-box">
-                    <Label styleClass="form__label" text="E-mail" />
-                    <TextField styleClass="form__textfield" fx:id="txfEmail" />
-                </VBox>
-
-                <VBox styleClass="form__label-txf-box">
-                    <Label styleClass="form__label" text="Senha" />
-                    <PasswordField styleClass="form__textfield" fx:id="pwfPassword" />
-                </VBox>
-
-                <VBox styleClass="form__label-txf-box">
-                    <Label styleClass="form__label" text="Confirmar senha" />
-                    <PasswordField styleClass="form__textfield" fx:id="pwfConfirmedPassword" />
-                </VBox>
-
-                <VBox styleClass="form__options">
-                    <Button styleClass="options__continue-button" text="Criar conta" onAction="#onActionBtnRegisterPlayer"/>
-                    <Hyperlink styleClass="options__hyperlink" text="Já tenho uma conta." onAction="#onActionHplRedirectToLogin" />
+                <VBox styleClass="main-box__options">
+                    <Button styleClass="options__continue-button-medium" text="Criar conta" onAction="#onActionBtnRegisterPlayer"/>
+                    <Hyperlink styleClass="hyperlinks__link" text="Já tenho uma conta." onAction="#onActionHplRedirectToLogin" />
                 </VBox>
             </VBox>
         </VBox>

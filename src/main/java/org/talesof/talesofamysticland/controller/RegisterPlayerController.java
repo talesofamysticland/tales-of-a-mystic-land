@@ -50,6 +50,8 @@ public class RegisterPlayerController {
         } else {
             System.out.println(username + ", " + email + ", " + password + ", " + confirmedPassword);
         }
+
+        navigationService.navigateTo("title-screen.fxml");
     }
 
     @FXML

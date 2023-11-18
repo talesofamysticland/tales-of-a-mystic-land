@@ -78,7 +78,7 @@ public class TalesOfAMysticLandApplication extends Application {
         };
 
         Callback<Class<?>, Object> settingsControllerFactory = param -> {
-            return new SettingsController(userService, navigationService);
+            return new SettingsController(userService);
         };
 
         Callback<Class<?>, Object> titleScreenControllerFactory = param -> {

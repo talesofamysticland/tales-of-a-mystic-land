@@ -6,10 +6,11 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane
-    styleClass="root" 
+    styleClass="root-settings" 
     xmlns:fx="http://javafx.com/fxml"
     fx:controller="org.talesof.talesofamysticland.controller.SettingsController"
     stylesheets="@style.css"
+    fx:id="root"
 >
 
     <top>
@@ -32,23 +33,23 @@
                 <VBox styleClass="config__content-box__audio-box">
                     <HBox>
                         <Label styleClass="config__content-box__audio-text" text="Geral"/>
-                        <Label styleClass="config__content-box__audio-number" fx:id="lbGeralSound"/>
+                        <Label styleClass="config__content-box__audio-number" />
                     </HBox>
-                    <Slider fx:id="sliderGeralSoundBar"/>
+                    <Slider styleClass="slider" fx:id="sliderGeralSoundBar"/>
                 </VBox>
                 <VBox styleClass="config__content-box__audio-box">
                     <HBox>
-                        <Label styleClass="config__content-box__audio-text" text="Musica"/>
-                        <Label styleClass="config__content-box__audio-number" fx:id="lbMusicSound"/>
+                        <Label styleClass="config__content-box__audio-text" text="Música"/>
+                        <Label styleClass="config__content-box__audio-number" />
                     </HBox>
-                    <Slider fx:id="sliderMusicSoundBar"/>
+                    <Slider styleClass="slider" fx:id="sliderMusicSoundBar" />
                 </VBox>
                 <VBox styleClass="config__content-box__audio-box">
                     <HBox>
                         <Label styleClass="config__content-box__audio-text" text="Efeitos Sonoros"/>
-                        <Label styleClass="config__content-box__audio-number" fx:id="lbEffectSound"/>
+                        <Label styleClass="config__content-box__audio-number" />
                     </HBox>
-                    <Slider fx:id="sliderEffectSoundBar"/>
+                    <Slider styleClass="slider" fx:id="sliderEffectSoundBar"/>
                 </VBox>
             </VBox>
         </HBox>

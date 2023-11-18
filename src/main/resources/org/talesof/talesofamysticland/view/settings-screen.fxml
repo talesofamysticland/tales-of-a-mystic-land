@@ -6,10 +6,11 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane
-    styleClass="root" 
+    styleClass="root-settings" 
     xmlns:fx="http://javafx.com/fxml"
     fx:controller="org.talesof.talesofamysticland.controller.SettingsController"
     stylesheets="@style.css"
+    fx:id="root"
 >
 
     <top>
@@ -29,24 +30,29 @@
     <center>
         <HBox styleClass="config__content-box-margin">
             <VBox styleClass="config__content-box">
-                <HBox styleClass="config__content-box__resolution-box-margin">
-                    <VBox styleClass="config__content-box__resolution-box" onMouseClicked="#onClickSelectResolutionLower">
-                        <ImageView styleClass="config__computer-icon"/>
-                        <Label styleClass="config__resolution-text" text="4:3"/>
-                    </VBox>
-                </HBox>
-                <HBox styleClass="config__content-box__resolution-box-margin">
-                    <VBox styleClass="config__content-box__resolution-box" onMouseClicked="#onClickSelectResolutionStandart">
-                        <ImageView styleClass="config__computer-icon"/>
-                        <Label styleClass="config__resolution-text" text="16:9"/>
-                    </VBox>
-                </HBox>
-                <HBox styleClass="config__content-box__resolution-box-margin">
-                    <VBox styleClass="config__content-box__resolution-box" onMouseClicked="#onClickSelectResolutionHighest">
-                        <ImageView styleClass="config__computer-icon"/>
-                        <Label styleClass="config__resolution-text" text="21:9"/>
-                    </VBox>
-                </HBox>
+
+                <CheckBox styleClass="config__content-box__fullscreen-checkbox" text="Tela cheia" />
+
+                <GridPane styleClass="config__content-box__grid">
+                    <HBox styleClass="config__content-box__resolution-box-margin" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <VBox styleClass="config__content-box__resolution-box" onMouseClicked="#onClickSelectResolutionLower">
+                            <ImageView styleClass="config__computer-icon"/>
+                            <Label styleClass="config__resolution-text" text="4:3"/>
+                        </VBox>
+                    </HBox>
+                    <HBox styleClass="config__content-box__resolution-box-margin" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <VBox styleClass="config__content-box__resolution-box" onMouseClicked="#onClickSelectResolutionStandart">
+                            <ImageView styleClass="config__computer-icon"/>
+                            <Label styleClass="config__resolution-text" text="16:9"/>
+                        </VBox>
+                    </HBox>
+                    <HBox styleClass="config__content-box__resolution-box-margin" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <VBox styleClass="config__content-box__resolution-box" onMouseClicked="#onClickSelectResolutionHighest">
+                            <ImageView styleClass="config__computer-icon"/>
+                            <Label styleClass="config__resolution-text" text="21:9"/>
+                        </VBox>
+                    </HBox>
+                </GridPane>
             </VBox>
         </HBox>
     </center>

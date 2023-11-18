@@ -2,37 +2,68 @@ package org.talesof.talesofamysticland.controller;
 
 import java.io.IOException;
 
-import org.talesof.talesofamysticland.service.NavigationService;
+import org.talesof.talesofamysticland.injection.DependencyInjector;
 import org.talesof.talesofamysticland.service.UserService;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.layout.BorderPane;
 
 public class SettingsController {
 
     private UserService userService;
-    private NavigationService navigationService;
 
-    public SettingsController(UserService userService, NavigationService navigationService) {
+    @FXML
+    private BorderPane root;
+
+    public SettingsController(UserService userService) {
         this.userService = userService;
-        this.navigationService = navigationService;
     }
 
     @FXML
-    public void onActionOpenControlScreen(ActionEvent event) throws IOException {
-        navigationService.navigateTo("settings-controls.fxml");
+    public void onActionOpenControlScreen() throws IOException {
+        loadAndSetToCenter("settings-controls.fxml");
     }
 
     @FXML
-    public void onActionOpenAudioScreen(){
-        navigationService.navigateTo("settings-audio.fxml");
+    public void onActionOpenAudioScreen() throws IOException {
+        loadAndSetToCenter("settings-audio.fxml");
     }
 
     @FXML
-    public void onActionOpenResolutionScreen(){
-        navigationService.navigateTo("settings-screen.fxml");
+    public void onActionOpenResolutionScreen() throws IOException {
+        loadAndSetToCenter("settings-screen.fxml");
+    }
+
+    private void loadAndSetToCenter(String fxmlFileName) throws IOException {
+        Stage stage = (Stage) this.root.getScene().getWindow();
+        Parent root = DependencyInjector.load(fxmlFileName);
+        stage.getScene().setRoot(root);
+        setCenterContent(root);
+    }
+
+    private void setCenterContent(Node content) {
+        BorderPane.setAlignment(content, Pos.CENTER);
+        this.root.setCenter(content);
+    }
+
+    @FXML
+    public void onClickSelectResolutionLower() {
+
+    }
+
+    @FXML
+    public void onClickSelectResolutionStandart() {
+
+    }
+
+    @FXML
+    public void onClickSelectResolutionHighest() {
+
     }
 
     @FXML
@@ -46,4 +77,8 @@ public class SettingsController {
         stage.close();
     }
 
+    @FXML
+    public void onActionExitGame() {
+
+    }
 }

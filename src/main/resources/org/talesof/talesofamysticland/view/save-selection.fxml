@@ -16,10 +16,6 @@
     <top> 
         <VBox styleClass="header-box">
             <ImageView styleClass="header-box__config-icon" onMouseClicked="#onClickImgOpenConfigurations" />
-            
-            <VBox styleClass="header-box__title-box">
-                <Label styleClass="title-box__title-medium" text="Escolha um save para iniciar" />
-            </VBox>
         </VBox>
     </top>
  
