@@ -30,12 +30,23 @@
 
                 <Button styleClass="options__button-big" text="Sair" onAction="#onActionBtnExit" />
 
-                <VBox styleClass="options__hyperlinks">
+                <VBox styleClass="options__hyperlinks" fx:id="boxAccountHyperlink" visible="true">
                     <Hyperlink styleClass="hyperlinks__link" text="Criar conta." onAction="#onActionHplRedirectToRegisterPlayer" />
                     <Hyperlink styleClass="hyperlinks__link" text="Entrar." onAction="#onActionHplRedirectToLogin" />
                 </VBox>
             </VBox>
         </VBox>
     </center>
+
+    <bottom>
+        <VBox styleClass="footer-box__account-box" fx:id="boxLoggedAccount" visible="false" >
+            <ImageView 
+                styleClass="account__user-icon" 
+                fitWidth="60"
+                preserveRatio="true"
+            />
+            <Hyperlink styleClass="hyperlinks__link-exit-account" text="Sair" />
+        </VBox>
+    </bottom>
 
 </BorderPane>

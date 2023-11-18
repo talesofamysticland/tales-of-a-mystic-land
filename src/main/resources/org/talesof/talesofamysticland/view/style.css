@@ -58,6 +58,7 @@
     -fx-alignment: center;
     -fx-font-size: 90px;
     -fx-wrap-text: true;
+    -fx-padding: 20px 0px 20px 0px;
 }
 
 .title-box__title-medium {
@@ -83,6 +84,10 @@
 .footer-box__back-button:hover {
     -fx-text-fill: #FFFFFF;
     -fx-background-color: #FF3F3F;
+}
+
+.account__user-icon {
+    -fx-image: url('../media/icons/user-icon.png');
 }
 
 .main-box {
@@ -116,9 +121,20 @@
     -fx-spacing: 3px;
 }
 
-.hyperlinks__link {
+.hyperlinks__link,
+.hyperlinks__link-exit-account{
     -fx-font-size: 20px;
     -fx-text-fill: #6b0ea1;
+}
+
+.hyperlinks__link-exit-account {
+    -fx-text-fill: #FF3F3F;
+    -fx-alignment: center;
+}
+
+.footer-box__account-box {
+    -fx-alignment: bottom-right;
+    -fx-spacing: 10px;
 }
 
 

@@ -7,6 +7,7 @@ import org.talesof.talesofamysticland.service.UserService;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 public class TitleScreenController {
 
@@ -16,9 +17,23 @@ public class TitleScreenController {
     @FXML
     private BorderPane root;
 
+    @FXML
+    private VBox boxAccountHyperlinks;
+
+    @FXML
+    private VBox boxLoggedAccount;
+
     public TitleScreenController(UserService userService, NavigationService navigationService) {
         this.userService = userService;
         this.navigationService = navigationService;
+    }
+
+    @FXML
+    public void initialize() {
+        if(userService.isLoggedIn()) {
+            boxAccountHyperlinks.setVisible(false);
+            boxLoggedAccount.setVisible(true);
+        }
     }
     
     @FXML 
