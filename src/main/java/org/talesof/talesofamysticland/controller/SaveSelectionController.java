@@ -1,9 +1,13 @@
 package org.talesof.talesofamysticland.controller;
 
+import org.talesof.talesofamysticland.service.NavigationService;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class SaveSelectionController {
+
+    private NavigationService navigationService;
 
     @FXML
     private Label lblCharacterName1;
@@ -32,13 +36,37 @@ public class SaveSelectionController {
     @FXML
     private Label lblLastSaved3;
     
+    public SaveSelectionController(NavigationService navigationService) {
+        this.navigationService = navigationService;
+    }
+
     @FXML 
     public void onClickImgOpenConfigurations() {
-        // TODO
+        navigationService.openConfigurationsMenu();
+    }
+
+    @FXML
+    public void onClickBoxSelectSave1() {
+        navigationService.navigateTo("character-creation.fxml");
+    }
+
+    @FXML
+    public void onClickBoxSelectSave2() {
+        navigationService.navigateTo("character-creation.fxml");
+    }
+
+    @FXML
+    public void onClickBoxSelectSave3() {
+        navigationService.navigateTo("character-creation.fxml");
+    }
+
+    @FXML
+    public void onClickImgDeleteSave() {
+
     }
 
     @FXML
     public void onActionBtnBack() {
-        // TODO
+        navigationService.navigateBack();
     }
 }

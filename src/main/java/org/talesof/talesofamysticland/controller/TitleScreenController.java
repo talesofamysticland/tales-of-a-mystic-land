@@ -6,11 +6,7 @@ import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 public class TitleScreenController {
 
@@ -27,17 +23,7 @@ public class TitleScreenController {
     
     @FXML 
     public void onClickImgOpenConfigurations() throws IOException {
-        
-        FXMLLoader loader = new FXMLLoader(TitleScreenController.class.getResource("/org/talesof/talesofamysticland/view/settings-main.fxml"));
-        Scene scene = new Scene(loader.load());
-        Stage stage = new Stage();
-        //stage.initStyle(StageStyle.UNDECORATED);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setWidth(700);
-        stage.setHeight(600);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
+        navigationService.openConfigurationsMenu();
     }
 
     @FXML
@@ -52,7 +38,7 @@ public class TitleScreenController {
 
     @FXML
     public void onActionBtnExit() {
-        // TODO
+        navigationService.closeApplication();
     }
 
     @FXML

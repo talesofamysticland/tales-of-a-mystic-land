@@ -1,9 +1,15 @@
 package org.talesof.talesofamysticland.controller;
 
+import org.talesof.talesofamysticland.service.NavigationService;
+import org.talesof.talesofamysticland.service.UserService;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class ChangePasswordController {
+
+    private UserService userService;
+    private NavigationService navigationService;
 
     @FXML
     private TextField txfEmail;
@@ -17,29 +23,33 @@ public class ChangePasswordController {
     @FXML
     private PasswordField pwfConfirmedNewPassword;
 
+    public ChangePasswordController(UserService userService, NavigationService navigationService) {
+        this.userService = userService;
+        this.navigationService = navigationService;
+    }
+
     @FXML
     public void onClickImgOpenConfigurations() {
-        // TODO
+        navigationService.openConfigurationsMenu();
     }
 
     @FXML
     public void onActionBtnSendToken() {
-        // TODO
+        navigationService.navigateTo("change-password2-token.fxml");
     }
 
     @FXML
     public void onActionBtnValidateToken() {
-        // TODO
+        navigationService.navigateTo("change-password3-new-password.fxml");
     }
 
     @FXML
     public void onActionBtnSetNewPassword() {
-        // TODO
+        navigationService.navigateTo("login.fxml");
     }
 
     @FXML
     public void onActionBtnBack() {
-        // TODO
+        navigationService.navigateBack();
     }
-
 }

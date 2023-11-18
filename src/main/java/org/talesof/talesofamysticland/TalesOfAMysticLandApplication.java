@@ -2,7 +2,12 @@ package org.talesof.talesofamysticland;
 
 import java.io.IOException;
 
+import org.talesof.talesofamysticland.controller.ChangePasswordController;
+import org.talesof.talesofamysticland.controller.CharacterCreationController;
 import org.talesof.talesofamysticland.controller.LoginController;
+import org.talesof.talesofamysticland.controller.RegisterPlayerController;
+import org.talesof.talesofamysticland.controller.SaveSelectionController;
+import org.talesof.talesofamysticland.controller.SettingsController;
 import org.talesof.talesofamysticland.controller.TitleScreenController;
 import org.talesof.talesofamysticland.injection.DependencyInjector;
 import org.talesof.talesofamysticland.service.NavigationService;
@@ -28,8 +33,8 @@ public class TalesOfAMysticLandApplication extends Application {
     public final int screenHeight = tileSize * maxScreenRow;  
 
     @Override
-    public void start(Stage stage) throws IOException {
-        this.stage = stage;
+    public void start(Stage primaryStage) throws IOException {
+        stage = primaryStage;
         
         setUpDependecyInjector();
 
@@ -52,20 +57,60 @@ public class TalesOfAMysticLandApplication extends Application {
         NavigationService navigationService = new NavigationService(stage);
         UserService userService = new UserService();
 
-        Callback<Class<?>, Object> titleScreenControllerFactory = param -> {
-            return new TitleScreenController(userService, navigationService);
+        Callback<Class<?>, Object> changePasswordControllerFactory = param -> {
+            return new ChangePasswordController(userService, navigationService);
+        };
+
+        Callback<Class<?>, Object> characterCreationControllerFactory = param -> {
+            return new CharacterCreationController(navigationService);
         };
 
         Callback<Class<?>, Object> loginControllerFactory = param -> {
             return new LoginController(userService, navigationService);
         };
 
+        Callback<Class<?>, Object> registerPlayerControllerFactory = param -> {
+            return new RegisterPlayerController(userService, navigationService);
+        };
+
+        Callback<Class<?>, Object> saveSelectionControllerFactory = param -> {
+            return new SaveSelectionController(navigationService);
+        };
+
+        Callback<Class<?>, Object> settingsControllerFactory = param -> {
+            return new SettingsController(userService, navigationService);
+        };
+
+        Callback<Class<?>, Object> titleScreenControllerFactory = param -> {
+            return new TitleScreenController(userService, navigationService);
+        };
+
         DependencyInjector.addInjectionMethod(
-                TitleScreenController.class, titleScreenControllerFactory
+                ChangePasswordController.class, changePasswordControllerFactory
+        );
+
+        DependencyInjector.addInjectionMethod(
+                CharacterCreationController.class, characterCreationControllerFactory
         );
 
         DependencyInjector.addInjectionMethod(
                 LoginController.class, loginControllerFactory
+        );
+
+        DependencyInjector.addInjectionMethod(
+                RegisterPlayerController.class, registerPlayerControllerFactory
+        );
+
+        DependencyInjector.addInjectionMethod(
+                SaveSelectionController.class, saveSelectionControllerFactory
+        );
+
+        DependencyInjector.addInjectionMethod(
+                SettingsController.class, settingsControllerFactory
+        );
+
+        DependencyInjector.addInjectionMethod(
+                TitleScreenController.class, titleScreenControllerFactory
         );
     }
 }

@@ -28,22 +28,22 @@ public class LoginController {
 
     @FXML
     public void onClickImgOpenConfigurations() {
-        // TODO
+        navigationService.openConfigurationsMenu();
     }
 
     @FXML
     public void onActionHplRedirectToChangePassword() {
-        // TODO
+        navigationService.navigateTo("change-password1-email.fxml");
     }
 
     @FXML
     public void onActionBtnLogin() {
-        // TODO
+        navigationService.navigateTo("save-selection.fxml");
     }
 
     @FXML
     public void onActionHplRedirectToRegisterPlayer() {
-        // TODO
+        navigationService.navigateTo("register-player.fxml");
     }
 
     @FXML

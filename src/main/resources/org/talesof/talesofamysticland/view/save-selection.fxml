@@ -26,7 +26,7 @@
     <center>
         <VBox styleClass="main-box">
             <HBox styleClass="save__outerbox">
-                <HBox styleClass="save__innerbox">
+                <HBox styleClass="save__innerbox" onMouseClicked="#onClickBoxSelectSave1">
                     <ImageView 
                         styleClass="wizard-icon" 
                         fitWidth="70"
@@ -47,7 +47,7 @@
             </HBox>
 
             <HBox styleClass="save__outerbox">
-                <HBox styleClass="save__innerbox">
+                <HBox styleClass="save__innerbox" onMouseClicked="#onClickBoxSelectSave2">
                     <ImageView 
                         styleClass="wizard-icon" 
                         fitWidth="70"
@@ -68,7 +68,7 @@
             </HBox>
 
             <HBox styleClass="save__outerbox">
-                <HBox styleClass="save__innerbox">
+                <HBox styleClass="save__innerbox" onMouseClicked="#onClickBoxSelectSave3">
                     <ImageView 
                         styleClass="wizard-icon" 
                         fitWidth="70"

@@ -1,11 +1,15 @@
 package org.talesof.talesofamysticland.controller;
 
+import org.talesof.talesofamysticland.service.NavigationService;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 public class CharacterCreationController {
+
+    private NavigationService navigationService;
 
     @FXML
     private TextField txfCharacterName;
@@ -15,9 +19,13 @@ public class CharacterCreationController {
 
     private VBox selectedBox;
     
+    public CharacterCreationController(NavigationService navigationService) {
+        this.navigationService = navigationService;
+    }
+
     @FXML 
     public void onClickImgOpenConfigurations() {
-        // TODO
+        navigationService.openConfigurationsMenu();
     }
 
     @FXML
@@ -60,6 +68,6 @@ public class CharacterCreationController {
     
     @FXML
     public void onActionBtnBack() {
-        // TODO
+        navigationService.navigateBack();
     }
 }

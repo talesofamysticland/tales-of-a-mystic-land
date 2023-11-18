@@ -1,9 +1,19 @@
 package org.talesof.talesofamysticland.controller;
 
+import org.talesof.talesofamysticland.service.NavigationService;
+import org.talesof.talesofamysticland.service.UserService;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 
 public class RegisterPlayerController {
+
+    private UserService userService;
+    private NavigationService navigationService;
+
+    @FXML
+    private BorderPane root;
 
     @FXML
     private TextField txfUsername;
@@ -17,9 +27,14 @@ public class RegisterPlayerController {
     @FXML
     private PasswordField pwfConfirmedPassword;
 
+    public RegisterPlayerController(UserService userService, NavigationService navigationService) {
+        this.userService = userService;
+        this.navigationService = navigationService;
+    }
+
     @FXML
     public void onClickImgOpenConfigurations() {
-        // TODO
+        navigationService.openConfigurationsMenu();
     }
 
     @FXML
@@ -39,11 +54,11 @@ public class RegisterPlayerController {
 
     @FXML
     public void onActionHplRedirectToLogin() {
-        // TODO
+        navigationService.navigateTo("login.fxml");
     }
 
     @FXML
     public void onActionBtnBack() {
-        // TODO
+        navigationService.navigateBack();
     }
 }
