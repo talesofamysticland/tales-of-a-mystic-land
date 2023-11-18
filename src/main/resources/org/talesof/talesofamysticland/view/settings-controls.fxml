@@ -5,70 +5,37 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane
-    styleClass="root-settings" 
+<HBox 
+    styleClass="config__content-box-margin"
     xmlns:fx="http://javafx.com/fxml"
     fx:controller="org.talesof.talesofamysticland.controller.SettingsController"
     stylesheets="@style.css"
-    fx:id="root"
 >
 
-    <top>
-        <HBox styleClass="config__title-box">
-            <Label styleClass="config__title-box__title-medium" text="Configurações" />
+    <VBox styleClass="config__content-box">
+        <HBox styleClass="config__content-box__keys-box">
+            <Label styleClass="config__content-box__keys" text="W A S D  ↑ ← ↓ →"/>
+            <Label styleClass="config__content-box__description__move" text="Mover-se"/>
         </HBox>
-    </top>
-
-    <left>
-        <VBox styleClass="config__options-box">
-            <Button styleClass="config__options-box__option-button__clicked" text="Controles"/>
-            <Button styleClass="config__options-box__option-button" text="Audio" onAction="#onActionOpenAudioScreen"/>
-            <Button styleClass="config__options-box__option-button" text="Resolução" onAction="#onActionOpenResolutionScreen"/>
-        </VBox>
-    </left>
-
-    <center>
-        <HBox styleClass="config__content-box-margin">
-            <VBox styleClass="config__content-box">
-                <HBox styleClass="config__content-box__keys-box">
-                    <Label styleClass="config__content-box__keys" text="W A S D  ↑ ← ↓ →"/>
-                    <Label styleClass="config__content-box__description__move" text="Mover-se"/>
-                </HBox>
-                <HBox styleClass="config__content-box__keys-box">
-                    <Label styleClass="config__content-box__keys" text="ENTER"/>
-                    <Label styleClass="config__content-box__description" text="Confirmar e atacar"/>
-                </HBox>
-                <HBox styleClass="config__content-box__keys-box">
-                    <Label styleClass="config__content-box__keys" text="F"/>
-                    <Label styleClass="config__content-box__description" text="Atirar e conjurar"/>
-                </HBox>
-                <HBox styleClass="config__content-box__keys-box">
-                    <Label styleClass="config__content-box__keys" text="C"/>
-                    <Label styleClass="config__content-box__description" text="Abrir o menu de personagem"/>
-                </HBox>
-                <HBox styleClass="config__content-box__keys-box">
-                    <Label styleClass="config__content-box__keys" text="ESC"/>
-                    <Label styleClass="config__content-box__description" text="Abrir menu de configurações"/>
-                </HBox>
-                <HBox styleClass="config__content-box__keys-box">
-                    <Label styleClass="config__content-box__keys" text="E"/>
-                    <Label styleClass="config__content-box__description" text="Pegar itens e interagir com NPCs"/>
-                </HBox>
-            </VBox>
+        <HBox styleClass="config__content-box__keys-box">
+            <Label styleClass="config__content-box__keys" text="ENTER"/>
+            <Label styleClass="config__content-box__description" text="Confirmar e atacar"/>
         </HBox>
-    </center>
-
-    <bottom>
-        <HBox styleClass="config__footer-box">
-            <HBox styleClass="config__exit-button-box">
-                <Button styleClass="config__exit-button-box__exit" text="Sair do jogo"  onAction="#onActionExitGame"/>
-            </HBox>
-
-            <HBox styleClass="config__buttons">
-                <Button styleClass="config__footer-box__save-button" text="Salvar"  onAction="#onActionSaveSettings"/>
-                <Button styleClass="config__footer-box__cancel-button" text="Cancelar"  onAction="#onActionCancelSettings"/>
-            </HBox>
+        <HBox styleClass="config__content-box__keys-box">
+            <Label styleClass="config__content-box__keys" text="F"/>
+            <Label styleClass="config__content-box__description" text="Atirar e conjurar"/>
         </HBox>
-    </bottom>
-
-</BorderPane> 
+        <HBox styleClass="config__content-box__keys-box">
+            <Label styleClass="config__content-box__keys" text="C"/>
+            <Label styleClass="config__content-box__description" text="Abrir o menu de personagem"/>
+        </HBox>
+        <HBox styleClass="config__content-box__keys-box">
+            <Label styleClass="config__content-box__keys" text="ESC"/>
+            <Label styleClass="config__content-box__description" text="Abrir menu de configurações"/>
+        </HBox>
+        <HBox styleClass="config__content-box__keys-box">
+            <Label styleClass="config__content-box__keys" text="E"/>
+            <Label styleClass="config__content-box__description" text="Pegar itens e interagir com NPCs"/>
+        </HBox>
+    </VBox>
+</HBox>

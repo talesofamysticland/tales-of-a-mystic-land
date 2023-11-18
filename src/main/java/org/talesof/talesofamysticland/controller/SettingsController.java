@@ -7,10 +7,8 @@ import org.talesof.talesofamysticland.service.UserService;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 
 public class SettingsController {
@@ -25,30 +23,18 @@ public class SettingsController {
     }
 
     @FXML
-    public void onActionOpenControlScreen() throws IOException {
-        loadAndSetToCenter("settings-controls.fxml");
+    public void onActionOpenControlScreen(ActionEvent event) throws IOException {
+        root.setCenter(DependencyInjector.load("settings-controls.fxml"));
     }
 
     @FXML
     public void onActionOpenAudioScreen() throws IOException {
-        loadAndSetToCenter("settings-audio.fxml");
+        root.setCenter(DependencyInjector.load("settings-audio.fxml"));
     }
 
     @FXML
     public void onActionOpenResolutionScreen() throws IOException {
-        loadAndSetToCenter("settings-screen.fxml");
-    }
-
-    private void loadAndSetToCenter(String fxmlFileName) throws IOException {
-        Stage stage = (Stage) this.root.getScene().getWindow();
-        Parent root = DependencyInjector.load(fxmlFileName);
-        stage.getScene().setRoot(root);
-        setCenterContent(root);
-    }
-
-    private void setCenterContent(Node content) {
-        BorderPane.setAlignment(content, Pos.CENTER);
-        this.root.setCenter(content);
+        root.setCenter(DependencyInjector.load("settings-resolution.fxml"));
     }
 
     @FXML

@@ -5,61 +5,35 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane
-    styleClass="root-settings" 
+<HBox 
+    styleClass="config__content-box-margin"
     xmlns:fx="http://javafx.com/fxml"
     fx:controller="org.talesof.talesofamysticland.controller.SettingsController"
     stylesheets="@style.css"
-    fx:id="root"
 >
 
-    <top>
-        <HBox styleClass="config__title-box">
-            <Label styleClass="config__title-box__title-medium" text="Configurações" />
-        </HBox>
-    </top>
-
-    <left>
-        <VBox styleClass="config__options-box">
-            <Button styleClass="config__options-box__option-button" text="Controles" onAction="#onActionOpenControlScreen"/>
-            <Button styleClass="config__options-box__option-button__clicked" text="Audio"/>
-            <Button styleClass="config__options-box__option-button" text="Resolução" onAction="#onActionOpenResolutionScreen"/>
+    <VBox styleClass="config__content-box">
+        <VBox styleClass="config__content-box__audio-box">
+            <HBox>
+                <Label styleClass="config__content-box__audio-text" text="Geral"/>
+                <Label styleClass="config__content-box__audio-number" />
+            </HBox>
+            <Slider styleClass="slider" fx:id="sliderGeralSoundBar"/>
         </VBox>
-    </left>
-
-    <center>
-        <HBox styleClass="config__content-box-margin">
-            <VBox styleClass="config__content-box">
-                <VBox styleClass="config__content-box__audio-box">
-                    <HBox>
-                        <Label styleClass="config__content-box__audio-text" text="Geral"/>
-                        <Label styleClass="config__content-box__audio-number" />
-                    </HBox>
-                    <Slider styleClass="slider" fx:id="sliderGeralSoundBar"/>
-                </VBox>
-                <VBox styleClass="config__content-box__audio-box">
-                    <HBox>
-                        <Label styleClass="config__content-box__audio-text" text="Música"/>
-                        <Label styleClass="config__content-box__audio-number" />
-                    </HBox>
-                    <Slider styleClass="slider" fx:id="sliderMusicSoundBar" />
-                </VBox>
-                <VBox styleClass="config__content-box__audio-box">
-                    <HBox>
-                        <Label styleClass="config__content-box__audio-text" text="Efeitos Sonoros"/>
-                        <Label styleClass="config__content-box__audio-number" />
-                    </HBox>
-                    <Slider styleClass="slider" fx:id="sliderEffectSoundBar"/>
-                </VBox>
-            </VBox>
-        </HBox>
-    </center>
-
-    <bottom>
-        <HBox styleClass="config__footer-box">
-            <Button styleClass="config__footer-box__save-button" text="salvar"  onAction="#onActionSaveSettings"/>
-            <Button styleClass="config__footer-box__cancel-button" text="cancelar"  onAction="#onActionCancelSettings"/>
-        </HBox>
-    </bottom>
-
-</BorderPane> 
+        <VBox styleClass="config__content-box__audio-box">
+            <HBox>
+                <Label styleClass="config__content-box__audio-text" text="Música"/>
+                <Label styleClass="config__content-box__audio-number" />
+            </HBox>
+            <Slider styleClass="slider" fx:id="sliderMusicSoundBar" />
+        </VBox>
+        <VBox styleClass="config__content-box__audio-box">
+            <HBox>
+                <Label styleClass="config__content-box__audio-text" text="Efeitos Sonoros"/>
+                <Label styleClass="config__content-box__audio-number" />
+            </HBox>
+            <Slider styleClass="slider" fx:id="sliderEffectSoundBar"/>
+        </VBox>
+    </VBox>
+    
+</HBox>

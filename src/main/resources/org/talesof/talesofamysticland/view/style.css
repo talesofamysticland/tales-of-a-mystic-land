@@ -509,7 +509,7 @@
     -fx-text-alignment: center;
     -fx-background-color: #FFFFFF;
     -fx-pref-height: 45px;
-    -fx-pref-width: 170px;
+    -fx-pref-width: 180px;
     -fx-border-color: #FF3F3F;
     -fx-border-width: 2px;
     -fx-border-radius: 3px;
@@ -526,7 +526,7 @@
 
 .config__buttons{
     -fx-alignment: top-right;
-    -fx-spacing: 6px;
+    -fx-spacing: 8px;
 }
 
 .config__footer-box {
