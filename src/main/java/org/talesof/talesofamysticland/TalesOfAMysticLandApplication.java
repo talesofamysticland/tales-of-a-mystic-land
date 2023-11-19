@@ -9,6 +9,7 @@ import org.talesof.talesofamysticland.controller.RegisterPlayerController;
 import org.talesof.talesofamysticland.controller.SaveSelectionController;
 import org.talesof.talesofamysticland.controller.SettingsController;
 import org.talesof.talesofamysticland.controller.TitleScreenController;
+import org.talesof.talesofamysticland.dao.PlayerDAO;
 import org.talesof.talesofamysticland.injection.DependencyInjector;
 import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
@@ -28,7 +29,7 @@ public class TalesOfAMysticLandApplication extends Application {
 
     public final int tileSize = originalTileSize * scale;  
     public final int maxScreenCol = 16; 
-    public final int maxScreenRow = 9; 
+    public final int maxScreenRow = 10; 
     public final int screenWidth = tileSize * maxScreenCol;  
     public final int screenHeight = tileSize * maxScreenRow;  
 
@@ -56,6 +57,7 @@ public class TalesOfAMysticLandApplication extends Application {
 
         NavigationService navigationService = new NavigationService(stage);
         UserService userService = new UserService();
+        PlayerDAO playerDAO = new PlayerDAO();
 
         Callback<Class<?>, Object> changePasswordControllerFactory = param -> {
             return new ChangePasswordController(userService, navigationService);
@@ -70,7 +72,7 @@ public class TalesOfAMysticLandApplication extends Application {
         };
 
         Callback<Class<?>, Object> registerPlayerControllerFactory = param -> {
-            return new RegisterPlayerController(userService, navigationService);
+            return new RegisterPlayerController(userService, navigationService, playerDAO);
         };
 
         Callback<Class<?>, Object> saveSelectionControllerFactory = param -> {

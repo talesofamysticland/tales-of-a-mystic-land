@@ -32,21 +32,45 @@
                     <VBox styleClass="form__label-txf-box">
                         <Label styleClass="form__label" text="Nome de usuário" />
                         <TextField styleClass="form__textfield" fx:id="txfUsername" />
+
+                        <Label styleClass="form__error-label" text="Nome de usuário inválido." fx:id="lblUsernameAlreadyExists" 
+                        visible="false" managed="false" />
+
+                        <Label styleClass="form__error-label" text="Nome não pode ser vazio." fx:id="lblBlankUsername" 
+                        visible="false" managed="false" />
+
+                        <Label styleClass="form__error-label" text="Nome não permite caracteres especiais." fx:id="lblUsernameSpecialCharacters" 
+                        visible="false" managed="false" />
+
+                        <Label styleClass="form__error-label" text="Nome não pode ter mais de 20 caracteres." fx:id="lblUsernameTooBig" 
+                        visible="false" managed="false" />
                     </VBox>
 
                     <VBox styleClass="form__label-txf-box">
                         <Label styleClass="form__label" text="E-mail" />
                         <TextField styleClass="form__textfield" fx:id="txfEmail" />
+
+                        <Label styleClass="form__error-label" text="Use um e-mail válido." fx:id="lblInvalidEmail" 
+                        visible="false" managed="false" />
                     </VBox>
 
                     <VBox styleClass="form__label-txf-box">
                         <Label styleClass="form__label" text="Senha" />
                         <PasswordField styleClass="form__textfield" fx:id="pwfPassword" />
+
+                        <Label styleClass="form__error-label" text="Senha deve ter pelo menos 8 caracteres." fx:id="lblPasswordTooShort" 
+                        visible="false" managed="false" />
+
+                        <Label styleClass="form__error-label" text="Senha deve incluir um número, uma letra maiúscula e uma letra minúscula." 
+                        fx:id="lblInvalidPassword" visible="false" managed="false" />
                     </VBox>
 
                     <VBox styleClass="form__label-txf-box">
                         <Label styleClass="form__label" text="Confirmar senha" />
                         <PasswordField styleClass="form__textfield" fx:id="pwfConfirmedPassword" />
+
+                        <Label styleClass="form__error-label" text="As senhas não podem ser diferentes." fx:id="lblDifferentPasswords" 
+                        visible="false" managed="false" />
                     </VBox>
                 </VBox>
 
