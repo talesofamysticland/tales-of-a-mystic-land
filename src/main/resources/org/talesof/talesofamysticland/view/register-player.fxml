@@ -52,6 +52,9 @@
 
                         <Label styleClass="form__error-label" text="Use um e-mail válido." fx:id="lblInvalidEmail" 
                         visible="false" managed="false" />
+
+                        <Label styleClass="form__error-label" text="Tente novamente com outro email." fx:id="lblEmailAlreadyExists" 
+                        visible="false" managed="false" />
                     </VBox>
 
                     <VBox styleClass="form__label-txf-box">

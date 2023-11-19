@@ -12,6 +12,12 @@ public class Player {
     private String verificationToken;
     private LocalDateTime registerDate;
 
+    public Player() {
+        this.verificationToken = "";
+        this.registerDate = LocalDateTime.now();
+        this.verified = false;
+    }
+
     public Player(Integer id, String username, String email, String password, boolean verified,
             String verificationToken, LocalDateTime registerDate) {
         this.id = id;
@@ -21,24 +27,6 @@ public class Player {
         this.verified = verified;
         this.verificationToken = verificationToken;
         this.registerDate = registerDate;
-    }
-
-    public Player(String username, String email, String password, boolean verified,
-            String verificationToken, LocalDateTime registerDate) {
-                
-        this(null, username, email, password, verified, verificationToken, registerDate);
-    }
-
-    public Player(Integer id, String username, String email, String password, boolean verified,
-            String verificationToken) {
-
-        this(id, username, email, password, verified, verificationToken, LocalDateTime.now());
-    }
-
-    public Player(String username, String email, String password, boolean verified,
-            String verificationToken) {
-
-        this(username, email, password, verified, verificationToken, LocalDateTime.now());
     }
 
     public Integer getId() {

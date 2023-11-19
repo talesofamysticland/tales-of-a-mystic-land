@@ -1,6 +1,7 @@
 package org.talesof.talesofamysticland.controller;
 
 import org.talesof.talesofamysticland.dao.PlayerDAO;
+import org.talesof.talesofamysticland.model.Player;
 import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
 
@@ -32,6 +33,9 @@ public class RegisterPlayerController {
     private PasswordField pwfConfirmedPassword;
 
     @FXML
+    private TextField txfVerificationToken;
+
+    @FXML
     private Label lblUsernameAlreadyExists;
 
     @FXML
@@ -46,6 +50,9 @@ public class RegisterPlayerController {
     @FXML
     private Label lblInvalidEmail;
 
+    @FXML 
+    private Label lblEmailAlreadyExists;
+
     @FXML
     private Label lblPasswordTooShort;
 
@@ -55,6 +62,12 @@ public class RegisterPlayerController {
     @FXML
     private Label lblDifferentPasswords;
 
+    @FXML
+    private Label lblBlankToken;
+
+    @FXML
+    private Label lblInvalidToken;
+
     public RegisterPlayerController(UserService userService, NavigationService navigationService, PlayerDAO playerDAO) {
         this.userService = userService;
         this.navigationService = navigationService;
@@ -63,6 +76,27 @@ public class RegisterPlayerController {
 
     @FXML
     public void initialize() {
+        if(userService.isLoggedIn()) {
+            navigationService.navigateTo("title-screen.fxml");
+        }
+
+        if(txfUsername != null 
+            && 
+        txfEmail != null 
+            && 
+        pwfPassword != null 
+            && 
+        pwfConfirmedPassword != null) {
+            setupFormFieldListeners();
+        }
+
+        if(txfVerificationToken != null) {
+            setupFieldListener(txfVerificationToken, lblBlankToken, lblInvalidToken);
+        }
+        
+    }
+
+    private void setupFormFieldListeners() {
         setupFieldListener(txfUsername, lblBlankUsername, lblUsernameTooBig, lblUsernameSpecialCharacters, lblUsernameAlreadyExists);
         setupFieldListener(txfEmail, lblInvalidEmail);
         setupFieldListener(pwfPassword, lblPasswordTooShort, lblInvalidPassword);
@@ -101,7 +135,12 @@ public class RegisterPlayerController {
         String confirmedPassword = pwfConfirmedPassword.getText().trim();
 
         if(isUsernameValid(username) && isEmailValid(email) && isPasswordValid(password, confirmedPassword)) {
-            navigationService.navigateTo("title-screen.fxml");
+            Player player = new Player();
+            player.setUsername(username);
+            player.setEmail(email);
+            player.setPassword(password);
+
+            navigationService.navigateTo("register-player-verification-token.fxml");
         }
     }
 
@@ -150,6 +189,13 @@ public class RegisterPlayerController {
             emailIsValid = false;
         }
 
+        if(playerDAO.findByEmail(email) != null) {
+            lblEmailAlreadyExists.setVisible(true);
+            lblEmailAlreadyExists.setManaged(true);
+            txfEmail.getStyleClass().add("form__error-textfield");
+            emailIsValid = false;
+        }
+
         return emailIsValid;
     }
 
@@ -181,9 +227,44 @@ public class RegisterPlayerController {
         return passwordIsValid;
     }
 
+    public boolean isVerificationTokenValid(String verificationToken) {
+
+        boolean verificationTokenIsValid = true;
+
+        if(verificationToken.isBlank()) {
+            lblBlankToken.setVisible(true);
+            lblBlankToken.setManaged(true);
+            txfVerificationToken.getStyleClass().add("form__error-textfield");
+            verificationTokenIsValid = false;
+        }
+
+        if(!verificationToken.equals("123456")) {
+            lblInvalidToken.setVisible(true);
+            lblInvalidToken.setManaged(true);
+            txfVerificationToken.getStyleClass().add("form__error-textfield");
+            verificationTokenIsValid = false;
+        }
+
+        return verificationTokenIsValid;
+    }
+
     @FXML
     public void onActionHplRedirectToLogin() {
         navigationService.navigateTo("login.fxml");
+    }
+
+    @FXML
+    public void onActionBtnValidateToken() {
+        String verificationToken = txfVerificationToken.getText().trim();
+
+        if(verificationToken.equals("123456")) {
+            navigationService.navigateTo("title-screen.fxml");
+        }
+    }
+
+    @FXML
+    public void onActionHplResendToken() {
+
     }
 
     @FXML

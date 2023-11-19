@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane
+    styleClass="root" 
+    xmlns:fx="http://javafx.com/fxml"
+    fx:controller="org.talesof.talesofamysticland.controller.RegisterPlayerController"
+    stylesheets="@style.css"
+>
+
+    <top> 
+        <VBox styleClass="header-box">
+            <ImageView styleClass="header-box__config-icon" onMouseClicked="#onClickImgOpenConfigurations" />
+
+            <VBox styleClass="header-box__title-box-low">
+                <Label styleClass="title-box__title-low" text="Use o código entregue pelo arauto do reino no e-mail" />
+            </VBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox styleClass="main-box"> 
+
+            <VBox styleClass="form__label-txf-box">
+                <Label styleClass="form__label" text="Código de verificação" />
+                <TextField styleClass="form__textfield" fx:id="txfVerificationToken" />
+
+                <Label styleClass="form__error-label" text="Código não pode ser vazio." fx:id="lblBlankToken" 
+                visible="false" managed="false" />
+
+                <Label styleClass="form__error-label" text="Tente novamente com um novo código" fx:id="lblInvalidToken" 
+                visible="false" managed="false" />
+            </VBox>
+
+            <VBox styleClass="form__options">
+                <Button styleClass="options__continue-button-medium" text="Continuar" onAction="#onActionBtnValidateToken" />
+                <Hyperlink styleClass="hyperlinks__link" text="Reenviar código" onAction="#onActionHplResendToken" />
+            </VBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox styleClass="footer-box">
+            <Button styleClass="footer-box__back-button" text="Voltar" onAction="#onActionBtnBack" />
+        </HBox>
+    </bottom>
+
+</BorderPane> 

@@ -16,9 +16,6 @@ ext {
     junitVersion = '5.9.2'
 }
 
-sourceCompatibility = '17'
-targetCompatibility = '17'
-
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
@@ -35,6 +32,7 @@ javafx {
 
 dependencies {
     implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'org.mindrot:jbcrypt:0.4'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
