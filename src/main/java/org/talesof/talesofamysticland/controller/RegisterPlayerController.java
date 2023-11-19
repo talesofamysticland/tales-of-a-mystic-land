@@ -131,7 +131,7 @@ public class RegisterPlayerController {
             usernameIsValid = false;
         }
 
-        if(playerDAO.findByUsername(username) == null) {
+        if(playerDAO.findByUsername(username) != null) {
             lblUsernameAlreadyExists.setVisible(true);
             lblUsernameAlreadyExists.setManaged(true);
             txfUsername.getStyleClass().add("form__error-textfield");

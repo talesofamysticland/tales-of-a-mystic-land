@@ -10,6 +10,7 @@ import org.talesof.talesofamysticland.controller.SaveSelectionController;
 import org.talesof.talesofamysticland.controller.SettingsController;
 import org.talesof.talesofamysticland.controller.TitleScreenController;
 import org.talesof.talesofamysticland.dao.PlayerDAO;
+import org.talesof.talesofamysticland.database.TableManager;
 import org.talesof.talesofamysticland.injection.DependencyInjector;
 import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
@@ -35,6 +36,8 @@ public class TalesOfAMysticLandApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        TableManager.create();
+
         stage = primaryStage;
         
         setUpDependecyInjector();
