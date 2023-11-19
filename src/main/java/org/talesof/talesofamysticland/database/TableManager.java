@@ -9,10 +9,10 @@ public class TableManager {
     public static void create() {
         
         try(
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = ConnectionManager.getConnection()
         ) {
 
-            String sql = """
+            String sqlPlayerTable = """
                 CREATE TABLE Player(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     username VARCHAR(30) NOT NULL,
@@ -21,8 +21,10 @@ public class TableManager {
                     verified BOOLEAN NOT NULL,
                     verification_token CHAR(36) NOT NULL,
                     register_date DATETIME NOT NULL
-                );
-                
+                )
+            """;
+
+            String sqlSettingsTable = """
                 CREATE TABLE Settings(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     player_id INT NOT NULL,
@@ -30,12 +32,14 @@ public class TableManager {
                     volume_music NUMERIC(3,1) NOT NULL,
                     volume_geral NUMERIC(3,1) NOT NULL,
                     full_screen BOOLEAN NOT NULL,
-                    resolution ENUM("4:3", "16:9", "21:9") NOT NULL,
+                    resolution ENUM('4:3', '16:9', '21:9') NOT NULL,
                     save_date DATETIME NOT NULL,
                     
                     FOREIGN KEY(player_id) REFERENCES Player(id)
                 );
-                
+            """;
+
+            String sqlChangePasswordTable = """
                 CREATE TABLE Change_password(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     player_id INT NOT NULL,
@@ -45,7 +49,9 @@ public class TableManager {
                     
                     FOREIGN KEY(player_id) REFERENCES Player(id)
                 );
-                
+            """;
+
+            String sqlSaveTable = """
                 CREATE TABLE Save(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     player_id INT NOT NULL,
@@ -54,7 +60,9 @@ public class TableManager {
                 
                     FOREIGN KEY(player_id) REFERENCES Player(id)
                 );
-                
+            """;
+
+            String sqlSavePointTable = """
                 CREATE TABLE Save_point(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     name VARCHAR(50) NOT NULL,
@@ -62,19 +70,23 @@ public class TableManager {
                     world_x INT NOT NULL,
                     world_y INT NOT NULL
                 );
-                
+            """;
+
+            String sqlCharacterStateTable = """
                 CREATE TABLE Character_state(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     play_time DECIMAL(15) NOT NULL,
                     experience INT NOT NULL,
                     coins INT NOT NULL,
-                    strenght INT NOT NULL,
+                    strength INT NOT NULL,
                     resistance INT NOT NULL,
                     constitution INT NOT NULL,
                     dexterity INT NOT NULL,
                     wisdom INT NOT NULL
                 );
-                
+            """;
+
+            String sqlSaveStateTable = """
                 CREATE TABLE Save_state(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     save_id INT NOT NULL,
@@ -86,12 +98,16 @@ public class TableManager {
                     FOREIGN KEY(character_state_id) REFERENCES Character_state(id),
                     FOREIGN KEY(save_point_id) REFERENCES Save_point(id)
                 );
-                    
+            """;
+
+            String sqlItemTable = """ 
                 CREATE TABLE Item(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     name VARCHAR(50) NOT NULL
                 );
-                
+            """;
+
+            String sqlItemInInventoryTable = """
                 CREATE TABLE Item_in_inventory(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     character_state_id INT NOT NULL,
@@ -103,30 +119,60 @@ public class TableManager {
                     FOREIGN KEY(item_id) REFERENCES Item(id)
                 );
             """;
-            
+
+            assert connection != null;
             Statement stm = connection.createStatement();
-            stm.execute(sql);
+
+            stm.execute(sqlPlayerTable);
+            stm.execute(sqlSettingsTable);
+            stm.execute(sqlChangePasswordTable);
+            stm.execute(sqlSaveTable);
+            stm.execute(sqlSavePointTable);
+            stm.execute(sqlCharacterStateTable);
+            stm.execute(sqlSaveStateTable);
+            stm.execute(sqlItemTable);
+            stm.execute(sqlItemInInventoryTable);
 
             stm.close();
-            connection.close();
 
         } catch(SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public static String drop() {
-        
-        return """
-            DROP TABLE IF EXISTS Item_in_inventory;
-            DROP TABLE IF EXISTS Item;
-            DROP TABLE IF EXISTS Save_state;
-            DROP TABLE IF EXISTS Character_state;
-            DROP TABLE IF EXISTS Save_point;
-            DROP TABLE IF EXISTS Save;
-            DROP TABLE IF EXISTS Change_password;
-            DROP TABLE IF EXISTS Settings;
-            DROP TABLE IF EXISTS Player;
-        """;
+    public static void drop() {
+
+        try(
+            Connection connection = ConnectionManager.getConnection()
+        ) {
+
+            String sqlItemInInventoryTable = "DROP TABLE IF EXISTS Item_in_inventory;";
+            String sqlSaveStateTable = "DROP TABLE IF EXISTS Save_state;";
+            String sqlCharacterStateTable = "DROP TABLE IF EXISTS Character_state;";
+            String sqlSavePointTable = "DROP TABLE IF EXISTS Save_point;";
+            String sqlChangePasswordTable = "DROP TABLE IF EXISTS Change_password;";
+            String sqlSettingsTable = "DROP TABLE IF EXISTS Settings;";
+            String sqlSaveTable = "DROP TABLE IF EXISTS Save;";
+            String sqlPlayerTable = "DROP TABLE IF EXISTS Player;";
+            String sqlItemTable = "DROP TABLE IF EXISTS Item;";
+
+            assert connection != null;
+            Statement stm = connection.createStatement();
+
+            stm.execute(sqlItemInInventoryTable);
+            stm.execute(sqlSaveStateTable);
+            stm.execute(sqlCharacterStateTable);
+            stm.execute(sqlSavePointTable);
+            stm.execute(sqlChangePasswordTable);
+            stm.execute(sqlSettingsTable);
+            stm.execute(sqlSaveTable);
+            stm.execute(sqlPlayerTable);
+            stm.execute(sqlItemTable);
+
+            stm.close();
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
 } 

@@ -36,11 +36,12 @@ public class TalesOfAMysticLandApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        TableManager.drop();
         TableManager.create();
 
         stage = primaryStage;
         
-        setUpDependecyInjector();
+        setUpDependencyInjector();
 
         Parent root = DependencyInjector.load("title-screen.fxml");
         Scene scene = new Scene(root);
@@ -56,39 +57,25 @@ public class TalesOfAMysticLandApplication extends Application {
         launch();
     }
 
-    private void setUpDependecyInjector() {
+    private void setUpDependencyInjector() {
 
         NavigationService navigationService = new NavigationService(stage);
         UserService userService = new UserService();
         PlayerDAO playerDAO = new PlayerDAO();
 
-        Callback<Class<?>, Object> changePasswordControllerFactory = param -> {
-            return new ChangePasswordController(userService, navigationService);
-        };
+        Callback<Class<?>, Object> changePasswordControllerFactory = param -> new ChangePasswordController(userService, navigationService);
 
-        Callback<Class<?>, Object> characterCreationControllerFactory = param -> {
-            return new CharacterCreationController(navigationService);
-        };
+        Callback<Class<?>, Object> characterCreationControllerFactory = param -> new CharacterCreationController(navigationService);
 
-        Callback<Class<?>, Object> loginControllerFactory = param -> {
-            return new LoginController(userService, navigationService);
-        };
+        Callback<Class<?>, Object> loginControllerFactory = param -> new LoginController(userService, navigationService);
 
-        Callback<Class<?>, Object> registerPlayerControllerFactory = param -> {
-            return new RegisterPlayerController(userService, navigationService, playerDAO);
-        };
+        Callback<Class<?>, Object> registerPlayerControllerFactory = param -> new RegisterPlayerController(userService, navigationService, playerDAO);
 
-        Callback<Class<?>, Object> saveSelectionControllerFactory = param -> {
-            return new SaveSelectionController(navigationService);
-        };
+        Callback<Class<?>, Object> saveSelectionControllerFactory = param -> new SaveSelectionController(navigationService);
 
-        Callback<Class<?>, Object> settingsControllerFactory = param -> {
-            return new SettingsController(userService);
-        };
+        Callback<Class<?>, Object> settingsControllerFactory = param -> new SettingsController(userService);
 
-        Callback<Class<?>, Object> titleScreenControllerFactory = param -> {
-            return new TitleScreenController(userService, navigationService);
-        };
+        Callback<Class<?>, Object> titleScreenControllerFactory = param -> new TitleScreenController(userService, navigationService);
 
         DependencyInjector.addInjectionMethod(
                 ChangePasswordController.class, changePasswordControllerFactory

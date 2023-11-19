@@ -55,7 +55,6 @@ public class RegisterPlayerController {
     @FXML
     private Label lblDifferentPasswords;
 
-
     public RegisterPlayerController(UserService userService, NavigationService navigationService, PlayerDAO playerDAO) {
         this.userService = userService;
         this.navigationService = navigationService;
@@ -144,7 +143,7 @@ public class RegisterPlayerController {
     private boolean isEmailValid(String email) {
         boolean emailIsValid = true;
 
-        if(!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+        if(!email.matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
             lblInvalidEmail.setVisible(true);
             lblInvalidEmail.setManaged(true);
             txfEmail.getStyleClass().add("form__error-textfield");
