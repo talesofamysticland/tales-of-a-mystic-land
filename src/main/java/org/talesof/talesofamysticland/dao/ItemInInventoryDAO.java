@@ -13,7 +13,7 @@ import org.talesof.talesofamysticland.model.ItemInInventory;
 
 public class ItemInInventoryDAO {
     
-    public ItemInInventory create(ItemInInventory item) throws SQLException {
+    public ItemInInventory save(ItemInInventory item) throws SQLException {
         String sql = """
             INSERT INTO Item_in_inventory(character_state_id, item_id, amount, position)
             VALUES (?, ?, ?, ?);

@@ -14,7 +14,7 @@ import org.talesof.talesofamysticland.model.SaveState;
 
 public class SaveStateDAO {
 
-    public SaveState create(SaveState saveState) throws SQLException {
+    public SaveState save(SaveState saveState) throws SQLException {
         String sql = """
             INSERT INTO Save_state(save_id, character_state_id, save_point_id, date)
             VALUES (?, ?, ?, ?);

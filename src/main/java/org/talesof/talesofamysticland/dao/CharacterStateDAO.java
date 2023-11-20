@@ -13,7 +13,7 @@ import org.talesof.talesofamysticland.model.CharacterState;
 
 public class CharacterStateDAO {
 
-    public CharacterState create(CharacterState characterState) throws SQLException {
+    public CharacterState save(CharacterState characterState) throws SQLException {
         String sql = """
             INSERT INTO Character_state(play_time, experience, coins, strength, resistance, constitution, dexterity, wisdom)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?);

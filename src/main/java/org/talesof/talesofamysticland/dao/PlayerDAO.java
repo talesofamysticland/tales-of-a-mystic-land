@@ -14,7 +14,7 @@ import org.talesof.talesofamysticland.model.Player;
 
 public class PlayerDAO {
 
-    public Player create(Player player) throws SQLException {
+    public Player save(Player player) throws SQLException {
         String sql = """
             INSERT INTO Player(username, email, password, verified, verification_token, register_date) 
             VALUES (?, ?, ?, ?, ?, ?);

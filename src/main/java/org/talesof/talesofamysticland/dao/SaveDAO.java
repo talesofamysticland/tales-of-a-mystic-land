@@ -13,7 +13,7 @@ import org.talesof.talesofamysticland.model.Save;
 
 public class SaveDAO {
 
-    public Save create(Save save) throws SQLException {
+    public Save save(Save save) throws SQLException {
         String sql = """
             INSERT INTO Save(player_id, character_name, character_class)
             VALUES (?, ?, ?);

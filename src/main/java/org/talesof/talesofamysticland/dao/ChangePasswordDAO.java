@@ -14,7 +14,7 @@ import org.talesof.talesofamysticland.model.ChangePassword;
 
 public class ChangePasswordDAO {
 
-    public ChangePassword create(ChangePassword changePassword) throws SQLException {
+    public ChangePassword save(ChangePassword changePassword) throws SQLException {
         String sql = """
             INSERT INTO Change_password(player_id, validated, verification_date, verification_token) 
             VALUES (?, ?, ?, ?);

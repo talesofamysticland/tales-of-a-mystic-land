@@ -1,5 +1,7 @@
 package org.talesof.talesofamysticland.controller;
 
+import java.sql.SQLException;
+
 import org.talesof.talesofamysticland.dao.PlayerDAO;
 import org.talesof.talesofamysticland.model.Player;
 import org.talesof.talesofamysticland.service.NavigationService;
@@ -127,7 +129,7 @@ public class RegisterPlayerController {
     }
 
     @FXML
-    public void onActionBtnRegisterPlayer() {
+    public void onActionBtnRegisterPlayer() throws SQLException {
 
         String username = txfUsername.getText().trim();
         String email = txfEmail.getText().trim();
@@ -139,6 +141,7 @@ public class RegisterPlayerController {
             player.setUsername(username);
             player.setEmail(email);
             player.setPassword(password);
+            playerDAO.save(player);
 
             navigationService.navigateTo("register-player-verification-token.fxml");
         }

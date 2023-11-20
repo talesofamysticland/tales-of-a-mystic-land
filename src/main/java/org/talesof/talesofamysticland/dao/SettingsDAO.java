@@ -14,7 +14,7 @@ import org.talesof.talesofamysticland.model.Settings;
 
 public class SettingsDAO {
 
-    public Settings create(Settings settings) throws SQLException {
+    public Settings save(Settings settings) throws SQLException {
         String sql = """
             INSERT INTO Settings(player_id, volume_effects, volume_music, volume_geral, full_screen, resolution, save_date)
             VALUES (?, ?, ?, ?, ?, ?, ?);
