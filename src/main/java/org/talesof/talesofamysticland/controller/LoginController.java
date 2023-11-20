@@ -1,5 +1,7 @@
 package org.talesof.talesofamysticland.controller;
 
+import org.talesof.talesofamysticland.dao.PlayerDAO;
+import org.talesof.talesofamysticland.service.FormErrorListeningService;
 import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
 
@@ -11,6 +13,8 @@ public class LoginController {
 
     private UserService userService;
     private NavigationService navigationService;
+    private FormErrorListeningService formErrorListeningService;
+    private PlayerDAO playerDAO;
 
     @FXML
     private BorderPane root;
@@ -21,9 +25,25 @@ public class LoginController {
     @FXML
     private PasswordField pwfPassword;
 
-    public LoginController(UserService userService, NavigationService navigationService) {
+    @FXML
+    private Label lblInvalidCredentials;
+
+    public LoginController(
+        UserService userService, 
+        NavigationService navigationService, 
+        FormErrorListeningService formErrorListeningService,
+        PlayerDAO playerDAO) {
+
         this.userService = userService;
         this.navigationService = navigationService;
+        this.formErrorListeningService = formErrorListeningService;
+        this.playerDAO = playerDAO;
+    }
+
+    @FXML
+    private void initialize() {
+        formErrorListeningService.setupFieldListener(txfUsernameOrEmail, lblInvalidCredentials);
+        formErrorListeningService.setupFieldListener(pwfPassword, lblInvalidCredentials);
     }
 
     @FXML
@@ -38,7 +58,27 @@ public class LoginController {
 
     @FXML
     public void onActionBtnLogin() {
-        navigationService.navigateTo("save-selection.fxml");
+        String usernameOrEmail = txfUsernameOrEmail.getText().trim();
+        String password = pwfPassword.getText().trim();
+
+        if(isEmail(usernameOrEmail)) {
+            userService.setCurrentPlayer(playerDAO.findByEmail(usernameOrEmail));
+        } else {
+            userService.setCurrentPlayer(playerDAO.findByUsername(usernameOrEmail));
+        }
+
+        if(userService.getCurrentPlayer() == null || !userService.getCurrentPlayer().getPassword().equals(password)) {
+            formErrorListeningService.showErrors(lblInvalidCredentials, txfUsernameOrEmail);
+            formErrorListeningService.showErrors(lblInvalidCredentials, pwfPassword);
+        } else {
+            userService.setLoggedIn(true);
+            navigationService.navigateTo("title-screen.fxml");
+        }
+    }
+
+    private boolean isEmail(String input) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        return input.matches(emailRegex);
     }
 
     @FXML

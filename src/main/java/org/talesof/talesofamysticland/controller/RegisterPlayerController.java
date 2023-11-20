@@ -4,10 +4,10 @@ import java.sql.SQLException;
 
 import org.talesof.talesofamysticland.dao.PlayerDAO;
 import org.talesof.talesofamysticland.model.Player;
+import org.talesof.talesofamysticland.service.FormErrorListeningService;
 import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
 
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -16,9 +16,9 @@ public class RegisterPlayerController {
 
     private UserService userService;
     private NavigationService navigationService;
+    private FormErrorListeningService formErrorListeningService;
 
     private PlayerDAO playerDAO;
-    private Player player;
 
     @FXML
     private BorderPane root;
@@ -71,9 +71,15 @@ public class RegisterPlayerController {
     @FXML
     private Label lblInvalidToken;
 
-    public RegisterPlayerController(UserService userService, NavigationService navigationService, PlayerDAO playerDAO) {
+    public RegisterPlayerController(
+        UserService userService, 
+        NavigationService navigationService, 
+        FormErrorListeningService formErrorListeningService, 
+        PlayerDAO playerDAO) {
+
         this.userService = userService;
         this.navigationService = navigationService;
+        this.formErrorListeningService = formErrorListeningService;
         this.playerDAO = playerDAO;
     }
 
@@ -94,34 +100,18 @@ public class RegisterPlayerController {
         }
 
         if(txfVerificationToken != null) {
-            setupFieldListener(txfVerificationToken, lblBlankToken, lblInvalidToken);
+            formErrorListeningService.setupFieldListener(txfVerificationToken, lblBlankToken, lblInvalidToken);
         }
         
     }
 
     private void setupFormFieldListeners() {
-        setupFieldListener(txfUsername, lblBlankUsername, lblUsernameTooBig, lblUsernameSpecialCharacters, lblUsernameAlreadyExists);
-        setupFieldListener(txfEmail, lblInvalidEmail);
-        setupFieldListener(pwfPassword, lblPasswordTooShort, lblInvalidPassword);
-        setupFieldListener(pwfConfirmedPassword, lblDifferentPasswords);
-    }
-
-    private void setupFieldListener(TextField textField, Label... errorLabels) {
-        textField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            hideErrorLabels(errorLabels);
-            clearFieldStyles(textField);
-        });
-    }
-
-    private void hideErrorLabels(Label... errorLabels) {
-        for (Label label : errorLabels) {
-            label.setVisible(false);
-            label.setManaged(false);
-        }
-    }
-
-    private void clearFieldStyles(TextField textField) {
-        textField.getStyleClass().removeAll("form__error-textfield");
+        formErrorListeningService.setupFieldListener(
+            txfUsername, lblBlankUsername, lblUsernameTooBig, lblUsernameSpecialCharacters, lblUsernameAlreadyExists
+        );
+        formErrorListeningService.setupFieldListener(txfEmail, lblInvalidEmail);
+        formErrorListeningService.setupFieldListener(pwfPassword, lblPasswordTooShort, lblInvalidPassword);
+        formErrorListeningService.setupFieldListener(pwfConfirmedPassword, lblDifferentPasswords);
     }
 
     @FXML
@@ -138,11 +128,11 @@ public class RegisterPlayerController {
         String confirmedPassword = pwfConfirmedPassword.getText().trim();
 
         if(isUsernameValid(username) && isEmailValid(email) && isPasswordValid(password, confirmedPassword)) {
-            player = new Player();
-            player.setUsername(username);
-            player.setEmail(email);
-            player.setPassword(userService.hash(password));
-            playerDAO.save(player);
+            userService.setCurrentPlayer(new Player());
+            userService.getCurrentPlayer().setUsername(username);
+            userService.getCurrentPlayer().setEmail(email);
+            userService.getCurrentPlayer().setPassword(userService.hash(password));
+            playerDAO.save(userService.getCurrentPlayer());
 
             System.out.println(playerDAO.findByUsername(username));
 
@@ -155,30 +145,22 @@ public class RegisterPlayerController {
         boolean usernameIsValid = true;
 
         if(username.isBlank()) {
-            lblBlankUsername.setVisible(true);
-            lblBlankUsername.setManaged(true);
-            txfUsername.getStyleClass().add("form__error-textfield");
+            formErrorListeningService.showErrors(lblBlankUsername, txfUsername);
             usernameIsValid = false;
         }
 
         if(username.length() > 20) {
-            lblUsernameTooBig.setVisible(true);
-            lblUsernameTooBig.setManaged(true);
-            txfUsername.getStyleClass().add("form__error-textfield");
+            formErrorListeningService.showErrors(lblUsernameTooBig, txfUsername);
             usernameIsValid = false;
         }
 
         if(username.matches(".*[^a-zA-Z0-9].*")) {
-            lblUsernameSpecialCharacters.setVisible(true);
-            lblUsernameSpecialCharacters.setManaged(true);
-            txfUsername.getStyleClass().add("form__error-textfield");
+            formErrorListeningService.showErrors(lblUsernameSpecialCharacters, txfUsername);
             usernameIsValid = false;
         }
 
         if(playerDAO.findByUsername(username) != null) {
-            lblUsernameAlreadyExists.setVisible(true);
-            lblUsernameAlreadyExists.setManaged(true);
-            txfUsername.getStyleClass().add("form__error-textfield");
+            formErrorListeningService.showErrors(lblUsernameAlreadyExists, txfUsername);
             usernameIsValid = false;
         }
 
@@ -189,16 +171,12 @@ public class RegisterPlayerController {
         boolean emailIsValid = true;
 
         if(!email.matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-            lblInvalidEmail.setVisible(true);
-            lblInvalidEmail.setManaged(true);
-            txfEmail.getStyleClass().add("form__error-textfield");
+            formErrorListeningService.showErrors(lblInvalidEmail, txfEmail);
             emailIsValid = false;
         }
 
         if(playerDAO.findByEmail(email) != null) {
-            lblEmailAlreadyExists.setVisible(true);
-            lblEmailAlreadyExists.setManaged(true);
-            txfEmail.getStyleClass().add("form__error-textfield");
+            formErrorListeningService.showErrors(lblEmailAlreadyExists, txfEmail);
             emailIsValid = false;
         }
 
@@ -210,23 +188,19 @@ public class RegisterPlayerController {
         boolean passwordIsValid = true;
 
         if(password.length() < 7) {
-            lblPasswordTooShort.setVisible(true);
-            lblPasswordTooShort.setManaged(true);
-            pwfPassword.getStyleClass().add("form__error-textfield");
+            formErrorListeningService.showErrors(lblPasswordTooShort, pwfPassword);
             passwordIsValid = false;
         }
 
-        if(password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])$")) {
-            lblInvalidPassword.setVisible(true);
-            lblInvalidPassword.setManaged(true);
-            pwfPassword.getStyleClass().add("form__error-textfield");
+        final String REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).+$";
+        
+        if (!password.matches(REGEX)) {
+            formErrorListeningService.showErrors(lblInvalidPassword, pwfPassword);
             passwordIsValid = false;
         }
 
         if(!password.equals(confirmedPassword)) {
-            lblDifferentPasswords.setVisible(true);
-            lblDifferentPasswords.setManaged(true);
-            pwfConfirmedPassword.getStyleClass().add("form__error-textfield");
+            formErrorListeningService.showErrors(lblDifferentPasswords, pwfConfirmedPassword);
             passwordIsValid = false;
         }
 
@@ -238,16 +212,12 @@ public class RegisterPlayerController {
         boolean verificationTokenIsValid = true;
 
         if(verificationToken.isBlank()) {
-            lblBlankToken.setVisible(true);
-            lblBlankToken.setManaged(true);
-            txfVerificationToken.getStyleClass().add("form__error-textfield");
+            formErrorListeningService.showErrors(lblBlankToken, txfVerificationToken);
             verificationTokenIsValid = false;
         }
 
-        if(!verificationToken.equals("123456")) {
-            lblInvalidToken.setVisible(true);
-            lblInvalidToken.setManaged(true);
-            txfVerificationToken.getStyleClass().add("form__error-textfield");
+        if(!verificationToken.equals(userService.getCurrentPlayer().getVerificationToken())) {
+            formErrorListeningService.showErrors(lblInvalidToken, txfVerificationToken);
             verificationTokenIsValid = false;
         }
 
@@ -260,11 +230,19 @@ public class RegisterPlayerController {
     }
 
     @FXML
-    public void onActionBtnValidateToken() {
+    public void onActionBtnValidateToken() throws SQLException {
         String verificationToken = txfVerificationToken.getText().trim();
 
-        if(verificationToken.equals("123456")) {
-            navigationService.navigateTo("title-screen.fxml");
+        if(verificationToken.equals(userService.getCurrentPlayer().getVerificationToken())) {
+
+            if(userService.getCurrentPlayer() != null) {
+                userService.getCurrentPlayer().setVerified(true);
+                playerDAO.update(userService.getCurrentPlayer());
+
+                userService.setLoggedIn(true);
+
+                navigationService.navigateTo("title-screen.fxml");
+            }
         }
     }
 

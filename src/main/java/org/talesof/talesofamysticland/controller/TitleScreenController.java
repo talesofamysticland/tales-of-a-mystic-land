@@ -6,6 +6,7 @@ import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
@@ -23,6 +24,9 @@ public class TitleScreenController {
     @FXML
     private VBox boxLoggedAccount;
 
+    @FXML
+    private Label lblPlayerUsername;
+
     public TitleScreenController(UserService userService, NavigationService navigationService) {
         this.userService = userService;
         this.navigationService = navigationService;
@@ -31,6 +35,7 @@ public class TitleScreenController {
     @FXML
     public void initialize() {
         if(userService.isLoggedIn()) {
+            lblPlayerUsername.setText(userService.getCurrentPlayer().getUsername());
             boxAccountHyperlinks.setVisible(false);
             boxLoggedAccount.setVisible(true);
         }
@@ -64,5 +69,11 @@ public class TitleScreenController {
     @FXML
     public void onActionHplRedirectToLogin() {
         navigationService.navigateTo("login.fxml");
+    }
+
+    @FXML
+    private void onActionHplExitAccount() {
+        userService.logout();
+        navigationService.navigateTo("title-screen.fxml");
     }
 }

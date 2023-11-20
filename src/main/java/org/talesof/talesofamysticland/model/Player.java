@@ -1,6 +1,7 @@
 package org.talesof.talesofamysticland.model;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class Player {
     
@@ -13,7 +14,7 @@ public class Player {
     private LocalDateTime registerDate;
 
     public Player() {
-        this.verificationToken = "";
+        this.verificationToken = UUID.randomUUID().toString();
         this.registerDate = LocalDateTime.now();
         this.verified = false;
     }
@@ -58,6 +59,10 @@ public class Player {
     }
 
     public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void getPassword(String password) {
         this.password = password;
     }
 

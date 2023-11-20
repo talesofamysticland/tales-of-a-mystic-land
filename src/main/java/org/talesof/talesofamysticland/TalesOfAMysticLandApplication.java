@@ -12,6 +12,7 @@ import org.talesof.talesofamysticland.controller.TitleScreenController;
 import org.talesof.talesofamysticland.dao.PlayerDAO;
 import org.talesof.talesofamysticland.database.TableManager;
 import org.talesof.talesofamysticland.injection.DependencyInjector;
+import org.talesof.talesofamysticland.service.FormErrorListeningService;
 import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
 
@@ -59,17 +60,25 @@ public class TalesOfAMysticLandApplication extends Application {
 
     private void setUpDependencyInjector() {
 
+        // Services
         NavigationService navigationService = new NavigationService(stage);
         UserService userService = new UserService();
+        FormErrorListeningService formErrorListeningService = new FormErrorListeningService();
+
+        // DAOs
         PlayerDAO playerDAO = new PlayerDAO();
 
         Callback<Class<?>, Object> changePasswordControllerFactory = param -> new ChangePasswordController(userService, navigationService);
 
         Callback<Class<?>, Object> characterCreationControllerFactory = param -> new CharacterCreationController(navigationService);
 
-        Callback<Class<?>, Object> loginControllerFactory = param -> new LoginController(userService, navigationService);
+        Callback<Class<?>, Object> loginControllerFactory = param -> {
+                return new LoginController(userService, navigationService, formErrorListeningService, playerDAO);
+        };
 
-        Callback<Class<?>, Object> registerPlayerControllerFactory = param -> new RegisterPlayerController(userService, navigationService, playerDAO);
+        Callback<Class<?>, Object> registerPlayerControllerFactory = param -> {
+                return new RegisterPlayerController(userService, navigationService, formErrorListeningService, playerDAO);
+        };
 
         Callback<Class<?>, Object> saveSelectionControllerFactory = param -> new SaveSelectionController(navigationService);
 

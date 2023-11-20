@@ -38,6 +38,9 @@
                 <VBox styleClass="form__label-txf-box">
                     <Label styleClass="form__label" text="Senha" />
                     <PasswordField styleClass="form__textfield" fx:id="pwfPassword" />
+
+                    <Label styleClass="form__error-label" text="Email ou senha incorretos." fx:id="lblInvalidCredentials" 
+                    visible="false" managed="false" />
                 </VBox>
 
                 <VBox styleClass="form__options">

@@ -86,6 +86,12 @@
     -fx-background-color: #FF3F3F;
 }
 
+.account__user-name {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-wrap-text: true;
+}
+
 .account__user-icon {
     -fx-image: url('../media/icons/user-icon.png');
 }
