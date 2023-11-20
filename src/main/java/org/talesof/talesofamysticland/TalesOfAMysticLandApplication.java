@@ -9,9 +9,11 @@ import org.talesof.talesofamysticland.controller.RegisterPlayerController;
 import org.talesof.talesofamysticland.controller.SaveSelectionController;
 import org.talesof.talesofamysticland.controller.SettingsController;
 import org.talesof.talesofamysticland.controller.TitleScreenController;
+import org.talesof.talesofamysticland.dao.ChangePasswordDAO;
 import org.talesof.talesofamysticland.dao.PlayerDAO;
 import org.talesof.talesofamysticland.database.TableManager;
 import org.talesof.talesofamysticland.injection.DependencyInjector;
+import org.talesof.talesofamysticland.service.EmailService;
 import org.talesof.talesofamysticland.service.FormErrorListeningService;
 import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
@@ -63,12 +65,16 @@ public class TalesOfAMysticLandApplication extends Application {
         // Services
         NavigationService navigationService = new NavigationService(stage);
         UserService userService = new UserService();
+        EmailService emailService = new EmailService();
         FormErrorListeningService formErrorListeningService = new FormErrorListeningService();
 
         // DAOs
         PlayerDAO playerDAO = new PlayerDAO();
+        ChangePasswordDAO changePasswordDAO = new ChangePasswordDAO();
 
-        Callback<Class<?>, Object> changePasswordControllerFactory = param -> new ChangePasswordController(userService, navigationService);
+        Callback<Class<?>, Object> changePasswordControllerFactory = param -> {
+                return new ChangePasswordController(userService, navigationService, formErrorListeningService, emailService, changePasswordDAO);
+        }; 
 
         Callback<Class<?>, Object> characterCreationControllerFactory = param -> new CharacterCreationController(navigationService);
 
@@ -77,7 +83,7 @@ public class TalesOfAMysticLandApplication extends Application {
         };
 
         Callback<Class<?>, Object> registerPlayerControllerFactory = param -> {
-                return new RegisterPlayerController(userService, navigationService, formErrorListeningService, playerDAO);
+                return new RegisterPlayerController(userService, navigationService, formErrorListeningService, emailService, playerDAO);
         };
 
         Callback<Class<?>, Object> saveSelectionControllerFactory = param -> new SaveSelectionController(navigationService);

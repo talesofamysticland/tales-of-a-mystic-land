@@ -14,7 +14,7 @@ public class Player {
     private LocalDateTime registerDate;
 
     public Player() {
-        this.verificationToken = UUID.randomUUID().toString();
+        generateVerificationToken();
         this.registerDate = LocalDateTime.now();
         this.verified = false;
     }
@@ -28,6 +28,10 @@ public class Player {
         this.verified = verified;
         this.verificationToken = verificationToken;
         this.registerDate = registerDate;
+    }
+
+    public void generateVerificationToken() {
+        this.verificationToken = UUID.randomUUID().toString();
     }
 
     public Integer getId() {

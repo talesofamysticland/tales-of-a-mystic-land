@@ -1,5 +1,8 @@
 package org.talesof.talesofamysticland.controller;
 
+import org.talesof.talesofamysticland.dao.ChangePasswordDAO;
+import org.talesof.talesofamysticland.service.EmailService;
+import org.talesof.talesofamysticland.service.FormErrorListeningService;
 import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
 
@@ -10,6 +13,10 @@ public class ChangePasswordController {
 
     private UserService userService;
     private NavigationService navigationService;
+    private FormErrorListeningService formErrorListeningService;
+    private EmailService emailService;
+
+    private ChangePasswordDAO changePasswordDAO;
 
     @FXML
     private TextField txfEmail;
@@ -23,7 +30,13 @@ public class ChangePasswordController {
     @FXML
     private PasswordField pwfConfirmedNewPassword;
 
-    public ChangePasswordController(UserService userService, NavigationService navigationService) {
+    public ChangePasswordController(
+        UserService userService, 
+        NavigationService navigationService, 
+        FormErrorListeningService formErrorListeningService, 
+        EmailService emailService, 
+        ChangePasswordDAO changePasswordDAO) {
+            
         this.userService = userService;
         this.navigationService = navigationService;
     }

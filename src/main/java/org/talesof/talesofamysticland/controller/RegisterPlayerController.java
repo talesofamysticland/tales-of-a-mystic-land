@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.talesof.talesofamysticland.dao.PlayerDAO;
 import org.talesof.talesofamysticland.model.Player;
+import org.talesof.talesofamysticland.service.EmailService;
 import org.talesof.talesofamysticland.service.FormErrorListeningService;
 import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
@@ -17,6 +18,7 @@ public class RegisterPlayerController {
     private UserService userService;
     private NavigationService navigationService;
     private FormErrorListeningService formErrorListeningService;
+    private EmailService emailService;
 
     private PlayerDAO playerDAO;
 
@@ -75,11 +77,13 @@ public class RegisterPlayerController {
         UserService userService, 
         NavigationService navigationService, 
         FormErrorListeningService formErrorListeningService, 
+        EmailService emailService,
         PlayerDAO playerDAO) {
 
         this.userService = userService;
         this.navigationService = navigationService;
         this.formErrorListeningService = formErrorListeningService;
+        this.emailService = emailService;
         this.playerDAO = playerDAO;
     }
 
@@ -134,9 +138,12 @@ public class RegisterPlayerController {
             userService.getCurrentPlayer().setPassword(userService.hash(password));
             playerDAO.save(userService.getCurrentPlayer());
 
-            System.out.println(playerDAO.findByUsername(username));
-
             navigationService.navigateTo("register-player-verification-token.fxml");
+
+            sendVerificationToken(
+                userService.getCurrentPlayer().getEmail(),
+                userService.getCurrentPlayer().getVerificationToken()
+            );
         }
     }
 
@@ -246,9 +253,25 @@ public class RegisterPlayerController {
         }
     }
 
+    private void sendVerificationToken(String email, String verificationToken) {
+        emailService.send(
+            email, 
+            "Seja bem-vindo a Tales of a Mystic Land, aventureiro!", 
+            "<p>Aqui está o código de segurança para validar sua conta: " 
+            + "<b>" + verificationToken + "</p></b>"
+            + "<p>Se você não solicitou esta mensagem, por favor, desconsidere este e-mail.</p>"
+            + "<br><br>"
+            + "<p>Tales of a Mystic Land, Inc.</p>"
+        );
+    }
+
     @FXML
     public void onActionHplResendToken() {
-
+        userService.getCurrentPlayer().generateVerificationToken();
+        sendVerificationToken(
+            userService.getCurrentPlayer().getEmail(),
+            userService.getCurrentPlayer().getVerificationToken()
+        );
     }
 
     @FXML
