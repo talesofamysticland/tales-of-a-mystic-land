@@ -9,7 +9,7 @@ public class TableManager {
     public static void create() {
         
         try(
-            Connection connection = ConnectionManager.getConnection()
+            Connection connection = DatabaseManager.getConnection()
         ) {
 
             String sqlPlayerTable = """
@@ -143,7 +143,7 @@ public class TableManager {
     public static void drop() {
 
         try(
-            Connection connection = ConnectionManager.getConnection()
+            Connection connection = DatabaseManager.getConnection()
         ) {
 
             String sqlItemInInventoryTable = "DROP TABLE IF EXISTS Item_in_inventory;";

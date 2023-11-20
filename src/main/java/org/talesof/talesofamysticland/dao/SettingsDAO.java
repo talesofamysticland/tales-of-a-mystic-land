@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 
-import org.talesof.talesofamysticland.database.ConnectionManager;
+import org.talesof.talesofamysticland.database.DatabaseManager;
 import org.talesof.talesofamysticland.model.Settings;
 
 public class SettingsDAO {
@@ -21,7 +21,7 @@ public class SettingsDAO {
         """;
        
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection
                 .prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         ) {
@@ -52,7 +52,7 @@ public class SettingsDAO {
         String sql = "SELECT * FROM Settings WHERE id = ?;";
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setInt(1, id);
@@ -77,7 +77,7 @@ public class SettingsDAO {
         List<Settings> settings = new ArrayList<>();
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
         ) {

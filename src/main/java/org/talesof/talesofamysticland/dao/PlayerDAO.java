@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 
-import org.talesof.talesofamysticland.database.ConnectionManager;
+import org.talesof.talesofamysticland.database.DatabaseManager;
 import org.talesof.talesofamysticland.model.Player;
 
 public class PlayerDAO {
@@ -21,7 +21,7 @@ public class PlayerDAO {
         """;
         
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection
                 .prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         ) {
@@ -55,7 +55,7 @@ public class PlayerDAO {
         """;
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
 
@@ -84,7 +84,7 @@ public class PlayerDAO {
         String sql = "SELECT * FROM Player WHERE id = ?;";
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setInt(1, id);
@@ -108,7 +108,7 @@ public class PlayerDAO {
         String sql = "SELECT * FROM Player WHERE username = ?;";
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setString(1, username);
@@ -132,7 +132,7 @@ public class PlayerDAO {
         String sql = "SELECT * FROM Player WHERE email = ?;";
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setString(1, email);
@@ -157,7 +157,7 @@ public class PlayerDAO {
         List<Player> players = new ArrayList<>();
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
         ) {

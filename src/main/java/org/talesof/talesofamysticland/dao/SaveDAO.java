@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.talesof.talesofamysticland.database.ConnectionManager;
+import org.talesof.talesofamysticland.database.DatabaseManager;
 import org.talesof.talesofamysticland.model.Save;
 
 public class SaveDAO {
@@ -20,7 +20,7 @@ public class SaveDAO {
         """;
         
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection
                 .prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         ) {
@@ -50,7 +50,7 @@ public class SaveDAO {
         """;
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
 
@@ -76,7 +76,7 @@ public class SaveDAO {
         String sql = "DELETE FROM Save WHERE id = ?;";
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setInt(1, id);
@@ -94,7 +94,7 @@ public class SaveDAO {
         String sql = "SELECT * FROM Save WHERE id = ?;";
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setInt(1, id);
@@ -119,7 +119,7 @@ public class SaveDAO {
         List<Save> saves = new ArrayList<>();
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
         ) {

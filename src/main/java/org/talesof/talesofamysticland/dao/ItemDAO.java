@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.talesof.talesofamysticland.database.ConnectionManager;
+import org.talesof.talesofamysticland.database.DatabaseManager;
 import org.talesof.talesofamysticland.model.Item;
 
 public class ItemDAO {
@@ -17,7 +17,7 @@ public class ItemDAO {
         String sql = "SELECT * FROM Item WHERE id = ?;";
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setInt(1, id);
@@ -41,7 +41,7 @@ public class ItemDAO {
         String sql = "SELECT * FROM Item WHERE name = ?;";
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setString(1, name);
@@ -66,7 +66,7 @@ public class ItemDAO {
         List<Item> items = new ArrayList<>();
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
         ) {

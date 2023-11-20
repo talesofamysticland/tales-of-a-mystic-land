@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.talesof.talesofamysticland.database.ConnectionManager;
+import org.talesof.talesofamysticland.database.DatabaseManager;
 import org.talesof.talesofamysticland.model.CharacterState;
 
 public class CharacterStateDAO {
@@ -20,7 +20,7 @@ public class CharacterStateDAO {
         """;
        
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection
                 .prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         ) {
@@ -54,7 +54,7 @@ public class CharacterStateDAO {
         String sql = "SELECT * FROM Character_state WHERE id = ?;";
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setInt(1, id);
@@ -79,7 +79,7 @@ public class CharacterStateDAO {
         List<CharacterState> charactersStates = new ArrayList<>();
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
         ) {

@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.talesof.talesofamysticland.database.ConnectionManager;
+import org.talesof.talesofamysticland.database.DatabaseManager;
 import org.talesof.talesofamysticland.model.ItemInInventory;
 
 public class ItemInInventoryDAO {
@@ -20,7 +20,7 @@ public class ItemInInventoryDAO {
         """;
         
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         ) {
             
@@ -47,7 +47,7 @@ public class ItemInInventoryDAO {
         """;
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
 
@@ -74,7 +74,7 @@ public class ItemInInventoryDAO {
         String sql = "SELECT * FROM Item_in_inventory WHERE id = ?;";
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setInt(1, id);
@@ -98,7 +98,7 @@ public class ItemInInventoryDAO {
         String sql = "SELECT * FROM Item_in_inventory WHERE character_state_id = ?;";
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setInt(1, characterStateId);
@@ -123,7 +123,7 @@ public class ItemInInventoryDAO {
         List<ItemInInventory> itemsInInventories = new ArrayList<>();
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
         ) {

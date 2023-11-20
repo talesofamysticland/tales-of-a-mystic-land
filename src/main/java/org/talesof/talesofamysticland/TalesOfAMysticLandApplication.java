@@ -11,7 +11,7 @@ import org.talesof.talesofamysticland.controller.SettingsController;
 import org.talesof.talesofamysticland.controller.TitleScreenController;
 import org.talesof.talesofamysticland.dao.ChangePasswordDAO;
 import org.talesof.talesofamysticland.dao.PlayerDAO;
-import org.talesof.talesofamysticland.database.TableManager;
+import org.talesof.talesofamysticland.database.DatabaseManager;
 import org.talesof.talesofamysticland.injection.DependencyInjector;
 import org.talesof.talesofamysticland.service.EmailService;
 import org.talesof.talesofamysticland.service.FormErrorListeningService;
@@ -39,8 +39,7 @@ public class TalesOfAMysticLandApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        TableManager.drop();
-        TableManager.create();
+        setupDatabase();
 
         stage = primaryStage;
         
@@ -58,6 +57,12 @@ public class TalesOfAMysticLandApplication extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    private void setupDatabase() {
+        DatabaseManager.dropTables();
+        DatabaseManager.createTables();
+        DatabaseManager.insertData();
     }
 
     private void setUpDependencyInjector() {

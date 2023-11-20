@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 
-import org.talesof.talesofamysticland.database.ConnectionManager;
+import org.talesof.talesofamysticland.database.DatabaseManager;
 import org.talesof.talesofamysticland.model.ChangePassword;
 
 public class ChangePasswordDAO {
@@ -21,7 +21,7 @@ public class ChangePasswordDAO {
         """;
         
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection
                 .prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
         ) {
@@ -53,7 +53,7 @@ public class ChangePasswordDAO {
         """;
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
 
@@ -80,7 +80,7 @@ public class ChangePasswordDAO {
         String sql = "SELECT * FROM Change_password WHERE id = ?;";
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
             statement.setInt(1, id);
@@ -105,7 +105,7 @@ public class ChangePasswordDAO {
         List<ChangePassword> changes = new ArrayList<>();
 
         try (
-            Connection connection = ConnectionManager.getConnection();
+            Connection connection = DatabaseManager.getConnection();
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
         ) {
