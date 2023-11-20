@@ -50,7 +50,7 @@ public class RegisterPlayerController {
     private Label lblUsernameSpecialCharacters;
 
     @FXML
-    private Label lblUsernameTooBig;
+    private Label lblUsernameTooLong;
 
     @FXML
     private Label lblInvalidEmail;
@@ -111,7 +111,7 @@ public class RegisterPlayerController {
 
     private void setupFormFieldListeners() {
         formErrorListeningService.setupFieldListener(
-            txfUsername, lblBlankUsername, lblUsernameTooBig, lblUsernameSpecialCharacters, lblUsernameAlreadyExists
+            txfUsername, lblBlankUsername, lblUsernameTooLong, lblUsernameSpecialCharacters, lblUsernameAlreadyExists
         );
         formErrorListeningService.setupFieldListener(txfEmail, lblInvalidEmail);
         formErrorListeningService.setupFieldListener(pwfPassword, lblPasswordTooShort, lblInvalidPassword);
@@ -157,7 +157,7 @@ public class RegisterPlayerController {
         }
 
         if(username.length() > 20) {
-            formErrorListeningService.showErrors(lblUsernameTooBig, txfUsername);
+            formErrorListeningService.showErrors(lblUsernameTooLong, txfUsername);
             usernameIsValid = false;
         }
 
@@ -221,9 +221,8 @@ public class RegisterPlayerController {
         if(verificationToken.isBlank()) {
             formErrorListeningService.showErrors(lblBlankToken, txfVerificationToken);
             verificationTokenIsValid = false;
-        }
-
-        if(!verificationToken.equals(userService.getCurrentPlayer().getVerificationToken())) {
+            
+        } else if(!verificationToken.equals(userService.getCurrentPlayer().getVerificationToken())) {
             formErrorListeningService.showErrors(lblInvalidToken, txfVerificationToken);
             verificationTokenIsValid = false;
         }
@@ -240,7 +239,7 @@ public class RegisterPlayerController {
     public void onActionBtnValidateToken() throws SQLException {
         String verificationToken = txfVerificationToken.getText().trim();
 
-        if(verificationToken.equals(userService.getCurrentPlayer().getVerificationToken())) {
+        if(isVerificationTokenValid(verificationToken)) {
 
             if(userService.getCurrentPlayer() != null) {
                 userService.getCurrentPlayer().setVerified(true);

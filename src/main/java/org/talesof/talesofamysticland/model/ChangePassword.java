@@ -1,6 +1,7 @@
 package org.talesof.talesofamysticland.model;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class ChangePassword {
 
@@ -10,6 +11,21 @@ public class ChangePassword {
     private LocalDateTime verificationDate;
     private String verificationToken;
 
+    private LocalDateTime expirationDate;
+
+    public ChangePassword(Integer playerId) {
+        this.playerId = playerId;
+        this.validated = false;
+        generateVerificationToken();
+    }
+
+    public ChangePassword(Integer playerId, boolean validated, LocalDateTime verificationDate, String verificationToken) {
+        this.playerId = playerId;
+        this.validated = validated;
+        this.verificationDate = verificationDate;
+        this.verificationToken = verificationToken;
+    }
+
     public ChangePassword(Integer id, Integer playerId, boolean validated, LocalDateTime verificationDate, String verificationToken) {
         this.id = id;
         this.playerId = playerId;
@@ -18,16 +34,8 @@ public class ChangePassword {
         this.verificationToken = verificationToken;
     }
 
-    public ChangePassword(Integer playerId, boolean validated, LocalDateTime verificationDate, String verificationToken) {
-        this(null, playerId, validated, verificationDate, verificationToken);
-    }
-
-    public ChangePassword(Integer id, Integer playerId, boolean validated, String verificationToken) {
-        this(id, playerId, validated, LocalDateTime.now(), verificationToken);
-    }
-
-    public ChangePassword(Integer playerId, boolean validated, String verificationToken) {
-        this(playerId, validated, LocalDateTime.now(), verificationToken);
+    public void generateVerificationToken() {
+        this.verificationToken = UUID.randomUUID().toString();
     }
 
     public Integer getId() {
@@ -68,6 +76,14 @@ public class ChangePassword {
 
     public void setVerificationToken(String verificationToken) {
         this.verificationToken = verificationToken;
+    }
+
+    public LocalDateTime getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDateTime expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     @Override

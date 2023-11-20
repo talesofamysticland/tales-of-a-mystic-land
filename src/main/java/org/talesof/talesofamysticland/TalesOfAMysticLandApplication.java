@@ -39,7 +39,7 @@ public class TalesOfAMysticLandApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        TableManager.drop();
+        // TableManager.drop();
         TableManager.create();
 
         stage = primaryStage;
@@ -73,7 +73,14 @@ public class TalesOfAMysticLandApplication extends Application {
         ChangePasswordDAO changePasswordDAO = new ChangePasswordDAO();
 
         Callback<Class<?>, Object> changePasswordControllerFactory = param -> {
-                return new ChangePasswordController(userService, navigationService, formErrorListeningService, emailService, changePasswordDAO);
+                return new ChangePasswordController(
+                        userService, 
+                        navigationService, 
+                        formErrorListeningService, 
+                        emailService, 
+                        playerDAO, 
+                        changePasswordDAO
+                );
         }; 
 
         Callback<Class<?>, Object> characterCreationControllerFactory = param -> new CharacterCreationController(navigationService);
@@ -83,7 +90,13 @@ public class TalesOfAMysticLandApplication extends Application {
         };
 
         Callback<Class<?>, Object> registerPlayerControllerFactory = param -> {
-                return new RegisterPlayerController(userService, navigationService, formErrorListeningService, emailService, playerDAO);
+                return new RegisterPlayerController(
+                        userService, 
+                        navigationService, 
+                        formErrorListeningService, 
+                        emailService, 
+                        playerDAO
+                );
         };
 
         Callback<Class<?>, Object> saveSelectionControllerFactory = param -> new SaveSelectionController(navigationService);

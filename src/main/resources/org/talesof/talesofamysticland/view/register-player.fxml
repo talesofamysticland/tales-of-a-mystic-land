@@ -42,7 +42,7 @@
                         <Label styleClass="form__error-label" text="Nome não permite caracteres especiais." fx:id="lblUsernameSpecialCharacters" 
                         visible="false" managed="false" />
 
-                        <Label styleClass="form__error-label" text="Nome não pode ter mais de 20 caracteres." fx:id="lblUsernameTooBig" 
+                        <Label styleClass="form__error-label" text="Nome não pode ter mais de 20 caracteres." fx:id="lblUsernameTooLong" 
                         visible="false" managed="false" />
                     </VBox>
 

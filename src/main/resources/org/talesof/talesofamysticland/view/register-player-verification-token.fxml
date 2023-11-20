@@ -31,7 +31,7 @@
                 <Label styleClass="form__error-label" text="Código não pode ser vazio." fx:id="lblBlankToken" 
                 visible="false" managed="false" />
 
-                <Label styleClass="form__error-label" text="Tente novamente com um novo código" fx:id="lblInvalidToken" 
+                <Label styleClass="form__error-label" text="Tente novamente." fx:id="lblInvalidToken" 
                 visible="false" managed="false" />
             </VBox>
 

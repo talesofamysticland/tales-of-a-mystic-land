@@ -13,7 +13,7 @@ public class TableManager {
         ) {
 
             String sqlPlayerTable = """
-                CREATE TABLE Player(
+                CREATE TABLE IF NOT EXISTS Player(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     username VARCHAR(30) NOT NULL,
                     email VARCHAR(50) NOT NULL,
@@ -25,7 +25,7 @@ public class TableManager {
             """;
 
             String sqlSettingsTable = """
-                CREATE TABLE Settings(
+                CREATE TABLE IF NOT EXISTS Settings(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     player_id INT NOT NULL,
                     volume_effects NUMERIC(3,1) NOT NULL,
@@ -40,11 +40,11 @@ public class TableManager {
             """;
 
             String sqlChangePasswordTable = """
-                CREATE TABLE Change_password(
+                CREATE TABLE IF NOT EXISTS Change_password(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     player_id INT NOT NULL,
                     validated BOOLEAN NOT NULL,
-                    verification_date DATETIME NOT NULL,
+                    verification_date DATETIME,
                     verification_token CHAR(36) NOT NULL,
                     
                     FOREIGN KEY(player_id) REFERENCES Player(id)
@@ -52,7 +52,7 @@ public class TableManager {
             """;
 
             String sqlSaveTable = """
-                CREATE TABLE Save(
+                CREATE TABLE IF NOT EXISTS Save(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     player_id INT NOT NULL,
                     character_name VARCHAR(20) NOT NULL,
@@ -63,7 +63,7 @@ public class TableManager {
             """;
 
             String sqlSavePointTable = """
-                CREATE TABLE Save_point(
+                CREATE TABLE IF NOT EXISTS Save_point(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     name VARCHAR(50) NOT NULL,
                     map INT NOT NULL,
@@ -73,7 +73,7 @@ public class TableManager {
             """;
 
             String sqlCharacterStateTable = """
-                CREATE TABLE Character_state(
+                CREATE TABLE IF NOT EXISTS Character_state(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     play_time DECIMAL(15) NOT NULL,
                     experience INT NOT NULL,
@@ -87,7 +87,7 @@ public class TableManager {
             """;
 
             String sqlSaveStateTable = """
-                CREATE TABLE Save_state(
+                CREATE TABLE IF NOT EXISTS Save_state(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     save_id INT NOT NULL,
                     character_state_id INT NOT NULL,
@@ -101,14 +101,14 @@ public class TableManager {
             """;
 
             String sqlItemTable = """ 
-                CREATE TABLE Item(
+                CREATE TABLE IF NOT EXISTS Item(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     name VARCHAR(50) NOT NULL
                 );
             """;
 
             String sqlItemInInventoryTable = """
-                CREATE TABLE Item_in_inventory(
+                CREATE TABLE IF NOT EXISTS Item_in_inventory(
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     character_state_id INT NOT NULL,
                     item_id INT NOT NULL,
