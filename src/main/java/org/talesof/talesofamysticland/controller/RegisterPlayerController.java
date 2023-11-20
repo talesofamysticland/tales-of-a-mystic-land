@@ -18,6 +18,7 @@ public class RegisterPlayerController {
     private NavigationService navigationService;
 
     private PlayerDAO playerDAO;
+    private Player player;
 
     @FXML
     private BorderPane root;
@@ -137,11 +138,13 @@ public class RegisterPlayerController {
         String confirmedPassword = pwfConfirmedPassword.getText().trim();
 
         if(isUsernameValid(username) && isEmailValid(email) && isPasswordValid(password, confirmedPassword)) {
-            Player player = new Player();
+            player = new Player();
             player.setUsername(username);
             player.setEmail(email);
-            player.setPassword(password);
+            player.setPassword(userService.hash(password));
             playerDAO.save(player);
+
+            System.out.println(playerDAO.findByUsername(username));
 
             navigationService.navigateTo("register-player-verification-token.fxml");
         }
