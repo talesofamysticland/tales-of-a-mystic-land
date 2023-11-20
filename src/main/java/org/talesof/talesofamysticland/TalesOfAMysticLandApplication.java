@@ -39,7 +39,7 @@ public class TalesOfAMysticLandApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        // TableManager.drop();
+        TableManager.drop();
         TableManager.create();
 
         stage = primaryStage;

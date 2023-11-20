@@ -13,6 +13,8 @@ public class Player {
     private String verificationToken;
     private LocalDateTime registerDate;
 
+    private LocalDateTime verificationTokenExpirationDate;
+
     public Player() {
         generateVerificationToken();
         this.registerDate = LocalDateTime.now();
@@ -92,6 +94,14 @@ public class Player {
 
     public void setRegisterDate(LocalDateTime registerDate) {
         this.registerDate = registerDate;
+    }
+
+    public LocalDateTime getVerificationTokenExpirationDate() {
+        return verificationTokenExpirationDate;
+    }
+
+    public void setVerificationTokenExpirationDate(LocalDateTime verificationTokenExpirationDate) {
+        this.verificationTokenExpirationDate = verificationTokenExpirationDate;
     }
 
     @Override

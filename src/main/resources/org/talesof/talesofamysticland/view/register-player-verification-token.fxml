@@ -33,6 +33,9 @@
 
                 <Label styleClass="form__error-label" text="Tente novamente." fx:id="lblInvalidToken" 
                 visible="false" managed="false" />
+
+                <Label styleClass="form__error-label" text="Código expirado. Tente novamente com o novo código enviado." fx:id="lblTokenExpired" 
+                visible="false" managed="false" />
             </VBox>
 
             <VBox styleClass="form__options">

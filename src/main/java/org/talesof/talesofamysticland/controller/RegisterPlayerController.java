@@ -1,6 +1,7 @@
 package org.talesof.talesofamysticland.controller;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 import org.talesof.talesofamysticland.dao.PlayerDAO;
 import org.talesof.talesofamysticland.model.Player;
@@ -68,6 +69,9 @@ public class RegisterPlayerController {
     private Label lblDifferentPasswords;
 
     @FXML
+    private Label lblTokenExpired;
+
+    @FXML
     private Label lblBlankToken;
 
     @FXML
@@ -104,7 +108,7 @@ public class RegisterPlayerController {
         }
 
         if(txfVerificationToken != null) {
-            formErrorListeningService.setupFieldListener(txfVerificationToken, lblBlankToken, lblInvalidToken);
+            formErrorListeningService.setupFieldListener(txfVerificationToken, lblBlankToken, lblInvalidToken, lblTokenExpired);
         }
         
     }
@@ -113,7 +117,7 @@ public class RegisterPlayerController {
         formErrorListeningService.setupFieldListener(
             txfUsername, lblBlankUsername, lblUsernameTooLong, lblUsernameSpecialCharacters, lblUsernameAlreadyExists
         );
-        formErrorListeningService.setupFieldListener(txfEmail, lblInvalidEmail);
+        formErrorListeningService.setupFieldListener(txfEmail, lblInvalidEmail, lblEmailAlreadyExists);
         formErrorListeningService.setupFieldListener(pwfPassword, lblPasswordTooShort, lblInvalidPassword);
         formErrorListeningService.setupFieldListener(pwfConfirmedPassword, lblDifferentPasswords);
     }
@@ -137,6 +141,8 @@ public class RegisterPlayerController {
             userService.getCurrentPlayer().setEmail(email);
             userService.getCurrentPlayer().setPassword(userService.hash(password));
             playerDAO.save(userService.getCurrentPlayer());
+
+            userService.getCurrentPlayer().setVerificationTokenExpirationDate(LocalDateTime.now().plusMinutes(7));
 
             navigationService.navigateTo("register-player-verification-token.fxml");
 
@@ -180,9 +186,8 @@ public class RegisterPlayerController {
         if(!email.matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
             formErrorListeningService.showErrors(lblInvalidEmail, txfEmail);
             emailIsValid = false;
-        }
 
-        if(playerDAO.findByEmail(email) != null) {
+        } else if(playerDAO.findByEmail(email) != null && playerDAO.findByEmail(email).isVerified()) {
             formErrorListeningService.showErrors(lblEmailAlreadyExists, txfEmail);
             emailIsValid = false;
         }
@@ -218,7 +223,13 @@ public class RegisterPlayerController {
 
         boolean verificationTokenIsValid = true;
 
-        if(verificationToken.isBlank()) {
+        if(userService.getCurrentPlayer().getVerificationTokenExpirationDate().isBefore(LocalDateTime.now())) {
+            formErrorListeningService.showErrors(lblTokenExpired, txfVerificationToken);
+            userService.getCurrentPlayer().setVerificationTokenExpirationDate(LocalDateTime.now().plusMinutes(7));
+            sendNewVerificationToken();
+            verificationTokenIsValid = false;
+
+        } else if(verificationToken.isBlank()) {
             formErrorListeningService.showErrors(lblBlankToken, txfVerificationToken);
             verificationTokenIsValid = false;
             
@@ -228,6 +239,15 @@ public class RegisterPlayerController {
         }
 
         return verificationTokenIsValid;
+    }
+
+    private void sendNewVerificationToken() {
+        userService.getCurrentPlayer().generateVerificationToken();
+        String newToken = userService.getCurrentPlayer().getVerificationToken();
+        sendVerificationToken(
+            userService.getCurrentPlayer().getEmail(), 
+            newToken
+        );
     }
 
     @FXML

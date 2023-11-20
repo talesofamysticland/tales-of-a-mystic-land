@@ -33,7 +33,7 @@
                         <Label styleClass="form__label" text="Nome de usuário" />
                         <TextField styleClass="form__textfield" fx:id="txfUsername" />
 
-                        <Label styleClass="form__error-label" text="Nome de usuário inválido." fx:id="lblUsernameAlreadyExists" 
+                        <Label styleClass="form__error-label" text="Nome de usuário indisponível." fx:id="lblUsernameAlreadyExists" 
                         visible="false" managed="false" />
 
                         <Label styleClass="form__error-label" text="Nome não pode ser vazio." fx:id="lblBlankUsername" 
