@@ -11,6 +11,7 @@ import org.talesof.talesofamysticland.game.entity.Warrior;
 import org.talesof.talesofamysticland.game.entity.Wizard;
 import org.talesof.talesofamysticland.model.Player;
 import org.talesof.talesofamysticland.model.Save;
+import org.talesof.talesofamysticland.service.GameService;
 import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
 
@@ -23,6 +24,7 @@ public class SaveSelectionController {
 
     private UserService userService;
     private NavigationService navigationService;
+    private GameService gameService;
 
     private SaveDAO saveDAO;
     private PlayerDAO playerDAO;
@@ -75,11 +77,13 @@ public class SaveSelectionController {
     public SaveSelectionController(
         UserService userService, 
         NavigationService navigationService,
+        GameService gameService,
         SaveDAO saveDAO,
         PlayerDAO playerDAO) {
 
         this.userService = userService;
         this.navigationService = navigationService;
+        this.gameService = gameService;
         this.saveDAO = saveDAO;
         this.playerDAO = playerDAO;
     }
@@ -156,38 +160,29 @@ public class SaveSelectionController {
 
     @FXML
     public void onClickBoxSelectSave1() {
-        if(save1 == null) {
-            navigationService.navigateToSave(1);
-            return;
-        }
-
-        PlayerCharacter player = getPlayerFromSave(save1);
-
-        navigationService.startGame(player);
+        selectSave(save1, 1);
     }
 
     @FXML
     public void onClickBoxSelectSave2() {
-        if(save2 == null) {
-            navigationService.navigateToSave(2);
-            return;
-        }
-
-        PlayerCharacter player = getPlayerFromSave(save1);
-
-        navigationService.startGame(player);
+        selectSave(save2, 2);
     }
 
     @FXML
     public void onClickBoxSelectSave3() {
-        if(save3 == null) {
-            navigationService.navigateToSave(3);
+        selectSave(save3, 3);
+    }
+
+    private void selectSave(Save save, int slot) {
+        if(save == null) {
+            navigationService.navigateTo("character-creation.fxml");
+            gameService.setSelectedSlot(slot);
             return;
         }
 
-        PlayerCharacter player = getPlayerFromSave(save1);
+        PlayerCharacter player = getPlayerFromSave(save);
 
-        navigationService.startGame(player);
+        navigationService.startGame(player, gameService);
     }
 
     private PlayerCharacter getPlayerFromSave(Save save) {

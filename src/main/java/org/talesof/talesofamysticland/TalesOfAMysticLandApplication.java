@@ -16,6 +16,7 @@ import org.talesof.talesofamysticland.database.DatabaseManager;
 import org.talesof.talesofamysticland.injection.DependencyInjector;
 import org.talesof.talesofamysticland.service.EmailService;
 import org.talesof.talesofamysticland.service.FormErrorListeningService;
+import org.talesof.talesofamysticland.service.GameService;
 import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
 
@@ -74,6 +75,7 @@ public class TalesOfAMysticLandApplication extends Application {
         UserService userService = new UserService();
         EmailService emailService = new EmailService();
         FormErrorListeningService formErrorListeningService = new FormErrorListeningService();
+        GameService gameService = new GameService();
 
         // DAOs
         PlayerDAO playerDAO = new PlayerDAO();
@@ -92,11 +94,22 @@ public class TalesOfAMysticLandApplication extends Application {
         }; 
 
         Callback<Class<?>, Object> characterCreationControllerFactory = param -> {
-                return new CharacterCreationController(userService, navigationService, formErrorListeningService, saveDAO);
+                return new CharacterCreationController(
+                        userService, 
+                        navigationService, 
+                        formErrorListeningService, 
+                        gameService,
+                        saveDAO
+                );
         };
 
         Callback<Class<?>, Object> loginControllerFactory = param -> {
-                return new LoginController(userService, navigationService, formErrorListeningService, playerDAO);
+                return new LoginController(
+                        userService, 
+                        navigationService, 
+                        formErrorListeningService, 
+                        playerDAO
+                );
         };
 
         Callback<Class<?>, Object> registerPlayerControllerFactory = param -> {
@@ -110,7 +123,13 @@ public class TalesOfAMysticLandApplication extends Application {
         };
 
         Callback<Class<?>, Object> saveSelectionControllerFactory = param -> {
-                return new SaveSelectionController(userService, navigationService, saveDAO, playerDAO);
+                return new SaveSelectionController(
+                        userService, 
+                        navigationService, 
+                        gameService, 
+                        saveDAO, 
+                        playerDAO
+                );
         };
 
         Callback<Class<?>, Object> settingsControllerFactory = param -> new SettingsController(userService);

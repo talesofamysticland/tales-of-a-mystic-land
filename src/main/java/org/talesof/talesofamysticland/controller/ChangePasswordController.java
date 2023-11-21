@@ -213,7 +213,7 @@ public class ChangePasswordController {
 
             try {
                 Player player = playerDAO.findById(playerId);
-                player.setPassword(userService.hashTemp(newPassword));
+                player.setPassword(userService.hash(newPassword));
                 playerDAO.update(player);
             } catch (SQLException e) {
                 e.printStackTrace();

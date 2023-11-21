@@ -5,9 +5,8 @@ import java.awt.image.BufferedImage;
 
 import org.talesof.talesofamysticland.game.main.GamePanel;
 import org.talesof.talesofamysticland.game.main.KeyHandler;
-import org.talesof.talesofamysticland.game.object.*;
 
-public class PlayerCharacter extends Entity {
+public abstract class PlayerCharacter extends Entity {
 
     KeyHandler keyH;
 
@@ -15,6 +14,21 @@ public class PlayerCharacter extends Entity {
     public final int screenY;
     public boolean attackCanceled = false;
     public boolean lightUpdated = false;
+
+    public int spriteNumVertical = 1;
+    public int spriteNumHorizontal = 1;
+
+    public BufferedImage 
+    up1, up2, up3, up4, up5,
+    down1, down2, down3, down4, down5,
+    left1, left2, left3,
+    right1, right2, right3;
+
+    public BufferedImage 
+    attackUp1, attackUp2, attackUp3,
+    attackDown1, attackDown2, attackDown3,
+    attackLeft1, attackLeft2, attackLeft3, attackLeft4,
+    attackRight1, attackRight2, attackRight3, attackRight4;
 
     public PlayerCharacter(GamePanel gp) {
 
@@ -69,15 +83,8 @@ public class PlayerCharacter extends Entity {
 
         currentLight = null;
 
-        currentWeapon = new OBJ_SwordNormal(gp);
-        currentShield = new OBJ_ShieldWood(gp);
-        projectile = new OBJ_Fireball(gp);
-        attack = getAttack();
-        defense = getDefense();
-
         getImage();
         getAttackImage();
-        getGuardingImage();
         setItems();
         setDialogue();
     }
@@ -90,8 +97,8 @@ public class PlayerCharacter extends Entity {
     }
 
     public void setDialogue() {
-        dialogues[0][0] = "You are level " + level + " now!\n"
-                + "You feel stronger!";
+        dialogues[0][0] = "Você subiu para o level " + level + "!\n"
+                + "Você se sente mais forte!";
     }
 
     public int getAttack() {
@@ -125,13 +132,7 @@ public class PlayerCharacter extends Entity {
         return currentShieldSlot;
     }
 
-    public void setItems() {
-        inventory.clear();
-        inventory.add(currentWeapon);
-        inventory.add(currentShield);
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Axe(gp));
-    }
+    public abstract void setItems();
 
     public void restoreStatus() {
         life = maxLife;
@@ -145,48 +146,9 @@ public class PlayerCharacter extends Entity {
         lightUpdated = true;
     }
 
-    public void getImage() {
-        up1 = setup("/player/boy_up_1");
-        up2 = setup("/player/boy_up_2");
-        down1 = setup("/player/boy_down_1");
-        down2 = setup("/player/boy_down_2");
-        left1 = setup("/player/boy_left_1");
-        left2 = setup("/player/boy_left_2");
-        right1 = setup("/player/boy_right_1");
-        right2 = setup("/player/boy_right_2");
-    }
+    public abstract void getImage();
 
-    public void getAttackImage() {
-
-        if(currentWeapon.type == typeSword) {
-            attackUp1 = setup("/player/boy_attack_up_1", gp.tileSize, gp.tileSize * 2);
-            attackUp2 = setup("/player/boy_attack_up_2", gp.tileSize, gp.tileSize * 2);
-            attackDown1 = setup("/player/boy_attack_down_1", gp.tileSize, gp.tileSize * 2);
-            attackDown2 = setup("/player/boy_attack_down_2", gp.tileSize, gp.tileSize * 2);
-            attackLeft1 = setup("/player/boy_attack_left_1", gp.tileSize * 2, gp.tileSize);
-            attackLeft2 = setup("/player/boy_attack_left_2", gp.tileSize * 2, gp.tileSize);
-            attackRight1 = setup("/player/boy_attack_right_1", gp.tileSize * 2, gp.tileSize);
-            attackRight2 = setup("/player/boy_attack_right_2", gp.tileSize * 2, gp.tileSize);
-        }
-
-        if(currentWeapon.type == typeAxe) {
-            attackUp1 = setup("/player/boy_axe_up_1", gp.tileSize, gp.tileSize * 2);
-            attackUp2 = setup("/player/boy_axe_up_2", gp.tileSize, gp.tileSize * 2);
-            attackDown1 = setup("/player/boy_axe_down_1", gp.tileSize, gp.tileSize * 2);
-            attackDown2 = setup("/player/boy_axe_down_2", gp.tileSize, gp.tileSize * 2);
-            attackLeft1 = setup("/player/boy_axe_left_1", gp.tileSize * 2, gp.tileSize);
-            attackLeft2 = setup("/player/boy_axe_left_2", gp.tileSize * 2, gp.tileSize);
-            attackRight1 = setup("/player/boy_axe_right_1", gp.tileSize * 2, gp.tileSize);
-            attackRight2 = setup("/player/boy_axe_right_2", gp.tileSize * 2, gp.tileSize);
-        }
-    }
-
-    public void getGuardingImage() {
-        guardUp = setup("/player/boy_guard_up");
-        guardDown = setup("/player/boy_guard_down");
-        guardLeft = setup("/player/boy_guard_left");
-        guardRight = setup("/player/boy_guard_right");
-    }
+    public abstract void getAttackImage();
 
     public void getSleepingImage(BufferedImage image) {
         up1 = image;
@@ -299,11 +261,30 @@ public class PlayerCharacter extends Entity {
             spriteCounter++;
 
             if (spriteCounter > 12) {
-
-                if (spriteNum == 1) {
-                    spriteNum = 2;
-                } else if (spriteNum == 2) {
-                    spriteNum = 1;
+                switch(direction) {
+                    case "up", "down" -> {
+                        if (spriteNumVertical == 1) {
+                            spriteNumVertical = 2;
+                        } else if (spriteNumVertical == 2) {
+                            spriteNumVertical = 3;
+                        } else if (spriteNumVertical == 3) {
+                            spriteNumVertical = 4;
+                        } else if (spriteNumVertical == 4) {
+                            spriteNumVertical = 5;
+                        } else if (spriteNumVertical == 5) {
+                            spriteNumVertical = 1;
+                        }
+                    }
+                    
+                    case "left", "right" -> {
+                        if (spriteNumHorizontal == 1) {
+                            spriteNumHorizontal = 2;
+                        } else if (spriteNumHorizontal == 2) {
+                            spriteNumHorizontal = 3;
+                        } else if (spriteNumHorizontal == 3) {
+                            spriteNumHorizontal = 1;
+                        }
+                    }
                 }
 
                 spriteCounter = 0;
@@ -629,56 +610,60 @@ public class PlayerCharacter extends Entity {
         switch (direction) {
             case "up" -> {
                 if(!attacking) {
-                    if (spriteNum == 1) image = up1;
-                    if (spriteNum == 2) image = up2;
+                    if (spriteNumVertical == 1) image = up1;
+                    if (spriteNumVertical == 2) image = up2;
+                    if (spriteNumVertical == 3) image = up3;
+                    if (spriteNumVertical == 4) image = up4;
+                    if (spriteNumVertical == 5) image = up5;
                 }
                 if(attacking) {
                     tempScreenY = screenY - gp.tileSize;
-                    if (spriteNum == 1) image = attackUp1;
-                    if (spriteNum == 2) image = attackUp2;
-                }
-                if(guarding) {
-                    image = guardUp;
+                    if (spriteNumVertical == 1) image = attackUp1;
+                    if (spriteNumVertical == 2) image = attackUp2;
+                    if (spriteNumVertical == 3) image = attackUp3;
                 }
             }
             case "down" -> {
                 if(!attacking) {
-                    if (spriteNum == 1) image = down1;
-                    if (spriteNum == 2) image = down2;
+                    if (spriteNumVertical == 1) image = down1;
+                    if (spriteNumVertical == 2) image = down2;
+                    if (spriteNumVertical == 3) image = down3;
+                    if (spriteNumVertical == 4) image = down4;
+                    if (spriteNumVertical == 5) image = down5;
                 }
                 if(attacking) {
-                    if (spriteNum == 1) image = attackDown1;
-                    if (spriteNum == 2) image = attackDown2;
-                }
-                if(guarding) {
-                    image = guardDown;
+                    tempScreenY = screenY - gp.tileSize;
+                    if (spriteNumVertical == 1) image = attackDown1;
+                    if (spriteNumVertical == 2) image = attackDown2;
+                    if (spriteNumVertical == 3) image = attackDown3;
                 }
             }
             case "left" -> {
                 if(!attacking) {
-                    if (spriteNum == 1) image = left1;
-                    if (spriteNum == 2) image = left2;
+                    if (spriteNumHorizontal == 1) image = left1;
+                    if (spriteNumHorizontal == 2) image = left2;
+                    if (spriteNumHorizontal == 3) image = left3;
                 }
                 if(attacking) {
-                    tempScreenX = screenX - gp.tileSize;
-                    if (spriteNum == 1) image = attackLeft1;
-                    if (spriteNum == 2) image = attackLeft2;
-                }
-                if(guarding) {
-                    image = guardLeft;
+                    tempScreenY = screenY - gp.tileSize;
+                    if (spriteNumHorizontal == 1) image = attackLeft1;
+                    if (spriteNumHorizontal == 2) image = attackLeft2;
+                    if (spriteNumHorizontal == 3) image = attackLeft3;
+                    if (spriteNumHorizontal == 4) image = attackLeft4;
                 }
             }
             case "right" -> {
                 if(!attacking) {
-                    if (spriteNum == 1) image = right1;
-                    if (spriteNum == 2) image = right2;
+                    if (spriteNumHorizontal == 1) image = right1;
+                    if (spriteNumHorizontal == 2) image = right2;
+                    if (spriteNumHorizontal == 3) image = right3;
                 }
                 if(attacking) {
-                    if (spriteNum == 1) image = attackRight1;
-                    if (spriteNum == 2) image = attackRight2;
-                }
-                if(guarding) {
-                    image = guardRight;
+                    tempScreenY = screenY - gp.tileSize;
+                    if (spriteNumHorizontal == 1) image = attackRight1;
+                    if (spriteNumHorizontal == 2) image = attackRight2;
+                    if (spriteNumHorizontal == 3) image = attackRight3;
+                    if (spriteNumHorizontal == 4) image = attackRight4;
                 }
             }
         }

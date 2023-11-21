@@ -1,5 +1,6 @@
 package org.talesof.talesofamysticland.service;
 
+import org.talesof.talesofamysticland.bcrypt.BCrypt;
 import org.talesof.talesofamysticland.model.ChangePassword;
 import org.talesof.talesofamysticland.model.Player;
 
@@ -12,11 +13,11 @@ public class UserService {
     private ChangePassword changePasswordRequest;
 
     public String hash(String password) {
-        return "$2a$12$cDmCoSZevR/w.cp/TyRXtuc/RkvUL2XQoR4letWXmv4PxO9nqq9CW";
+        return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    public String hashTemp(String password) {
-        return "$2a$12$eUNuRGvhcP59Bv.miWFNfO5n7WLxE.Xp6xbIKNHGXllD8vNLl8HeO";
+    public boolean check(String password, String hashPassword) {
+        return BCrypt.checkpw(password, hashPassword);
     }
 
     public void logout() {

@@ -17,7 +17,6 @@ public class NavigationService {
 
     private Stack<Scene> history = new Stack<>();
     private Stage stage;
-    private int selectedSaveSlot;
 
     public NavigationService(Stage primaryStage) {
         this.stage = primaryStage;
@@ -34,11 +33,6 @@ public class NavigationService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void navigateToSave(int saveSlot) {
-        navigateTo("character-creation.fxml");
-        this.selectedSaveSlot = saveSlot;
     }
 
     public void navigateBack() {
@@ -66,15 +60,11 @@ public class NavigationService {
         }
     }
 
-    public void startGame(PlayerCharacter player) {
-        Game.start(player);
+    public void startGame(PlayerCharacter player, GameService gameService) {
+        Game.start(player, gameService);
     }
 
     public void closeApplication() {
         stage.close();
-    }
-
-    public int getSelectedSaveSlot() {
-        return selectedSaveSlot;
     }
 }

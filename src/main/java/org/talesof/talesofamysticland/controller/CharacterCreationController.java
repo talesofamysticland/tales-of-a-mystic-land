@@ -10,6 +10,7 @@ import org.talesof.talesofamysticland.game.entity.Warrior;
 import org.talesof.talesofamysticland.game.entity.Wizard;
 import org.talesof.talesofamysticland.model.Save;
 import org.talesof.talesofamysticland.service.FormErrorListeningService;
+import org.talesof.talesofamysticland.service.GameService;
 import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
 
@@ -24,6 +25,7 @@ public class CharacterCreationController {
     private UserService userService;
     private NavigationService navigationService;
     private FormErrorListeningService formErrorListeningService;
+    private GameService gameService;
 
     private SaveDAO saveDAO;
 
@@ -42,11 +44,13 @@ public class CharacterCreationController {
         UserService userService, 
         NavigationService navigationService, 
         FormErrorListeningService formErrorListeningService,
+        GameService gameService,
         SaveDAO saveDAO) {
 
         this.userService = userService;
         this.navigationService = navigationService;
         this.formErrorListeningService = formErrorListeningService;
+        this.gameService = gameService;
         this.saveDAO = saveDAO;
     }
 
@@ -113,8 +117,15 @@ public class CharacterCreationController {
         }
 
         try {
-            Save save = new Save(userService.getCurrentPlayer().getId(), navigationService.getSelectedSaveSlot(), characterName, characterClass);
-            saveDAO.save(save);
+
+            gameService.setCurrentSave(new Save(
+                userService.getCurrentPlayer().getId(), 
+                gameService.getSelectedSlot(), 
+                characterName, 
+                characterClass
+            ));
+
+            saveDAO.save(gameService.getCurrentSave());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -127,7 +138,7 @@ public class CharacterCreationController {
             case "Archer" -> player = new Archer(Game.gamePanel);
         }
 
-        navigationService.startGame(player);
+        navigationService.startGame(player, gameService);
     }
     
     @FXML

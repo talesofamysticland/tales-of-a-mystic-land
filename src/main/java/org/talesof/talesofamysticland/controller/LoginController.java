@@ -67,7 +67,10 @@ public class LoginController {
             userService.setCurrentPlayer(playerDAO.findByUsername(usernameOrEmail));
         }
 
-        if(userService.getCurrentPlayer() == null || !userService.getCurrentPlayer().getPassword().equals(password)) {
+        if(userService.getCurrentPlayer() == null 
+            || 
+        !userService.check(password, userService.getCurrentPlayer().getPassword())) {
+            
             formErrorListeningService.showErrors(lblInvalidCredentials, txfUsernameOrEmail);
             formErrorListeningService.showErrors(lblInvalidCredentials, pwfPassword);
         } else {
