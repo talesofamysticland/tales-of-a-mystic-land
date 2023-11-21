@@ -20,10 +20,12 @@ import org.talesof.talesofamysticland.game.tile.TileManager;
 import org.talesof.talesofamysticland.game.tile.WorldMap;
 import org.talesof.talesofamysticland.game.tiles_interactive.InteractiveTile;
 import org.talesof.talesofamysticland.service.GameService;
+import org.talesof.talesofamysticland.service.NavigationService;
 
 public class GamePanel extends JPanel implements Runnable {
 
-    private GameService gameService;
+    public GameService gameService;
+    public NavigationService navigationService;
 
     // Window configurations
     final int originalTileSize = 16;  // 16x16
@@ -99,9 +101,10 @@ public class GamePanel extends JPanel implements Runnable {
     public final int indoor = 51;
     public final int dungeon = 52;
 
-    public GamePanel(GameService gameService) {
+    public GamePanel(GameService gameService, NavigationService navigationService) {
 
         this.gameService = gameService;
+        this.navigationService = navigationService;
 
         this.setPreferredSize(new DimensionUIResource(screenWidth, screenHeight));
         this.setBackground(Color.black);

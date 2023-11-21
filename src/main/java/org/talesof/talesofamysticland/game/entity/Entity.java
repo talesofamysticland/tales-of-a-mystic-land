@@ -31,7 +31,7 @@ public class Entity {
     public int worldX, worldY;
     public String direction = "down";
     public int spriteNum = 1;
-    public int spriteNumVertical = 1;
+    public int spriteNumVertical = 3;
     public int spriteNumHorizontal = 1;
     public int dialogueSet = 0;
     public int dialogueIndex = 0;

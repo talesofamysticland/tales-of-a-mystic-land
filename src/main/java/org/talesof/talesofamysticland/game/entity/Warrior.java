@@ -14,58 +14,95 @@ public class Warrior extends PlayerCharacter {
 
         currentWeapon = new OBJ_SwordNormal(gp);
         currentShield = new OBJ_ShieldWood(gp);
+
+        strength = 2;
+        dexterity = 1;
+        wisdom = 1;
+        constitution = 1;
+        resistance = 2;
+
         attack = getAttack();
+        magic = getMagic();
         defense = getDefense();
+
+        defaultSpeed = getSpeed();
+        speed = defaultSpeed;
+
+        maxLife = getHealth();
+        life = maxLife;
+
+        maxMana = getMana();
+        mana = maxMana;
+
+        setItems();
 
         getGuardingImage();
     }
 
     @Override
     public void getImage() {
-        up1 = setup("/player/warrior/warrior_up_1");
-        up2 = setup("/player/warrior/warrior_up_2");
-        up3 = setup("/player/warrior/warrior_up_3");
-        up4 = setup("/player/warrior/warrior_up_4");
-        up5 = setup("/player/warrior/warrior_up_5");
+        up1 = setup("/player/warrior/walking/warrior_up_1");
+        up2 = setup("/player/warrior/walking/warrior_up_2");
+        up3 = setup("/player/warrior/walking/warrior_up_3");
+        up4 = setup("/player/warrior/walking/warrior_up_4");
+        up5 = setup("/player/warrior/walking/warrior_up_5");
 
-        down1 = setup("/player/warrior/warrior_down_1");
-        down2 = setup("/player/warrior/warrior_down_2");
-        down3 = setup("/player/warrior/warrior_down_3");
-        down4 = setup("/player/warrior/warrior_down_4");
-        down5 = setup("/player/warrior/warrior_down_5");
+        down1 = setup("/player/warrior/walking/warrior_down_1");
+        down2 = setup("/player/warrior/walking/warrior_down_2");
+        down3 = setup("/player/warrior/walking/warrior_down_3");
+        down4 = setup("/player/warrior/walking/warrior_down_4");
+        down5 = setup("/player/warrior/walking/warrior_down_5");
 
-        left1 = setup("/player/warrior/warrior_left_1");
-        left2 = setup("/player/warrior/warrior_left_2");
-        left3 = setup("/player/warrior/warrior_left_3");
+        left1 = setup("/player/warrior/walking/warrior_left_1");
+        left2 = setup("/player/warrior/walking/warrior_left_2");
+        left3 = setup("/player/warrior/walking/warrior_left_3");
 
-        right1 = setup("/player/warrior/warrior_right_1");
-        right2 = setup("/player/warrior/warrior_right_2");
-        right3 = setup("/player/warrior/warrior_right_3");
+        right1 = setup("/player/warrior/walking/warrior_right_1");
+        right2 = setup("/player/warrior/walking/warrior_right_2");
+        right3 = setup("/player/warrior/walking/warrior_right_3");
     }
 
     @Override
     public void getAttackImage() {
 
         if(currentWeapon.type == typeSword) {
-            attackUp1 = setup("/player/boy_attack_up_1", gp.tileSize, gp.tileSize * 2);
-            attackUp2 = setup("/player/boy_attack_up_2", gp.tileSize, gp.tileSize * 2);
-            attackDown1 = setup("/player/boy_attack_down_1", gp.tileSize, gp.tileSize * 2);
-            attackDown2 = setup("/player/boy_attack_down_2", gp.tileSize, gp.tileSize * 2);
-            attackLeft1 = setup("/player/boy_attack_left_1", gp.tileSize * 2, gp.tileSize);
-            attackLeft2 = setup("/player/boy_attack_left_2", gp.tileSize * 2, gp.tileSize);
-            attackRight1 = setup("/player/boy_attack_right_1", gp.tileSize * 2, gp.tileSize);
-            attackRight2 = setup("/player/boy_attack_right_2", gp.tileSize * 2, gp.tileSize);
+            attackUp1 = setup("/player/wizard/attacking/wizard_attack_up_1", gp.tileSize, gp.tileSize*2);
+            attackUp2 = setup("/player/wizard/attacking/wizard_attack_up_2", gp.tileSize, gp.tileSize*2);
+            attackUp3 = setup("/player/wizard/attacking/wizard_attack_up_3", gp.tileSize, gp.tileSize*2);
+
+            attackDown1 = setup("/player/wizard/attacking/wizard_attack_down_1", gp.tileSize, gp.tileSize*2);
+            attackDown2 = setup("/player/wizard/attacking/wizard_attack_down_2", gp.tileSize, gp.tileSize*2);
+            attackDown3 = setup("/player/wizard/attacking/wizard_attack_down_3", gp.tileSize, gp.tileSize*2);
+
+            attackLeft1 = setup("/player/wizard/attacking/wizard_attack_left_1", gp.tileSize*2, gp.tileSize);
+            attackLeft2 = setup("/player/wizard/attacking/wizard_attack_left_2", gp.tileSize*2, gp.tileSize);
+            attackLeft3 = setup("/player/wizard/attacking/wizard_attack_left_3", gp.tileSize*2, gp.tileSize);
+            attackLeft4 = setup("/player/wizard/attacking/wizard_attack_left_3", gp.tileSize*2, gp.tileSize);
+
+            attackRight1 = setup("/player/wizard/attacking/wizard_attack_right_1", gp.tileSize*2, gp.tileSize);
+            attackRight2 = setup("/player/wizard/attacking/wizard_attack_right_2", gp.tileSize*2, gp.tileSize);
+            attackRight3 = setup("/player/wizard/attacking/wizard_attack_right_3", gp.tileSize*2, gp.tileSize);
+            attackRight4 = setup("/player/wizard/attacking/wizard_attack_right_3", gp.tileSize*2, gp.tileSize);
         }
 
         if(currentWeapon.type == typeAxe) {
-            attackUp1 = setup("/player/boy_axe_up_1", gp.tileSize, gp.tileSize * 2);
-            attackUp2 = setup("/player/boy_axe_up_2", gp.tileSize, gp.tileSize * 2);
-            attackDown1 = setup("/player/boy_axe_down_1", gp.tileSize, gp.tileSize * 2);
-            attackDown2 = setup("/player/boy_axe_down_2", gp.tileSize, gp.tileSize * 2);
-            attackLeft1 = setup("/player/boy_axe_left_1", gp.tileSize * 2, gp.tileSize);
-            attackLeft2 = setup("/player/boy_axe_left_2", gp.tileSize * 2, gp.tileSize);
-            attackRight1 = setup("/player/boy_axe_right_1", gp.tileSize * 2, gp.tileSize);
-            attackRight2 = setup("/player/boy_axe_right_2", gp.tileSize * 2, gp.tileSize);
+            attackUp1 = setup("/player/wizard/attacking/wizard_attack_up_1", gp.tileSize, gp.tileSize*2);
+            attackUp2 = setup("/player/wizard/attacking/wizard_attack_up_2", gp.tileSize, gp.tileSize*2);
+            attackUp3 = setup("/player/wizard/attacking/wizard_attack_up_3", gp.tileSize, gp.tileSize*2);
+
+            attackDown1 = setup("/player/wizard/attacking/wizard_attack_down_1", gp.tileSize, gp.tileSize*2);
+            attackDown2 = setup("/player/wizard/attacking/wizard_attack_down_2", gp.tileSize, gp.tileSize*2);
+            attackDown3 = setup("/player/wizard/attacking/wizard_attack_down_3", gp.tileSize, gp.tileSize*2);
+
+            attackLeft1 = setup("/player/wizard/attacking/wizard_attack_left_1", gp.tileSize*2, gp.tileSize);
+            attackLeft2 = setup("/player/wizard/attacking/wizard_attack_left_2", gp.tileSize*2, gp.tileSize);
+            attackLeft3 = setup("/player/wizard/attacking/wizard_attack_left_3", gp.tileSize*2, gp.tileSize);
+            attackLeft4 = setup("/player/wizard/attacking/wizard_attack_left_3", gp.tileSize*2, gp.tileSize);
+
+            attackRight1 = setup("/player/wizard/attacking/wizard_attack_right_1", gp.tileSize*2, gp.tileSize);
+            attackRight2 = setup("/player/wizard/attacking/wizard_attack_right_2", gp.tileSize*2, gp.tileSize);
+            attackRight3 = setup("/player/wizard/attacking/wizard_attack_right_3", gp.tileSize*2, gp.tileSize);
+            attackRight4 = setup("/player/wizard/attacking/wizard_attack_right_3", gp.tileSize*2, gp.tileSize);
         }
     }
 

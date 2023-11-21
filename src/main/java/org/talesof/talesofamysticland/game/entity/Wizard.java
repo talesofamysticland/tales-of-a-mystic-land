@@ -61,7 +61,35 @@ public class Wizard extends PlayerCharacter {
 
     @Override
     public void getAttackImage() {
-        
+
+        if(currentWeapon.type == typeAxe) {
+            loadAxeImage();
+        } else {
+            loadStaffImage();
+        }
+    }
+
+    private void loadStaffImage() {
+        attackUp1 = setup("/player/wizard/attacking/wizard_attack_up_1", gp.tileSize, gp.tileSize*2);
+        attackUp2 = setup("/player/wizard/attacking/wizard_attack_up_2", gp.tileSize, gp.tileSize*2);
+        attackUp3 = setup("/player/wizard/attacking/wizard_attack_up_3", gp.tileSize, gp.tileSize*2);
+
+        attackDown1 = setup("/player/wizard/attacking/wizard_attack_down_1", gp.tileSize, gp.tileSize*2);
+        attackDown2 = setup("/player/wizard/attacking/wizard_attack_down_2", gp.tileSize, gp.tileSize*2);
+        attackDown3 = setup("/player/wizard/attacking/wizard_attack_down_3", gp.tileSize, gp.tileSize*2);
+
+        attackLeft1 = setup("/player/wizard/attacking/wizard_attack_left_1", gp.tileSize*2, gp.tileSize);
+        attackLeft2 = setup("/player/wizard/attacking/wizard_attack_left_2", gp.tileSize*2, gp.tileSize);
+        attackLeft3 = setup("/player/wizard/attacking/wizard_attack_left_3", gp.tileSize*2, gp.tileSize);
+        attackLeft4 = setup("/player/wizard/attacking/wizard_attack_left_3", gp.tileSize*2, gp.tileSize);
+
+        attackRight1 = setup("/player/wizard/attacking/wizard_attack_right_1", gp.tileSize*2, gp.tileSize);
+        attackRight2 = setup("/player/wizard/attacking/wizard_attack_right_2", gp.tileSize*2, gp.tileSize);
+        attackRight3 = setup("/player/wizard/attacking/wizard_attack_right_3", gp.tileSize*2, gp.tileSize);
+        attackRight4 = setup("/player/wizard/attacking/wizard_attack_right_3", gp.tileSize*2, gp.tileSize);
+    }
+
+    private void loadAxeImage() {
         attackUp1 = setup("/player/wizard/attacking/wizard_attack_up_1", gp.tileSize, gp.tileSize*2);
         attackUp2 = setup("/player/wizard/attacking/wizard_attack_up_2", gp.tileSize, gp.tileSize*2);
         attackUp3 = setup("/player/wizard/attacking/wizard_attack_up_3", gp.tileSize, gp.tileSize*2);

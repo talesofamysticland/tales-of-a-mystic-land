@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Stack;
 
 import org.talesof.talesofamysticland.game.Game;
-import org.talesof.talesofamysticland.game.entity.PlayerCharacter;
 import org.talesof.talesofamysticland.injection.DependencyInjector;
 
 import javafx.scene.Parent;
@@ -61,7 +60,9 @@ public class NavigationService {
     }
 
     public void startGame(GameService gameService) {
-        Game.start(gameService);
+        this.navigateTo("title-screen.fxml");
+        this.stage.setIconified(true);
+        Game.start(gameService, this);
     }
 
     public void closeApplication() {

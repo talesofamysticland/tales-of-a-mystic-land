@@ -2,10 +2,9 @@ package org.talesof.talesofamysticland.game;
 
 import javax.swing.JFrame;
 
-import org.talesof.talesofamysticland.game.entity.PlayerCharacter;
 import org.talesof.talesofamysticland.game.main.GamePanel;
-import org.talesof.talesofamysticland.model.Player;
 import org.talesof.talesofamysticland.service.GameService;
+import org.talesof.talesofamysticland.service.NavigationService;
 
 public class Game {
 
@@ -15,7 +14,7 @@ public class Game {
 
     public static GamePanel gamePanel;
 
-    public static void start(GameService gameService) {
+    public static void start(GameService gameService, NavigationService navigationService) {
         
         window = new JFrame();
 
@@ -23,7 +22,7 @@ public class Game {
         window.setResizable(false);
         window.setTitle("Tales of a Mystic Land");
 
-        gamePanel = new GamePanel(gameService);
+        gamePanel = new GamePanel(gameService, navigationService);
         window.add(gamePanel);
 
         gamePanel.config.loadConfig();
@@ -32,7 +31,6 @@ public class Game {
 
         window.pack();
 
-        window.setAlwaysOnTop(true);
         window.setFocusableWindowState(true);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
