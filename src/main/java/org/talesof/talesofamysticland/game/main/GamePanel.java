@@ -3,6 +3,8 @@ package org.talesof.talesofamysticland.game.main;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.*;
 import javax.swing.plaf.DimensionUIResource;
@@ -79,7 +81,7 @@ public class GamePanel extends JPanel implements Runnable {
     public ArrayList<Entity> particleList = new ArrayList<>();
     // public ArrayList<Entity> projectileList = new ArrayList<>();
     public Entity[][] projectile = new Entity[maxMap][20];
-    ArrayList<Entity> entityList = new ArrayList<>();
+    private List<Entity> entityList = new ArrayList<>();
 
     // Game state
     public int gameState;
@@ -135,6 +137,8 @@ public class GamePanel extends JPanel implements Runnable {
         if(fullScreenOn) {
             setFullScreen();
         }
+
+        playMusic(0);
     }
 
     public void resetGame(boolean restart) {
@@ -288,44 +292,20 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
 
-        // add entities to the list
-        entityList.add(player);
+        entityList.clear();
+        entityList.addAll(Arrays.asList(player));
+        entityList.addAll(Arrays.asList(npc[currentMap]));
+        entityList.addAll(Arrays.asList(obj[currentMap]));
+        entityList.addAll(Arrays.asList(monster[currentMap]));
+        entityList.addAll(Arrays.asList(projectile[currentMap]));
+        entityList.addAll(particleList);
 
-        for (int i = 0; i < npc[1].length; i++) {
-            if (npc[currentMap][i] != null) {
-                entityList.add(npc[currentMap][i]);
-            }
-        }
+        entityList = entityList.stream().filter(Objects::nonNull).collect(Collectors.toList());
 
-        for (int i = 0; i < obj[1].length; i++) {
-            if (obj[currentMap][i] != null) {
-                entityList.add(obj[currentMap][i]);
-            }
-        }
-
-        for (int i = 0; i < monster[1].length; i++) {
-            if (monster[currentMap][i] != null) {
-                entityList.add(monster[currentMap][i]);
-            }
-        }
-
-        for(int i = 0; i < projectile[1].length; i++) {
-            if(projectile[currentMap][i] != null) {
-                entityList.add(projectile[currentMap][i]);
-            }
-        }
-
-        for (Entity entity : particleList) {
-            if (entity != null) {
-                entityList.add(entity);
-            }
-        }
-
-        // sort
         entityList.sort(Comparator.comparingInt(e -> e.worldY));
 
-        // draw entities
-        for(Entity en : entityList) {
+        // Draw entities
+        for (Entity en : entityList) {
             en.draw(g2);
         }
 
@@ -360,6 +340,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics g = getGraphics();
         g.drawImage(tempScreen, 0, 0, screenWidth2, screenHeight2, null);
+        g.dispose();
     }
 
     public void playMusic(int i) {

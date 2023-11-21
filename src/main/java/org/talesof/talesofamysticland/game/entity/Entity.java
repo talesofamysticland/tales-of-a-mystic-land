@@ -632,6 +632,7 @@ public class Entity {
                 gp.player.damageInteractiveTile(iTileIndex);
 
                 int projectileIndex = gp.cChecker.checkEntity(this, gp.projectile);
+                
                 if(projectile.user != gp.player) {
                     gp.player.damageProjectile(projectileIndex);
                 }

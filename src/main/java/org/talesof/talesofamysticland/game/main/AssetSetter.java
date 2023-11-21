@@ -20,7 +20,7 @@ public class AssetSetter {
 
         int mapNum = 0;
         int i = 0;
-        gp.obj[mapNum][i] = new OBJ_Axe(gp);
+        gp.obj[mapNum][i] = new OBJ_Boots(gp);
         gp.obj[mapNum][i].worldX = gp.tileSize * 33;
         gp.obj[mapNum][i].worldY = gp.tileSize * 7;
 

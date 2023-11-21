@@ -68,4 +68,22 @@ public class NavigationService {
     public void closeApplication() {
         stage.close();
     }
+
+	public Stack<Scene> getHistory() {
+		return history;
+	}
+
+	public void setHistory(Stack<Scene> history) {
+		this.history = history;
+	}
+
+	public Stage getStage() {
+		return stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+
+    
 }

@@ -720,9 +720,8 @@ public class UI {
         if(commandNum == 0) {
             g2.drawString(">", textX - 25, textY);
             if(gp.keyH.enterPressed) {
-                subState = 0;
-                gp.resetGame(true);
-                gp.music.stop();
+                Game.window.dispose();
+                gp.navigationService.getStage().setIconified(false);
             }
         }
 
@@ -755,6 +754,7 @@ public class UI {
             gp.player.worldY = gp.tileSize * gp.eHandler.tempRow;
             gp.eHandler.previousEventX = gp.player.worldX;
             gp.eHandler.previousEventY = gp.player.worldY;
+            
             gp.changeArea();
         }
     }

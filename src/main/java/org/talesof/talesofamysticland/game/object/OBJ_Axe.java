@@ -13,7 +13,7 @@ public class OBJ_Axe extends Entity {
         type = typeAxe;
 
         name = OBJ_NAME;
-        description = "[" + name + "]\nProvavelmente do Canada.\nPode cortar varias árvores.";
+        description = "[" + name + "]\nProvavelmente do \nCanada.";
         down1 = setup("/objects/axe");
 
         attackValue = 2;

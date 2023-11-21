@@ -34,10 +34,10 @@ public class OBJ_Chest extends Entity {
 
     public void setDialogue() {
 
-        dialogues[0][0] = "Você abriu um baú e encontrou " + loot.name + "!\n" +
-                "...Mas sua mochila ja esta cheia";
+        dialogues[0][0] = "Você abriu um baú e encontrou um(a) " + loot.name + "!\n" +
+                "...Mas sua mochila já esta cheia";
         dialogues[1][0] = "Você abriu um baú e encontrou " + loot.name + "!\n" +
-                "Você pegou um " + loot.name + "!";
+                "Você pegou um(a) " + loot.name + "!";
         dialogues[2][0] = "Estava vazio.";
 
     }

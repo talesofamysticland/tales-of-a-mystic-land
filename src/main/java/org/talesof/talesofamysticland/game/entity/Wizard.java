@@ -2,16 +2,17 @@ package org.talesof.talesofamysticland.game.entity;
 
 import org.talesof.talesofamysticland.game.main.GamePanel;
 import org.talesof.talesofamysticland.game.main.KeyHandler;
+import org.talesof.talesofamysticland.game.object.OBJ_Axe;
 import org.talesof.talesofamysticland.game.object.OBJ_Fireball;
 import org.talesof.talesofamysticland.game.object.OBJ_Key;
-import org.talesof.talesofamysticland.game.object.OBJ_NormalStaff;
+import org.talesof.talesofamysticland.game.object.OBJ_LiandryStaff;
 
 public class Wizard extends PlayerCharacter {
 
     public Wizard(String name, GamePanel gp, KeyHandler keyH) {
         super(name, gp, keyH);
 
-        currentWeapon = new OBJ_NormalStaff(gp);
+        currentWeapon = new OBJ_LiandryStaff(gp);
         projectile = new OBJ_Fireball(gp);
 
         strength = 1;
@@ -33,6 +34,8 @@ public class Wizard extends PlayerCharacter {
         maxMana = getMana();
         mana = maxMana;
 
+        getImage();
+        getAttackImage();
         setItems();
     }
 
@@ -64,7 +67,8 @@ public class Wizard extends PlayerCharacter {
 
         if(currentWeapon.type == typeAxe) {
             loadAxeImage();
-        } else {
+
+        } else if(currentWeapon.type == typeStaff) {
             loadStaffImage();
         }
     }
@@ -90,29 +94,30 @@ public class Wizard extends PlayerCharacter {
     }
 
     private void loadAxeImage() {
-        attackUp1 = setup("/player/wizard/attacking/wizard_attack_up_1", gp.tileSize, gp.tileSize*2);
-        attackUp2 = setup("/player/wizard/attacking/wizard_attack_up_2", gp.tileSize, gp.tileSize*2);
-        attackUp3 = setup("/player/wizard/attacking/wizard_attack_up_3", gp.tileSize, gp.tileSize*2);
+        attackUp1 = setup("/player/wizard/axe/wizard_axe_up_1", gp.tileSize, gp.tileSize*2);
+        attackUp2 = setup("/player/wizard/axe/wizard_axe_up_2", gp.tileSize, gp.tileSize*2);
+        attackUp3 = setup("/player/wizard/axe/wizard_axe_up_3", gp.tileSize, gp.tileSize*2);
 
-        attackDown1 = setup("/player/wizard/attacking/wizard_attack_down_1", gp.tileSize, gp.tileSize*2);
-        attackDown2 = setup("/player/wizard/attacking/wizard_attack_down_2", gp.tileSize, gp.tileSize*2);
-        attackDown3 = setup("/player/wizard/attacking/wizard_attack_down_3", gp.tileSize, gp.tileSize*2);
+        attackDown1 = setup("/player/wizard/axe/wizard_axe_down_1", gp.tileSize, gp.tileSize*2);
+        attackDown2 = setup("/player/wizard/axe/wizard_axe_down_2", gp.tileSize, gp.tileSize*2);
+        attackDown3 = setup("/player/wizard/axe/wizard_axe_down_3", gp.tileSize, gp.tileSize*2);
 
-        attackLeft1 = setup("/player/wizard/attacking/wizard_attack_left_1", gp.tileSize*2, gp.tileSize);
-        attackLeft2 = setup("/player/wizard/attacking/wizard_attack_left_2", gp.tileSize*2, gp.tileSize);
-        attackLeft3 = setup("/player/wizard/attacking/wizard_attack_left_3", gp.tileSize*2, gp.tileSize);
-        attackLeft4 = setup("/player/wizard/attacking/wizard_attack_left_3", gp.tileSize*2, gp.tileSize);
+        attackLeft1 = setup("/player/wizard/axe/wizard_axe_left_1", gp.tileSize*2, gp.tileSize);
+        attackLeft2 = setup("/player/wizard/axe/wizard_axe_left_2", gp.tileSize*2, gp.tileSize);
+        attackLeft3 = setup("/player/wizard/axe/wizard_axe_left_3", gp.tileSize*2, gp.tileSize);
+        attackLeft4 = setup("/player/wizard/axe/wizard_axe_left_3", gp.tileSize*2, gp.tileSize);
 
-        attackRight1 = setup("/player/wizard/attacking/wizard_attack_right_1", gp.tileSize*2, gp.tileSize);
-        attackRight2 = setup("/player/wizard/attacking/wizard_attack_right_2", gp.tileSize*2, gp.tileSize);
-        attackRight3 = setup("/player/wizard/attacking/wizard_attack_right_3", gp.tileSize*2, gp.tileSize);
-        attackRight4 = setup("/player/wizard/attacking/wizard_attack_right_3", gp.tileSize*2, gp.tileSize);
+        attackRight1 = setup("/player/wizard/axe/wizard_axe_right_1", gp.tileSize*2, gp.tileSize);
+        attackRight2 = setup("/player/wizard/axe/wizard_axe_right_2", gp.tileSize*2, gp.tileSize);
+        attackRight3 = setup("/player/wizard/axe/wizard_axe_right_3", gp.tileSize*2, gp.tileSize);
+        attackRight4 = setup("/player/wizard/axe/wizard_axe_right_3", gp.tileSize*2, gp.tileSize);
     }
 
     @Override
     public void setItems() {
         inventory.clear();
         inventory.add(currentWeapon);
+        inventory.add(new OBJ_Axe(gp));
         inventory.add(new OBJ_Key(gp));
     }    
 

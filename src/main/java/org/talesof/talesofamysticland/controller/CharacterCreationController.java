@@ -115,8 +115,6 @@ public class CharacterCreationController {
         
         String characterClass = selectedBox.getId();
 
-        System.out.println(TalesOfAMysticLandApplication.screenHeight);
-
         try {
 
             gameService.setCurrentSave(new Save(

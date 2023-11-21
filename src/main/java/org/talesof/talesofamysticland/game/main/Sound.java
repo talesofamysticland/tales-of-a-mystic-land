@@ -1,10 +1,10 @@
 package org.talesof.talesofamysticland.game.main;
 
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.LineUnavailableException;
 
 import org.talesof.talesofamysticland.game.Game;
 
@@ -21,12 +21,6 @@ public class Sound {
     float volume;
 
     public Sound() {
-
-        try {
-            clip = AudioSystem.getClip();
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        }
 
         soundURL[0] = getSoundURL("BlueBoyAdventure");
         soundURL[1] = getSoundURL("coin");
@@ -55,13 +49,9 @@ public class Sound {
     }
 
     public void setFile(int i) {
-
-        if (clip != null && clip.isOpen()) {
-            clip.close();
-        }
-
         try {
             AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
+            clip = AudioSystem.getClip();
             clip.open(ais);
 
             if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
@@ -85,12 +75,8 @@ public class Sound {
     }
 
     public void stop() {
-        if (clip != null && clip.isOpen()) {
-            clip.stop();
-            clip.close();
-
-            clipTime = clip.getMicrosecondPosition();
-        }
+        clipTime = clip.getMicrosecondPosition();
+        clip.stop();
     }
 
     public void resume() {

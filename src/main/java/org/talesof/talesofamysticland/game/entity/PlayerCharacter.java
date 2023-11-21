@@ -79,8 +79,6 @@ public abstract class PlayerCharacter extends Entity {
 
         currentLight = null;
 
-        getImage();
-        getAttackImage();
         setDialogue();
     }
 
@@ -328,7 +326,8 @@ public abstract class PlayerCharacter extends Entity {
         }
 
         if (gp.keyH.shotKeyPressed && !projectile.alive
-                && shotAvailableCounter == 30 && projectile.haveResource(this)) {
+                && shotAvailableCounter == 30 && projectile.haveResource(this)
+                && gp.player.currentWeapon.type == typeStaff) {
 
             // Set default coordinates, direction and user
             projectile.set(worldX, worldY, direction, true, this);
@@ -402,10 +401,10 @@ public abstract class PlayerCharacter extends Entity {
                     if(canObtainItem(gp.obj[gp.currentMap][i])) {
 
                         gp.playSoundEffect(1);
-                        text = "Got a " + gp.obj[gp.currentMap][i].name + "!";
+                        text = "Obteve " + gp.obj[gp.currentMap][i].name + "!";
 
                     } else {
-                        text = "You cannot carry any more!";
+                        text = "Você não pode carregar mais!";
                     }
 
                     gp.ui.addMessage(text);
@@ -480,14 +479,14 @@ public abstract class PlayerCharacter extends Entity {
                 if(gp.monster[gp.currentMap][i].life <= 0) {
                     gp.monster[gp.currentMap][i].life = 0;
                 }
-                gp.ui.addMessage(damage + " damage!");
+                gp.ui.addMessage(damage + " de dano!");
 
                 gp.monster[gp.currentMap][i].invincible = true;
                 gp.monster[gp.currentMap][i].damageReaction();
 
                 if(gp.monster[gp.currentMap][i].life <= 0) {
                     gp.monster[gp.currentMap][i].dying = true;
-                    gp.ui.addMessage("Killed the " + gp.monster[gp.currentMap][i].name + "!");
+                    gp.ui.addMessage("Matou o " + gp.monster[gp.currentMap][i].name + "!");
                     gp.ui.addMessage("+ " + gp.monster[gp.currentMap][i].exp + " exp");
                     exp += gp.monster[gp.currentMap][i].exp;
                     checkLevelUp();
@@ -553,7 +552,7 @@ public abstract class PlayerCharacter extends Entity {
 
             Entity selectedItem = inventory.get(itemIndex);
 
-            if(selectedItem.type == typeSword || selectedItem.type == typeAxe) {
+            if(selectedItem.type == typeSword || selectedItem.type == typeAxe || selectedItem.type == typeStaff) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getAttackImage();

@@ -12,11 +12,10 @@ public class IT_DryTree extends InteractiveTile {
 
         down1 = setup("/tiles_interactive/drytree");
         destructible = true;
-        life = 1;
+        life = 2;
     }
 
     public boolean itemIsCorrect(Entity entity) {
-
         return entity.currentWeapon.type == typeAxe;
     }
 
