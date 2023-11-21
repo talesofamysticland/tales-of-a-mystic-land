@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS talesof;
+
 USE talesof;
 
 CREATE TABLE IF NOT EXISTS Player(
@@ -17,7 +19,7 @@ CREATE TABLE IF NOT EXISTS Settings(
     volume_music NUMERIC(3,1) NOT NULL,
     volume_geral NUMERIC(3,1) NOT NULL,
     full_screen BOOLEAN NOT NULL,
-    resolution ENUM("4:3", "16:9", "21:9") NOT NULL,
+    resolution ENUM('4:3', '16:9', '21:9') NOT NULL,
     save_date DATETIME NOT NULL,
     
     FOREIGN KEY(player_id) REFERENCES Player(id)
@@ -37,7 +39,7 @@ CREATE TABLE IF NOT EXISTS Save(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     player_id INT NOT NULL,
     character_name VARCHAR(20) NOT NULL,
-    character_class ENUM("Warrior", "Wizard", "Archer") NOT NULL,
+    character_class ENUM('Warrior', 'Wizard', 'Archer') NOT NULL,
 
     FOREIGN KEY(player_id) REFERENCES Player(id)
 );

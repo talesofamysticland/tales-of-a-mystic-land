@@ -22,7 +22,7 @@ public class DatabaseManager {
     }
 
     public static void createTables() {
-        String path = "database/table-creation.sql";
+        String path = "database/create-table.sql";
         readSQLFile(path);
     }
 
