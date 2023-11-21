@@ -11,7 +11,7 @@ import org.talesof.talesofamysticland.game.Game;
 import org.talesof.talesofamysticland.game.AI.PathFinder;
 import org.talesof.talesofamysticland.game.data.SaveLoad;
 import org.talesof.talesofamysticland.game.entity.Entity;
-import org.talesof.talesofamysticland.game.entity.Player;
+import org.talesof.talesofamysticland.game.entity.PlayerCharacter;
 import org.talesof.talesofamysticland.game.environment.EnvironmentManager;
 import org.talesof.talesofamysticland.game.tile.TileManager;
 import org.talesof.talesofamysticland.game.tile.WorldMap;
@@ -63,7 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
 
     // Entity and object
-    public Player player = new Player(this, keyH);
+    public PlayerCharacter player;
     public Entity[][] obj = new Entity[maxMap][20];
     public Entity[][] npc = new Entity[maxMap][10];
     public Entity[][] monster = new Entity[maxMap][20];
@@ -75,7 +75,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     // Game state
     public int gameState;
-    public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
     public final int dialogueState = 3;
@@ -94,7 +93,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int indoor = 51;
     public final int dungeon = 52;
 
-    public GamePanel() {
+    public GamePanel(PlayerCharacter player) {
+        player.setKeyHandler(keyH);
 
         this.setPreferredSize(new DimensionUIResource(screenWidth, screenHeight));
         this.setBackground(Color.black);
@@ -110,7 +110,7 @@ public class GamePanel extends JPanel implements Runnable {
         aSetter.setInteractiveTile();
         eManager.setup();
 
-        gameState = titleState;
+        gameState = playState;
         currentArea = outside;
 
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
@@ -262,73 +262,69 @@ public class GamePanel extends JPanel implements Runnable {
             drawStart = System.nanoTime();
         }
 
-        // Title Screen
-        if (gameState != titleState) {
+        // Tile
+        tileM.draw(g2);
 
-            // Tile
-            tileM.draw(g2);
-
-            // Interactive tile
-            for (int i = 0; i < iTile[1].length; i++) {
-                if (iTile[currentMap][i] != null) {
-                    iTile[currentMap][i].draw(g2);
-                }
+        // Interactive tile
+        for (int i = 0; i < iTile[1].length; i++) {
+            if (iTile[currentMap][i] != null) {
+                iTile[currentMap][i].draw(g2);
             }
+        }
 
-            // add entities to the list
-            entityList.add(player);
+        // add entities to the list
+        entityList.add(player);
 
-            for (int i = 0; i < npc[1].length; i++) {
-                if (npc[currentMap][i] != null) {
-                    entityList.add(npc[currentMap][i]);
-                }
+        for (int i = 0; i < npc[1].length; i++) {
+            if (npc[currentMap][i] != null) {
+                entityList.add(npc[currentMap][i]);
             }
+        }
 
-            for (int i = 0; i < obj[1].length; i++) {
-                if (obj[currentMap][i] != null) {
-                    entityList.add(obj[currentMap][i]);
-                }
+        for (int i = 0; i < obj[1].length; i++) {
+            if (obj[currentMap][i] != null) {
+                entityList.add(obj[currentMap][i]);
             }
+        }
 
-            for (int i = 0; i < monster[1].length; i++) {
-                if (monster[currentMap][i] != null) {
-                    entityList.add(monster[currentMap][i]);
-                }
+        for (int i = 0; i < monster[1].length; i++) {
+            if (monster[currentMap][i] != null) {
+                entityList.add(monster[currentMap][i]);
             }
+        }
 
-            for(int i = 0; i < projectile[1].length; i++) {
-                if(projectile[currentMap][i] != null) {
-                    entityList.add(projectile[currentMap][i]);
-                }
+        for(int i = 0; i < projectile[1].length; i++) {
+            if(projectile[currentMap][i] != null) {
+                entityList.add(projectile[currentMap][i]);
             }
+        }
 
-            for (Entity entity : particleList) {
-                if (entity != null) {
-                    entityList.add(entity);
-                }
+        for (Entity entity : particleList) {
+            if (entity != null) {
+                entityList.add(entity);
             }
+        }
 
-            // sort
-            entityList.sort(Comparator.comparingInt(e -> e.worldY));
+        // sort
+        entityList.sort(Comparator.comparingInt(e -> e.worldY));
 
-            // draw entities
-            for(Entity en : entityList) {
-                en.draw(g2);
-            }
+        // draw entities
+        for(Entity en : entityList) {
+            en.draw(g2);
+        }
 
-            // empty entity list
-            entityList.clear();
+        // empty entity list
+        entityList.clear();
 
-            // Environment
-            eManager.draw(g2);
+        // Environment
+        eManager.draw(g2);
 
-            // Mini map
-            map.drawMiniMap(g2);
+        // Mini map
+        map.drawMiniMap(g2);
 
-            // Map
-            if(gameState == mapState) {
-                map.drawFullMapScreen(g2);
-            }
+        // Map
+        if(gameState == mapState) {
+            map.drawFullMapScreen(g2);
         }
 
         // UI

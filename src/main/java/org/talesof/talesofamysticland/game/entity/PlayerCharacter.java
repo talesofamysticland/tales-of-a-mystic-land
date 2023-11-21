@@ -7,7 +7,7 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 import org.talesof.talesofamysticland.game.main.KeyHandler;
 import org.talesof.talesofamysticland.game.object.*;
 
-public class Player extends Entity {
+public class PlayerCharacter extends Entity {
 
     KeyHandler keyH;
 
@@ -16,10 +16,9 @@ public class Player extends Entity {
     public boolean attackCanceled = false;
     public boolean lightUpdated = false;
 
-    public Player(GamePanel gp, KeyHandler keyH) {
+    public PlayerCharacter(GamePanel gp) {
 
         super(gp);
-        this.keyH = keyH;
 
         type = typePlayer;
 
@@ -34,6 +33,18 @@ public class Player extends Entity {
         solidAreaDefaultY = solidArea.y;
 
         setDefaultValues();
+    }
+
+    public GamePanel getGamePanel() {
+        return gp;
+    }
+
+    public void setGamePanel(GamePanel gp) {
+        this.gp = gp;
+    }  
+
+    public void setKeyHandler(KeyHandler keyH) {
+        this.keyH = keyH;
     }
 
     public void setDefaultValues() {

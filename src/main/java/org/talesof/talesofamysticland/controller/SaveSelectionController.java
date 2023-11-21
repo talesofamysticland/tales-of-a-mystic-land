@@ -5,6 +5,10 @@ import java.util.List;
 import org.talesof.talesofamysticland.dao.PlayerDAO;
 import org.talesof.talesofamysticland.dao.SaveDAO;
 import org.talesof.talesofamysticland.game.Game;
+import org.talesof.talesofamysticland.game.entity.Archer;
+import org.talesof.talesofamysticland.game.entity.PlayerCharacter;
+import org.talesof.talesofamysticland.game.entity.Warrior;
+import org.talesof.talesofamysticland.game.entity.Wizard;
 import org.talesof.talesofamysticland.model.Player;
 import org.talesof.talesofamysticland.model.Save;
 import org.talesof.talesofamysticland.service.NavigationService;
@@ -152,23 +156,51 @@ public class SaveSelectionController {
 
     @FXML
     public void onClickBoxSelectSave1() {
-        navigationService.startGame();
+        if(save1 == null) {
+            navigationService.navigateToSave(1);
+            return;
+        }
+
+        PlayerCharacter player = getPlayerFromSave(save1);
+
+        navigationService.startGame(player);
     }
 
     @FXML
     public void onClickBoxSelectSave2() {
         if(save2 == null) {
-            navigationService.navigateTo("character-creation.fxml");
+            navigationService.navigateToSave(2);
             return;
         }
+
+        PlayerCharacter player = getPlayerFromSave(save1);
+
+        navigationService.startGame(player);
     }
 
     @FXML
     public void onClickBoxSelectSave3() {
         if(save3 == null) {
-            navigationService.navigateTo("character-creation.fxml");
+            navigationService.navigateToSave(3);
             return;
         }
+
+        PlayerCharacter player = getPlayerFromSave(save1);
+
+        navigationService.startGame(player);
+    }
+
+    private PlayerCharacter getPlayerFromSave(Save save) {
+
+        PlayerCharacter playerCharacter = null;
+
+        switch(save.getCharacterClass()) {
+            case "Warrior" -> playerCharacter = new Warrior(Game.gamePanel);
+            case "Wizard" -> playerCharacter = new Wizard(Game.gamePanel);
+            case "Archer" -> playerCharacter = new Archer(Game.gamePanel);
+        }
+
+        return playerCharacter;
     }
 
     @FXML

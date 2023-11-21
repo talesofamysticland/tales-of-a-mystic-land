@@ -4,22 +4,20 @@ import java.io.IOException;
 import java.util.Stack;
 
 import org.talesof.talesofamysticland.game.Game;
-import org.talesof.talesofamysticland.game.main.GamePanel;
+import org.talesof.talesofamysticland.game.entity.PlayerCharacter;
 import org.talesof.talesofamysticland.injection.DependencyInjector;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import javafx.embed.swing.SwingNode;
 
 public class NavigationService {
 
     private Stack<Scene> history = new Stack<>();
     private Stage stage;
+    private int selectedSaveSlot;
 
     public NavigationService(Stage primaryStage) {
         this.stage = primaryStage;
@@ -36,6 +34,11 @@ public class NavigationService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void navigateToSave(int saveSlot) {
+        navigateTo("character-creation.fxml");
+        this.selectedSaveSlot = saveSlot;
     }
 
     public void navigateBack() {
@@ -63,11 +66,15 @@ public class NavigationService {
         }
     }
 
-    public void startGame() {
-        Game.start();
+    public void startGame(PlayerCharacter player) {
+        Game.start(player);
     }
 
     public void closeApplication() {
         stage.close();
+    }
+
+    public int getSelectedSaveSlot() {
+        return selectedSaveSlot;
     }
 }

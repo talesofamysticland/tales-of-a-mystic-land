@@ -23,8 +23,12 @@
 
             <TextField styleClass="txf-character-name" fx:id="txfCharacterName" promptText="Nome do personagem" />
 
+            <Label styleClass="form__error-label" text="Nome não pode ser vazio." fx:id="lblBlankCharacterName" 
+            visible="false" managed="false" />
+
             <HBox styleClass="classes-view">
                 <VBox 
+                    id="Warrior"
                     styleClass="classes-view__class-box-warrior"
                     onMouseClicked="#onClickSelectClass" 
                     fx:id="warriorBox"
@@ -51,6 +55,7 @@
                 </VBox>
 
                 <VBox 
+                    id="Wizard"
                     styleClass="classes-view__class-box-wizard" 
                     onMouseClicked="#onClickSelectClass" 
                     fx:id="wizardBox"
@@ -78,6 +83,7 @@
                 </VBox>
 
                 <VBox 
+                    id="Archer"
                     styleClass="classes-view__class-box-archer" 
                     onMouseClicked="#onClickSelectClass" 
                     fx:id="archerBox"
@@ -104,7 +110,10 @@
                 </VBox>
             </HBox>
 
-            <Button styleClass="options__continue-button-medium" text="Inicie sua jornada!" />
+            <Label styleClass="form__error-label" text="Escolha uma classe." fx:id="lblBlankCharacterClass" 
+            visible="false" managed="false" />
+
+            <Button styleClass="options__continue-button-medium" text="Inicie sua jornada!" onAction="#onActionBtnStartGame" />
         </VBox>
     </center>
 

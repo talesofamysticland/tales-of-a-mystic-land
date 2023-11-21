@@ -26,11 +26,8 @@ public class KeyHandler implements KeyListener {
         
         int code = e.getKeyCode();
 
-        // Title State
-        if(gp.gameState == gp.titleState) { titleState(code); }
-
         // Play State
-        else if(gp.gameState == gp.playState) { playState(code); }
+        if(gp.gameState == gp.playState) { playState(code); }
 
         // Pause State
         else if(gp.gameState == gp.pauseState) { pauseState(code); }
@@ -52,59 +49,6 @@ public class KeyHandler implements KeyListener {
 
         // Map State
         else if(gp.gameState == gp.mapState) { mapState(code); }
-    }
-
-    public void titleState(int code) {
-
-        if(gp.ui.titleScreenState == 0) {
-            if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
-                gp.ui.commandNum--;
-                if(gp.ui.commandNum < 0)
-                    gp.ui.commandNum = 2;
-            }
-
-            if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
-                gp.ui.commandNum++;
-                if(gp.ui.commandNum > 2)
-                    gp.ui.commandNum = 0;
-            }
-
-            if(code == KeyEvent.VK_ENTER) {
-                switch (gp.ui.commandNum) {
-                    case 0 -> gp.ui.titleScreenState = 1;
-                    case 1 -> {
-                        gp.saveLoad.load();
-                        gp.gameState = gp.playState;
-                        gp.playMusic(0);
-                    }
-                    case 2 -> System.exit(0);
-                }
-            }
-
-        } else if(gp.ui.titleScreenState == 1) {
-            if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
-                gp.ui.commandNum--;
-                if(gp.ui.commandNum < 0)
-                    gp.ui.commandNum = 3;
-            }
-
-            if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
-                gp.ui.commandNum++;
-                if(gp.ui.commandNum > 3)
-                    gp.ui.commandNum = 0;
-            }
-
-            if(code == KeyEvent.VK_ENTER) {
-                switch (gp.ui.commandNum) {
-                    case 0, 1, 2 -> {
-                        // do some class specific stuff
-                        gp.gameState = gp.playState;
-                        gp.playMusic(0);
-                    }
-                    case 3 -> gp.ui.titleScreenState = 0;
-                }
-            }
-        }
     }
 
     public void playState(int code) {
@@ -292,8 +236,7 @@ public class KeyHandler implements KeyListener {
                 gp.playMusic(0);
                 // Quit
             } else if(gp.ui.commandNum == 1) {
-                gp.gameState = gp.titleState;
-                gp.ui.titleScreenState = 0;
+                
                 gp.resetGame(true);
             }
         }

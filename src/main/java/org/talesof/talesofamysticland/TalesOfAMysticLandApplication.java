@@ -91,7 +91,9 @@ public class TalesOfAMysticLandApplication extends Application {
                 );
         }; 
 
-        Callback<Class<?>, Object> characterCreationControllerFactory = param -> new CharacterCreationController(navigationService);
+        Callback<Class<?>, Object> characterCreationControllerFactory = param -> {
+                return new CharacterCreationController(userService, navigationService, formErrorListeningService, saveDAO);
+        };
 
         Callback<Class<?>, Object> loginControllerFactory = param -> {
                 return new LoginController(userService, navigationService, formErrorListeningService, playerDAO);
