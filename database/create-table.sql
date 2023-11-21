@@ -4,7 +4,7 @@ USE talesof;
 
 CREATE TABLE IF NOT EXISTS Player(
 	id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30) NOT NULL,
+    username VARCHAR(30) NOT NULL,
     email VARCHAR(50) NOT NULL,
     password CHAR(60) NOT NULL,
     verified BOOLEAN NOT NULL,
