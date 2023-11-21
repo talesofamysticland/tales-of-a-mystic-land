@@ -60,7 +60,7 @@ public class TalesOfAMysticLandApplication extends Application {
     }
 
     private void setupDatabase() {
-        DatabaseManager.dropTables();
+        //DatabaseManager.dropTables();
         DatabaseManager.createTables();
         DatabaseManager.insertData();
     }

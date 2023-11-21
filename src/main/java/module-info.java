@@ -4,6 +4,7 @@ module org.talesof.talesofamysticland {
     requires transitive javafx.graphics;
     requires java.sql;
     requires java.mail;
+    requires java.desktop;
 
     opens org.talesof.talesofamysticland to javafx.fxml;
     opens org.talesof.talesofamysticland.controller to javafx.fxml;

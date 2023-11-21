@@ -1,5 +1,6 @@
 package org.talesof.talesofamysticland.controller;
 
+import org.talesof.talesofamysticland.game.main.Game;
 import org.talesof.talesofamysticland.service.NavigationService;
 
 import javafx.fxml.FXML;
@@ -47,7 +48,7 @@ public class SaveSelectionController {
 
     @FXML
     public void onClickBoxSelectSave1() {
-        navigationService.navigateTo("character-creation.fxml");
+        Game.start();
     }
 
     @FXML

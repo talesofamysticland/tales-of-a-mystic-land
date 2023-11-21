@@ -53,7 +53,7 @@ public class DatabaseManager {
             String[] sqls = sb.toString().split(";");
 
             for(String sql : sqls) {
-                stm.executeQuery(sql);
+                stm.execute(sql);
             }
 
         } catch (IOException e) {
