@@ -2,6 +2,7 @@ package org.talesof.talesofamysticland.controller;
 
 import java.sql.SQLException;
 
+import org.talesof.talesofamysticland.TalesOfAMysticLandApplication;
 import org.talesof.talesofamysticland.dao.SaveDAO;
 import org.talesof.talesofamysticland.game.Game;
 import org.talesof.talesofamysticland.game.entity.Archer;
@@ -83,6 +84,8 @@ public class CharacterCreationController {
 
         box.setStyle("-fx-border-width: 3px");
         selectedBox = box;
+        lblBlankCharacterClass.setVisible(false);
+        lblBlankCharacterClass.setManaged(false);
     }
 
     private void setHoverEffect(VBox box) {
@@ -101,12 +104,11 @@ public class CharacterCreationController {
 
     @FXML
     private void onActionBtnStartGame() {
+
         String characterName = txfCharacterName.getText().trim();
-        String characterClass = selectedBox.getId();
 
         if(characterName.isBlank()) {
-            lblBlankCharacterName.setVisible(true);
-            lblBlankCharacterName.setManaged(true);
+            formErrorListeningService.showErrors(lblBlankCharacterName, txfCharacterName);
             return;
         }
 
@@ -115,6 +117,10 @@ public class CharacterCreationController {
             lblBlankCharacterClass.setManaged(true);
             return;
         }
+        
+        String characterClass = selectedBox.getId();
+
+        System.out.println(TalesOfAMysticLandApplication.screenHeight);
 
         try {
 
@@ -130,15 +136,10 @@ public class CharacterCreationController {
             e.printStackTrace();
         }
 
-        PlayerCharacter player = null;
+        gameService.setCharacterName(characterName);
+        gameService.setCharacterClass(characterClass);
 
-        switch(characterClass) {
-            case "Warrior" -> player = new Warrior(Game.gamePanel);
-            case "Wizard" -> player = new Wizard(Game.gamePanel);
-            case "Archer" -> player = new Archer(Game.gamePanel);
-        }
-
-        navigationService.startGame(player, gameService);
+        navigationService.startGame(gameService);
     }
     
     @FXML

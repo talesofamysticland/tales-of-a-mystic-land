@@ -30,9 +30,11 @@ public abstract class PlayerCharacter extends Entity {
     attackLeft1, attackLeft2, attackLeft3, attackLeft4,
     attackRight1, attackRight2, attackRight3, attackRight4;
 
-    public PlayerCharacter(GamePanel gp) {
+    public PlayerCharacter(GamePanel gp, KeyHandler keyH) {
 
         super(gp);
+
+        this.keyH = keyH;
 
         type = typePlayer;
 

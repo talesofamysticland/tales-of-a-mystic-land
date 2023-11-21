@@ -21,10 +21,15 @@
     <center>
         <VBox styleClass="main-box"> 
 
-            <TextField styleClass="txf-character-name" fx:id="txfCharacterName" promptText="Nome do personagem" />
+            <VBox styleClass="character-name-errors" >
+                <TextField styleClass="txf-character-name" fx:id="txfCharacterName" promptText="Nome do personagem" />
 
-            <Label styleClass="form__error-label" text="Nome não pode ser vazio." fx:id="lblBlankCharacterName" 
-            visible="false" managed="false" />
+                <Label styleClass="form__error-label" text="Nome não pode ser vazio." fx:id="lblBlankCharacterName" 
+                visible="false" managed="false" />
+
+                <Label styleClass="form__error-label" text="Escolha uma classe." fx:id="lblBlankCharacterClass" 
+                visible="false" managed="false" />
+            </VBox>
 
             <HBox styleClass="classes-view">
                 <VBox 
@@ -109,9 +114,6 @@
                     <Label styleClass="class-box__attributes-archer" text="+ destreza e precisão" />
                 </VBox>
             </HBox>
-
-            <Label styleClass="form__error-label" text="Escolha uma classe." fx:id="lblBlankCharacterClass" 
-            visible="false" managed="false" />
 
             <Button styleClass="options__continue-button-medium" text="Inicie sua jornada!" onAction="#onActionBtnStartGame" />
         </VBox>

@@ -98,7 +98,7 @@
 
 .main-box {
     -fx-alignment: center;
-    -fx-spacing: 40px;
+    -fx-spacing: 30px;
 }
 
 /* TITLE SCREEN */
@@ -226,12 +226,16 @@
     -fx-font-size: 20px;
 }
 
+.character-name-errors {
+    -fx-alignment: center;
+    -fx-spacing: 12px;
+}
+
 .classes-view {
     -fx-font-family: 'Minecraft';
     -fx-font-size: 16px;
     -fx-spacing: 60px;
     -fx-alignment: center;
-    -fx-pref-height: 400px;
 }
 
 .classes-view__class-box-warrior,
@@ -240,6 +244,7 @@
     -fx-spacing: 18px;
     -fx-alignment: center;
     -fx-pref-width: 350px;
+    -fx-pref-height: 360px;
     -fx-padding: 20px;
     -fx-border-width: 0px;
 }

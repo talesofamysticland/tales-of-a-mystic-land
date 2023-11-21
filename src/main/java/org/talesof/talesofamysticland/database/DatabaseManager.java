@@ -10,13 +10,16 @@ import java.sql.Statement;
 
 public class DatabaseManager {
     
+    private static final String URL = "jdbc:mysql://localhost/talesof?useSSL=true";
+    private static final String USER = "root";
+    private static final String PASSWORD = "mateus";
+
     public static Connection getConnection() {
-        // String url = "jdbc:mysql://localhost/estudante1?user=estudante1&password=estudante1&useSSL=true";
-        String url = "jdbc:mysql://localhost/talesof?user=root&password=mateus&useSSL=true";
         try {
-            return DriverManager.getConnection(url);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            return DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Erro ao obter a conexão: " + e.getMessage());
             return null;
         }
     }

@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import org.talesof.talesofamysticland.game.entity.PlayerCharacter;
 import org.talesof.talesofamysticland.game.main.GamePanel;
+import org.talesof.talesofamysticland.model.Player;
 import org.talesof.talesofamysticland.service.GameService;
 
 public class Game {
@@ -14,7 +15,7 @@ public class Game {
 
     public static GamePanel gamePanel;
 
-    public static void start(PlayerCharacter player, GameService gameService) {
+    public static void start(GameService gameService) {
         
         window = new JFrame();
 
@@ -22,7 +23,7 @@ public class Game {
         window.setResizable(false);
         window.setTitle("Tales of a Mystic Land");
 
-        gamePanel = new GamePanel(player, gameService);
+        gamePanel = new GamePanel(gameService);
         window.add(gamePanel);
 
         gamePanel.config.loadConfig();

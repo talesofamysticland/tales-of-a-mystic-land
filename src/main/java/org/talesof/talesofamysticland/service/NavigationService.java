@@ -60,8 +60,8 @@ public class NavigationService {
         }
     }
 
-    public void startGame(PlayerCharacter player, GameService gameService) {
-        Game.start(player, gameService);
+    public void startGame(GameService gameService) {
+        Game.start(gameService);
     }
 
     public void closeApplication() {

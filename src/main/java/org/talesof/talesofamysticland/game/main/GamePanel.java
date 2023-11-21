@@ -96,9 +96,15 @@ public class GamePanel extends JPanel implements Runnable {
     public final int indoor = 51;
     public final int dungeon = 52;
 
-    public GamePanel(PlayerCharacter player, GameService gameService) {
-        player.setKeyHandler(keyH);
+    public GamePanel(GameService gameService) {
+
         this.gameService = gameService;
+
+        switch(gameService.getCharacterClass()) {
+            case "Warrior" -> player = new Warrior(this, keyH);
+            case "Wizard" -> player = new Wizard(this, keyH);
+            case "Archer" -> player = new Archer(this, keyH);
+        }
 
         this.setPreferredSize(new DimensionUIResource(screenWidth, screenHeight));
         this.setBackground(Color.black);

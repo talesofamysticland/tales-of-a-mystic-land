@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS talesof;
+
 USE talesof;
 
 DROP TABLE IF EXISTS Item_in_inventory;

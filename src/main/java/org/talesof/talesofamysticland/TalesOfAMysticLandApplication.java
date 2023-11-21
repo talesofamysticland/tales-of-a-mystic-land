@@ -35,7 +35,7 @@ public class TalesOfAMysticLandApplication extends Application {
 
     public final static int tileSize = originalTileSize * scale;
     public final static int maxScreenCol = 16; 
-    public final static int maxScreenRow = 10; 
+    public final static int maxScreenRow = 9; 
     public final static int screenWidth = tileSize * maxScreenCol;  
     public final static int screenHeight = tileSize * maxScreenRow;
 
@@ -65,7 +65,7 @@ public class TalesOfAMysticLandApplication extends Application {
         //DatabaseManager.dropTables();
         DatabaseManager.createTables();
         DatabaseManager.createViews();
-        DatabaseManager.insertData();
+        // DatabaseManager.insertData();
     }
 
     private void setUpDependencyInjector() {

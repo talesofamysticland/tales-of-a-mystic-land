@@ -8,8 +8,8 @@ import org.talesof.talesofamysticland.game.object.OBJ_SwordNormal;
 
 public class Warrior extends PlayerCharacter {
 
-    public Warrior(GamePanel gp) {
-        super(gp);
+    public Warrior(GamePanel gp, KeyHandler keyH) {
+        super(gp, keyH);
 
         currentWeapon = new OBJ_SwordNormal(gp);
         currentShield = new OBJ_ShieldWood(gp);
@@ -21,25 +21,25 @@ public class Warrior extends PlayerCharacter {
 
     @Override
     public void getImage() {
-        up1 = setup("/player/warrior/boy_up_1");
-        up2 = setup("/player/warrior/boy_up_2");
-        up3 = setup("/player/warrior/boy_up_2");
-        up4 = setup("/player/warrior/boy_up_2");
-        up5 = setup("/player/warrior/boy_up_2");
-        
-        down1 = setup("/player/warrior/boy_up_2");
-        down2 = setup("/player/warrior/boy_up_2");
-        down3 = setup("/player/warrior/boy_up_2");
-        down4 = setup("/player/warrior/boy_up_2");
-        down5 = setup("/player/warrior/boy_up_2");
+        up1 = setup("/player/warrior/warrior_up_1");
+        up2 = setup("/player/warrior/warrior_up_2");
+        up3 = setup("/player/warrior/warrior_up_3");
+        up4 = setup("/player/warrior/warrior_up_4");
+        up5 = setup("/player/warrior/warrior_up_5");
 
-        left1 = setup("/player/warrior/boy_up_2");
-        left2 = setup("/player/warrior/boy_up_2");
-        left3 = setup("/player/warrior/boy_up_2");
+        down1 = setup("/player/warrior/warrior_down_1");
+        down2 = setup("/player/warrior/warrior_down_2");
+        down3 = setup("/player/warrior/warrior_down_3");
+        down4 = setup("/player/warrior/warrior_down_4");
+        down5 = setup("/player/warrior/warrior_down_5");
 
-        right1 = setup("/player/warrior/boy_up_2");
-        right2 = setup("/player/warrior/boy_up_2");
-        right3 = setup("/player/warrior/boy_up_2");
+        left1 = setup("/player/warrior/warrior_left_1");
+        left2 = setup("/player/warrior/warrior_left_2");
+        left3 = setup("/player/warrior/warrior_left_3");
+
+        right1 = setup("/player/warrior/warrior_right_1");
+        right2 = setup("/player/warrior/warrior_right_2");
+        right3 = setup("/player/warrior/warrior_right_3");
     }
 
     @Override

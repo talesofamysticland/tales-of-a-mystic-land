@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS talesof;
+
 USE talesof;
 
 CREATE OR REPLACE VIEW saves_list AS 
