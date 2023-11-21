@@ -40,16 +40,16 @@ public class NPC_OldMan extends Entity {
     }
 
     public void setDialogue() {
-        dialogues[0][0] = "Hello, lad.";
-        dialogues[0][1] = "So you've come to this island to find \nthe treasure?";
-        dialogues[0][2] = "I used to be a great wizard but now...\nI'm a bit too old for taking an adventure.";
-        dialogues[0][3] = "Well, good luck on you.";
+        dialogues[0][0] = "Olá, jovem.";
+        dialogues[0][1] = "Então você veio até esta ilha pra procurar \nO Tesouro?";
+        dialogues[0][2] = "Antigamente, eu era um grandioso bruxo, mas agora...\nEstou um pouco velho para aventuras.";
+        dialogues[0][3] = "Bom, que a sorte lhe acompanhe.";
 
-        dialogues[1][0] = "If you become tired, rest at the water.";
-        dialogues[1][1] = "However, the monsters reappear if you rest\nI don't know why, but that's how it works.";
-        dialogues[1][2] = "In any case, don't push yourself too hard.";
+        dialogues[1][0] = "Se você ficar cansado, descanse na agua.";
+        dialogues[1][1] = "Porém, os monstros vão reaparecer se você descansar\nEu não sei por quê, mas é assim que funciona.";
+        dialogues[1][2] = "Em todos os casos, não se esforce demais.";
 
-        dialogues[2][0] = "I wonder how to open that door...";
+        dialogues[2][0] = "Eu me pergunto como abrir esta porta...";
     }
 
     public void setAction() {

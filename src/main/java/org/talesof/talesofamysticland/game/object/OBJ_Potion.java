@@ -5,7 +5,7 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class OBJ_Potion extends Entity {
 
-    public final static String OBJ_NAME = "Potion";
+    public final static String OBJ_NAME = "Poção";
     int heal;
 
     public OBJ_Potion(GamePanel gp) {
@@ -15,7 +15,7 @@ public class OBJ_Potion extends Entity {
 
         name = OBJ_NAME;
         heal = 5;
-        description = "[" + name + "]\nHeals your life by " + heal + ".";
+        description = "[" + name + "]\nCura sua vida em " + heal + ".";
         down1 = setup("/objects/potion_red");
         stackable = true;
 
@@ -25,10 +25,10 @@ public class OBJ_Potion extends Entity {
     }
 
     public void setDialogue() {
-        dialogues[0][0] = "You drink the " + name + "!\n" +
-                "Your life has been recovered by " + heal + ".";
+        dialogues[0][0] = "Você bebeu a " + name + "!\n" +
+                "Sua vida foi curada em " + heal + ".";
 
-        dialogues[1][0] = "Your life is full!";
+        dialogues[1][0] = "Sua vida esta cheia!";
     }
 
     public boolean use(Entity entity) {

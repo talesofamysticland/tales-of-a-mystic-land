@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class OBJ_Rock extends Projectile {
 
-    public final static String OBJ_NAME = "Rock";
+    public final static String OBJ_NAME = "Pedra";
 
     public OBJ_Rock(GamePanel gp) {
         super(gp);

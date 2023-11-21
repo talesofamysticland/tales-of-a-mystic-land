@@ -351,7 +351,9 @@ public class UI {
         g2.drawImage(gp.player.currentWeapon.down1, tailX - gp.tileSize, textY - 24, null);
         textY += gp.tileSize;
 
-        g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY - 24, null);
+        if(gp.player.currentShield != null) {
+            g2.drawImage(gp.player.currentShield.down1, tailX - gp.tileSize, textY - 24, null);
+        }
     }
 
     public void drawInventory(Entity entity, boolean cursor) {

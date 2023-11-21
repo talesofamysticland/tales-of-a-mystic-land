@@ -10,8 +10,11 @@ import javax.swing.plaf.DimensionUIResource;
 import org.talesof.talesofamysticland.game.Game;
 import org.talesof.talesofamysticland.game.AI.PathFinder;
 import org.talesof.talesofamysticland.game.data.SaveLoad;
+import org.talesof.talesofamysticland.game.entity.Archer;
 import org.talesof.talesofamysticland.game.entity.Entity;
 import org.talesof.talesofamysticland.game.entity.PlayerCharacter;
+import org.talesof.talesofamysticland.game.entity.Warrior;
+import org.talesof.talesofamysticland.game.entity.Wizard;
 import org.talesof.talesofamysticland.game.environment.EnvironmentManager;
 import org.talesof.talesofamysticland.game.tile.TileManager;
 import org.talesof.talesofamysticland.game.tile.WorldMap;
@@ -100,12 +103,6 @@ public class GamePanel extends JPanel implements Runnable {
 
         this.gameService = gameService;
 
-        switch(gameService.getCharacterClass()) {
-            case "Warrior" -> player = new Warrior(this, keyH);
-            case "Wizard" -> player = new Wizard(this, keyH);
-            case "Archer" -> player = new Archer(this, keyH);
-        }
-
         this.setPreferredSize(new DimensionUIResource(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
@@ -114,6 +111,12 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame () {
+        switch(gameService.getCharacterClass()) {
+            case "Warrior" -> player = new Warrior(gameService.getCharacterName(), this, keyH);
+            case "Wizard" -> player = new Wizard(gameService.getCharacterName(), this, keyH);
+            case "Archer" -> player = new Archer(gameService.getCharacterName(), this, keyH);
+        }
+
         aSetter.setObject();
         aSetter.setNPC();
         aSetter.setMonster();

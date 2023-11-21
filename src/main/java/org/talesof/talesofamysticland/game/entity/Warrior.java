@@ -1,6 +1,7 @@
 package org.talesof.talesofamysticland.game.entity;
 
 import org.talesof.talesofamysticland.game.main.GamePanel;
+import org.talesof.talesofamysticland.game.main.KeyHandler;
 import org.talesof.talesofamysticland.game.object.OBJ_Axe;
 import org.talesof.talesofamysticland.game.object.OBJ_Key;
 import org.talesof.talesofamysticland.game.object.OBJ_ShieldWood;
@@ -8,8 +9,8 @@ import org.talesof.talesofamysticland.game.object.OBJ_SwordNormal;
 
 public class Warrior extends PlayerCharacter {
 
-    public Warrior(GamePanel gp, KeyHandler keyH) {
-        super(gp, keyH);
+    public Warrior(String name, GamePanel gp, KeyHandler keyH) {
+        super(name, gp, keyH);
 
         currentWeapon = new OBJ_SwordNormal(gp);
         currentShield = new OBJ_ShieldWood(gp);

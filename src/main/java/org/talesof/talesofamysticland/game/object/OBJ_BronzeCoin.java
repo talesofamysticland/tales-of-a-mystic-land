@@ -5,7 +5,7 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class OBJ_BronzeCoin extends Entity {
 
-    public final static String OBJ_NAME = "Bronze Coin";
+    public final static String OBJ_NAME = "Moeda de Bronze";
     int value;
 
     public OBJ_BronzeCoin(GamePanel gp) {

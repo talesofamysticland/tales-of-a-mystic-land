@@ -5,7 +5,7 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class OBJ_Boots extends Entity {
 
-    public final static String OBJ_NAME = "Boots";
+    public final static String OBJ_NAME = "Botas";
 
     public OBJ_Boots(GamePanel gp) {
         super(gp);

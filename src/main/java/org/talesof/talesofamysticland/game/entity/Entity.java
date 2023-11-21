@@ -31,6 +31,8 @@ public class Entity {
     public int worldX, worldY;
     public String direction = "down";
     public int spriteNum = 1;
+    public int spriteNumVertical = 1;
+    public int spriteNumHorizontal = 1;
     public int dialogueSet = 0;
     public int dialogueIndex = 0;
     public boolean collisionOn = false;
@@ -68,10 +70,17 @@ public class Entity {
     public int mana;
     public int ammo;
     public int level;
+
     public int strength;
+    public int resistance;
+    public int constitution;
     public int dexterity;
-    public int attack;
-    public int defense;
+    public int wisdom;
+
+    public double attack;
+    public double magic;
+    public double defense;
+
     public int exp;
     public int nextLevelExp;
     public int coin;
@@ -85,8 +94,8 @@ public class Entity {
     // Item attributes
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
-    public int attackValue;
-    public int defenseValue;
+    public double attackValue;
+    public double defenseValue;
     public String description = "";
     public int useCost;
     public int price;
@@ -109,6 +118,7 @@ public class Entity {
     public final int typePickup = 8;
     public final int typeObstacle = 9;
     public final int typeLight = 10;
+    public final int typeStaff = 11;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -315,10 +325,10 @@ public class Entity {
         return oppositeDirection;
     }
 
-    public void damagePlayer(int attack) {
+    public void damagePlayer(double attack) {
         if(!gp.player.invincible) {
 
-            int damage = attack - gp.player.defense;
+            double damage = attack - gp.player.defense;
 
             // Get an opposite direction
             String canGuardDirection = getOppositeDirection(direction);
@@ -566,6 +576,8 @@ public class Entity {
             if(i == 0) {
                 attacking = true;
                 spriteNum = 1;
+                spriteNumHorizontal = 1;
+                spriteNumVertical = 1;
                 spriteCounter = 0;
                 shotAvailableCounter = 0;
             }
@@ -577,10 +589,14 @@ public class Entity {
 
         if(spriteCounter <= motion1Duration) {
             spriteNum = 1;
+            spriteNumHorizontal = 1;
+            spriteNumVertical = 1;
         }
 
         if(spriteCounter > motion1Duration && spriteCounter <= motion2Duration) {
             spriteNum = 2;
+            spriteNumHorizontal = 4;
+            spriteNumVertical = 3;
 
             // Save the current data
             int currentWorldX = worldX;
@@ -616,7 +632,9 @@ public class Entity {
                 gp.player.damageInteractiveTile(iTileIndex);
 
                 int projectileIndex = gp.cChecker.checkEntity(this, gp.projectile);
-                gp.player.damageProjectile(projectileIndex);
+                if(projectile.user != gp.player) {
+                    gp.player.damageProjectile(projectileIndex);
+                }
             }
 
             // Restore the original data
@@ -628,6 +646,8 @@ public class Entity {
 
         if(spriteCounter > motion2Duration) {
             spriteNum = 1;
+            spriteNumHorizontal = 1;
+            spriteNumVertical = 1;
             spriteCounter = 0;
             attacking = false;
         }

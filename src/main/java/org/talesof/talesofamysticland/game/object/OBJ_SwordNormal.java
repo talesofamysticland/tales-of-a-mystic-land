@@ -5,7 +5,7 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class OBJ_SwordNormal extends Entity {
 
-    public final static String OBJ_NAME = "Normal Sword";
+    public final static String OBJ_NAME = "Espada Comum";
 
     public OBJ_SwordNormal(GamePanel gp) {
         super(gp);
@@ -13,7 +13,7 @@ public class OBJ_SwordNormal extends Entity {
         type = typeSword;
 
         name = OBJ_NAME;
-        description = "[" + name + "]\nAn old sword.";
+        description = "[" + name + "]\nUma velha espada.";
 
         down1 = setup("/objects/sword_normal");
 

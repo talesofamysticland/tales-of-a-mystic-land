@@ -5,7 +5,7 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class OBJ_ShieldWood extends Entity {
 
-    public final static String OBJ_NAME = "Wood Shield";
+    public final static String OBJ_NAME = "Escudo de Madeira";
 
     public OBJ_ShieldWood(GamePanel gp) {
         super(gp);
@@ -13,7 +13,7 @@ public class OBJ_ShieldWood extends Entity {
         type = typeShield;
 
         name = OBJ_NAME;
-        description = "[" + name + "]\nMade by wood.";
+        description = "[" + name + "]\nFeito de madeira.";
         down1 = setup("/objects/shield_wood");
 
         defenseValue = 1;

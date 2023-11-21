@@ -15,9 +15,6 @@ public abstract class PlayerCharacter extends Entity {
     public boolean attackCanceled = false;
     public boolean lightUpdated = false;
 
-    public int spriteNumVertical = 1;
-    public int spriteNumHorizontal = 1;
-
     public BufferedImage 
     up1, up2, up3, up4, up5,
     down1, down2, down3, down4, down5,
@@ -30,10 +27,11 @@ public abstract class PlayerCharacter extends Entity {
     attackLeft1, attackLeft2, attackLeft3, attackLeft4,
     attackRight1, attackRight2, attackRight3, attackRight4;
 
-    public PlayerCharacter(GamePanel gp, KeyHandler keyH) {
+    public PlayerCharacter(String name, GamePanel gp, KeyHandler keyH) {
 
         super(gp);
 
+        this.name = name;
         this.keyH = keyH;
 
         type = typePlayer;
@@ -66,19 +64,15 @@ public abstract class PlayerCharacter extends Entity {
     public void setDefaultValues() {
 
         setDefaultPositions();
-        defaultSpeed = 4;
-        speed = defaultSpeed;
 
         // Player Status
         level = 1;
 
-        maxLife = 6;
-        life = maxLife;
-        maxMana = 4;
-        mana = maxMana;
+        defaultSpeed = 2;
 
-        strength = 1;
-        dexterity = 1;
+        maxLife = 6;
+        maxMana = 4;
+
         exp = 0;
         nextLevelExp = 5;
         coin = 500;
@@ -87,7 +81,6 @@ public abstract class PlayerCharacter extends Entity {
 
         getImage();
         getAttackImage();
-        setItems();
         setDialogue();
     }
 
@@ -103,15 +96,37 @@ public abstract class PlayerCharacter extends Entity {
                 + "Você se sente mais forte!";
     }
 
-    public int getAttack() {
+    public double getAttack() {
         attackArea = currentWeapon.attackArea;
         motion1Duration = currentWeapon.motion1Duration;
         motion2Duration = currentWeapon.motion2Duration;
-        return strength * currentWeapon.attackValue;
+        return strength + (0.75 * currentWeapon.attackValue);
     }
 
-    public int getDefense() {
-        return dexterity * currentShield.defenseValue;
+    public double getMagic() {
+        if(projectile == null) {
+            return wisdom;
+        }
+        return wisdom + (0.75 * projectile.attackValue);
+    }
+
+    public double getDefense() {
+        if(currentShield == null) {
+            return resistance;
+        }
+        return resistance + (0.75 * currentShield.defenseValue);
+    }
+
+    public int getSpeed() {
+        return defaultSpeed + dexterity;
+    }
+
+    public int getHealth() {
+        return (int) (maxLife + (0.75 * constitution));
+    }
+
+    public int getMana() {
+        return (int) (maxMana + (0.75 * wisdom));
     }
 
     public int getCurrentWeaponSlot() {
@@ -155,12 +170,20 @@ public abstract class PlayerCharacter extends Entity {
     public void getSleepingImage(BufferedImage image) {
         up1 = image;
         up2 = image;
+        up3 = image;
+        up4 = image;
+        up5 = image;
         down1 = image;
         down2 = image;
+        down3 = image;
+        down4 = image;
+        down5 = image;
         left1 = image;
         left2 = image;
+        left3 = image;
         right1 = image;
         right2 = image;
+        right3 = image;
     }
 
     public void update() {
@@ -195,7 +218,7 @@ public abstract class PlayerCharacter extends Entity {
                 speed = defaultSpeed;
             }
         }
-        else if (attacking) {
+        else if(attacking) {
             attacking();
         }
         else if(keyH.spacePressed) {
@@ -296,6 +319,8 @@ public abstract class PlayerCharacter extends Entity {
             standCounter++;
             if(standCounter == 40) {
                 spriteNum = 1;
+                spriteNumHorizontal = 1;
+                spriteNumVertical = 3;
                 standCounter = 0;
             }
             guarding = false;
@@ -320,6 +345,7 @@ public abstract class PlayerCharacter extends Entity {
 
             shotAvailableCounter = 0;
 
+            gp.player.attacking = true;
             gp.playSoundEffect(10);
         }
 
@@ -418,7 +444,7 @@ public abstract class PlayerCharacter extends Entity {
             if(!invincible && !gp.monster[gp.currentMap][i].dying) {
                 gp.playSoundEffect(6);
 
-                int damage = gp.monster[gp.currentMap][i].attack - defense;
+                double damage = gp.monster[gp.currentMap][i].attack - defense;
                 if(damage < 1) {
                     damage = 1;
                 }
@@ -430,7 +456,7 @@ public abstract class PlayerCharacter extends Entity {
         }
     }
 
-    public void damageMonster(int i, Entity attacker, int attack, int knockBackPower) {
+    public void damageMonster(int i, Entity attacker, double attack, int knockBackPower) {
 
         if(i != 999) {
 
@@ -445,7 +471,7 @@ public abstract class PlayerCharacter extends Entity {
                     attack *= 5;
                 }
 
-                int damage = attack - gp.monster[gp.currentMap][i].defense;
+                double damage = attack - gp.monster[gp.currentMap][i].defense;
                 if(damage < 0) {
                     damage = 0;
                 }
@@ -502,11 +528,14 @@ public abstract class PlayerCharacter extends Entity {
 
             level++;
             nextLevelExp *= 2;
-            maxLife += 2;
-            strength++;
-            dexterity++;
+            maxLife += 1;
+
             attack = getAttack();
             defense = getDefense();
+            magic = getMagic();
+            defaultSpeed = getSpeed();
+            maxMana = getMana();
+            maxLife = getHealth();
 
             gp.playSoundEffect(8);
             gp.gameState = gp.dialogueState;
@@ -623,6 +652,8 @@ public abstract class PlayerCharacter extends Entity {
                     if (spriteNumVertical == 1) image = attackUp1;
                     if (spriteNumVertical == 2) image = attackUp2;
                     if (spriteNumVertical == 3) image = attackUp3;
+                    if (spriteNumVertical == 4) image = attackUp3;
+                    if (spriteNumVertical == 5) image = attackUp3;
                 }
             }
             case "down" -> {
@@ -634,10 +665,11 @@ public abstract class PlayerCharacter extends Entity {
                     if (spriteNumVertical == 5) image = down5;
                 }
                 if(attacking) {
-                    tempScreenY = screenY - gp.tileSize;
                     if (spriteNumVertical == 1) image = attackDown1;
                     if (spriteNumVertical == 2) image = attackDown2;
                     if (spriteNumVertical == 3) image = attackDown3;
+                    if (spriteNumVertical == 4) image = attackDown3;
+                    if (spriteNumVertical == 5) image = attackDown3;
                 }
             }
             case "left" -> {
@@ -645,9 +677,10 @@ public abstract class PlayerCharacter extends Entity {
                     if (spriteNumHorizontal == 1) image = left1;
                     if (spriteNumHorizontal == 2) image = left2;
                     if (spriteNumHorizontal == 3) image = left3;
+                    if (spriteNumHorizontal == 4) image = left3;
                 }
                 if(attacking) {
-                    tempScreenY = screenY - gp.tileSize;
+                    tempScreenX = screenX - gp.tileSize;
                     if (spriteNumHorizontal == 1) image = attackLeft1;
                     if (spriteNumHorizontal == 2) image = attackLeft2;
                     if (spriteNumHorizontal == 3) image = attackLeft3;
@@ -659,9 +692,9 @@ public abstract class PlayerCharacter extends Entity {
                     if (spriteNumHorizontal == 1) image = right1;
                     if (spriteNumHorizontal == 2) image = right2;
                     if (spriteNumHorizontal == 3) image = right3;
+                    if (spriteNumHorizontal == 4) image = right3;
                 }
                 if(attacking) {
-                    tempScreenY = screenY - gp.tileSize;
                     if (spriteNumHorizontal == 1) image = attackRight1;
                     if (spriteNumHorizontal == 2) image = attackRight2;
                     if (spriteNumHorizontal == 3) image = attackRight3;

@@ -5,7 +5,7 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class OBJ_Heart extends Entity {
 
-    public final static String OBJ_NAME = "Heart";
+    public final static String OBJ_NAME = "Coração";
     int heal;
 
     public OBJ_Heart(GamePanel gp) {

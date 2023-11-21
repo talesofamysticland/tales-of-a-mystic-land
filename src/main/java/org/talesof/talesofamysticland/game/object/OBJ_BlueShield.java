@@ -5,7 +5,7 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class OBJ_BlueShield extends Entity {
 
-    public final static String OBJ_NAME = "Blue Shield";
+    public final static String OBJ_NAME = "Escudo Azul";
 
     public OBJ_BlueShield(GamePanel gp) {
         super(gp);
@@ -13,7 +13,7 @@ public class OBJ_BlueShield extends Entity {
         type = typeShield;
 
         name = OBJ_NAME;
-        description = "[" + name + "]\nA shiny blue shield.\nVery blue.";
+        description = "[" + name + "]\nUm brilhante Escudo Azul.\nBem azul mesmo.";
         down1 = setup("/objects/shield_blue");
 
         defenseValue = 2;

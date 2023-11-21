@@ -5,13 +5,13 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class OBJ_Key extends Entity {
 
-    public final static String OBJ_NAME = "Key";
+    public final static String OBJ_NAME = "Chave";
 
     public OBJ_Key(GamePanel gp) {
         super(gp);
 
         name = OBJ_NAME;
-        description = "[" + name + "]\nIt opens a door.";
+        description = "[" + name + "]\nIsso abre uma porta.";
         down1 = setup("/objects/key");
         type = typeConsumable;
         stackable = true;
@@ -22,9 +22,9 @@ public class OBJ_Key extends Entity {
     }
 
     public void setDialogue() {
-        dialogues[0][0] = "You used the " + name + " to open the door";
+        dialogues[0][0] = "Você usou a " + name + " para abrir a porta";
 
-        dialogues[1][0] = "It is not time for that.";
+        dialogues[1][0] = "Não é o momento para isso.";
     }
 
     @Override
@@ -32,7 +32,7 @@ public class OBJ_Key extends Entity {
 
         gp.gameState = gp.dialogueState;
 
-        int objIndex = getDetected(entity, gp.obj, "Door");
+        int objIndex = getDetected(entity, gp.obj, "Porta");
 
         if(objIndex != 999) {
             startDialogue(this, 0);

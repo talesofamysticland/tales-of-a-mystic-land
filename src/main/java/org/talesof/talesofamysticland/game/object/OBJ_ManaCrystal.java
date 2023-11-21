@@ -5,7 +5,7 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class OBJ_ManaCrystal extends Entity {
 
-    public final static String OBJ_NAME = "Mana Crystal";
+    public final static String OBJ_NAME = "Cristal de Mana";
     int mana;
 
     public OBJ_ManaCrystal(GamePanel gp) {

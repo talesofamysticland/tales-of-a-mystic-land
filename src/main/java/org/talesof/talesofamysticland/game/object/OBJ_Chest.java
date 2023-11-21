@@ -5,7 +5,7 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class OBJ_Chest extends Entity {
 
-    public final static String OBJ_NAME = "Chest";
+    public final static String OBJ_NAME = "Baú";
 
     public OBJ_Chest(GamePanel gp) {
         super(gp);
@@ -34,11 +34,11 @@ public class OBJ_Chest extends Entity {
 
     public void setDialogue() {
 
-        dialogues[0][0] = "You opened the chest and found a " + loot.name + "!\n" +
-                "...But you cannot carry more items";
-        dialogues[1][0] = "You opened the chest and found a " + loot.name + "!\n" +
-                "You got a " + loot.name + "!";
-        dialogues[2][0] = "It's empty.";
+        dialogues[0][0] = "Você abriu um baú e encontrou " + loot.name + "!\n" +
+                "...Mas sua mochila ja esta cheia";
+        dialogues[1][0] = "Você abriu um baú e encontrou " + loot.name + "!\n" +
+                "Você pegou um " + loot.name + "!";
+        dialogues[2][0] = "Estava vazio.";
 
     }
 

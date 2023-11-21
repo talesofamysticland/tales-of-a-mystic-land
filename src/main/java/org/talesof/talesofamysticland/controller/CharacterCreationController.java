@@ -4,11 +4,6 @@ import java.sql.SQLException;
 
 import org.talesof.talesofamysticland.TalesOfAMysticLandApplication;
 import org.talesof.talesofamysticland.dao.SaveDAO;
-import org.talesof.talesofamysticland.game.Game;
-import org.talesof.talesofamysticland.game.entity.Archer;
-import org.talesof.talesofamysticland.game.entity.PlayerCharacter;
-import org.talesof.talesofamysticland.game.entity.Warrior;
-import org.talesof.talesofamysticland.game.entity.Wizard;
 import org.talesof.talesofamysticland.model.Save;
 import org.talesof.talesofamysticland.service.FormErrorListeningService;
 import org.talesof.talesofamysticland.service.GameService;

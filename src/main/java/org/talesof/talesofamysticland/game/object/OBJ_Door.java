@@ -5,7 +5,7 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class OBJ_Door extends Entity {
 
-    public final static String OBJ_NAME = "Door";
+    public final static String OBJ_NAME = "Porta";
 
     public OBJ_Door(GamePanel gp) {
         super(gp);
@@ -27,7 +27,7 @@ public class OBJ_Door extends Entity {
     }
 
     public void setDialogue() {
-        dialogues[0][0] = "You need a key to open this!";
+        dialogues[0][0] = "Você precisa de uma chave para abrir isso!";
     }
 
     @Override

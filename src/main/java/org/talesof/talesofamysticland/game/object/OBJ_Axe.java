@@ -5,7 +5,7 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class OBJ_Axe extends Entity {
 
-    public final static String OBJ_NAME = "Woodcutter's Axe";
+    public final static String OBJ_NAME = "Machado de Lenhador";
 
     public OBJ_Axe(GamePanel gp) {
         super(gp);
@@ -13,7 +13,7 @@ public class OBJ_Axe extends Entity {
         type = typeAxe;
 
         name = OBJ_NAME;
-        description = "[" + name + "]\nProbably from Canada.\nCan cut some trees.";
+        description = "[" + name + "]\nProvavelmente do Canada.\nPode cortar varias árvores.";
         down1 = setup("/objects/axe");
 
         attackValue = 2;
