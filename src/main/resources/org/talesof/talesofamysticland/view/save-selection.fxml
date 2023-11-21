@@ -21,17 +21,25 @@
  
     <center>
         <VBox styleClass="main-box">
+
+            <!-- SAVE SLOT 1 -->
+
             <HBox styleClass="save__outerbox">
                 <HBox styleClass="save__innerbox" onMouseClicked="#onClickBoxSelectSave1">
-                    <ImageView 
-                        styleClass="wizard-icon" 
-                        fitWidth="70"
-                        preserveRatio="true"
-                    />
 
-                    <Label styleClass="save__label" text="Nome" fx:id="lblCharacterName1" />
-                    <Label styleClass="save__label" text="0:51" fx:id="lblPlayTime1" />
-                    <Label styleClass="save__label" text="21/05/2023" fx:id="lblLastSaved1" />
+                    <HBox styleClass="save__save-state-box" fx:id="boxLastSaveState1" visible="false" managed="false">
+                        <ImageView 
+                            fitWidth="70"
+                            preserveRatio="true"
+                            fx:id="imgCharacter1"
+                        />
+
+                        <Label styleClass="save__label" fx:id="lblCharacterName1" />
+                        <Label styleClass="save__label" fx:id="lblPlayTime1" />
+                        <Label styleClass="save__label" fx:id="lblLastSaved1" />
+                    </HBox>
+
+                    <Label styleClass="save__new-save-label" text="Iniciar uma nova jornada" fx:id="lblNewSave1" />
                 </HBox>
 
                 <ImageView 
@@ -41,18 +49,25 @@
                     onMouseClicked="#onClickImgDeleteSave"
                 />
             </HBox>
+
+            <!-- SAVE SLOT 2 -->
 
             <HBox styleClass="save__outerbox">
                 <HBox styleClass="save__innerbox" onMouseClicked="#onClickBoxSelectSave2">
-                    <ImageView 
-                        styleClass="wizard-icon" 
-                        fitWidth="70"
-                        preserveRatio="true"
-                    />
 
-                    <Label styleClass="save__label" text="Nome" fx:id="lblCharacterName2" />
-                    <Label styleClass="save__label" text="0:51" fx:id="lblPlayTime2" />
-                    <Label styleClass="save__label" text="21/05/2023" fx:id="lblLastSaved2" />
+                    <HBox styleClass="save__save-state-box" fx:id="boxLastSaveState2" visible="false" managed="false">
+                        <ImageView 
+                            fitWidth="70"
+                            preserveRatio="true"
+                            fx:id="imgCharacter2"
+                        />
+
+                        <Label styleClass="save__label" fx:id="lblCharacterName2" />
+                        <Label styleClass="save__label" fx:id="lblPlayTime2" />
+                        <Label styleClass="save__label" fx:id="lblLastSaved2" />
+                    </HBox>
+
+                    <Label styleClass="save__new-save-label" text="Iniciar uma nova jornada" fx:id="lblNewSave2" />
                 </HBox>
 
                 <ImageView 
@@ -63,17 +78,24 @@
                 />
             </HBox>
 
+            <!-- SAVE SLOT 3 -->
+
             <HBox styleClass="save__outerbox">
                 <HBox styleClass="save__innerbox" onMouseClicked="#onClickBoxSelectSave3">
-                    <ImageView 
-                        styleClass="wizard-icon" 
-                        fitWidth="70"
-                        preserveRatio="true"
-                    />
 
-                    <Label styleClass="save__label" text="Nome" fx:id="lblCharacterName3" />
-                    <Label styleClass="save__label" text="0:51" fx:id="lblPlayTime3" />
-                    <Label styleClass="save__label" text="21/05/2023" fx:id="lblLastSaved3" />
+                    <HBox styleClass="save__save-state-box" fx:id="boxLastSaveState3" visible="false" managed="false">
+                        <ImageView 
+                            fitWidth="70"
+                            preserveRatio="true"
+                            fx:id="imgCharacter3"
+                        />
+
+                        <Label styleClass="save__label" fx:id="lblCharacterName3" />
+                        <Label styleClass="save__label" fx:id="lblPlayTime3" />
+                        <Label styleClass="save__label" fx:id="lblLastSaved3" />
+                    </HBox>
+
+                    <Label styleClass="save__new-save-label" text="Iniciar uma nova jornada" fx:id="lblNewSave3" />
                 </HBox>
 
                 <ImageView 

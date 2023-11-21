@@ -15,6 +15,8 @@ public class SettingsController {
 
     private UserService userService;
 
+    
+
     @FXML
     private BorderPane root;
 
@@ -53,7 +55,7 @@ public class SettingsController {
     }
 
     @FXML
-    public void onActionSaveSettings(){
+    public void onActionSaveSettings() {
         //TODO
     }
 

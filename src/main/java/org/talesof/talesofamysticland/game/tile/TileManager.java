@@ -1,6 +1,6 @@
 package org.talesof.talesofamysticland.game.tile;
 
-import org.talesof.talesofamysticland.game.main.Game;
+import org.talesof.talesofamysticland.game.Game;
 import org.talesof.talesofamysticland.game.main.GamePanel;
 import org.talesof.talesofamysticland.game.main.UtilityTool;
 

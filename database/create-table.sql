@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS Change_password(
 CREATE TABLE IF NOT EXISTS Save(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     player_id INT NOT NULL,
+    slot INT NOT NULL,
     character_name VARCHAR(20) NOT NULL,
     character_class ENUM('Warrior', 'Wizard', 'Archer') NOT NULL,
 

@@ -31,6 +31,11 @@ public class DatabaseManager {
         readSQLFile(path);
     }
 
+    public static void createViews() {
+        String path = "database/create-view.sql";
+        readSQLFile(path);
+    }
+
     public static void insertData() {
         String path = "database/insert-data.sql";
         readSQLFile(path);

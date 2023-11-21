@@ -3,13 +3,18 @@ package org.talesof.talesofamysticland.service;
 import java.io.IOException;
 import java.util.Stack;
 
+import org.talesof.talesofamysticland.game.Game;
+import org.talesof.talesofamysticland.game.main.GamePanel;
 import org.talesof.talesofamysticland.injection.DependencyInjector;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import javafx.embed.swing.SwingNode;
 
 public class NavigationService {
 
@@ -56,6 +61,10 @@ public class NavigationService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void startGame() {
+        Game.start();
     }
 
     public void closeApplication() {

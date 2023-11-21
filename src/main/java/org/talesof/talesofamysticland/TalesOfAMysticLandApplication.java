@@ -11,6 +11,7 @@ import org.talesof.talesofamysticland.controller.SettingsController;
 import org.talesof.talesofamysticland.controller.TitleScreenController;
 import org.talesof.talesofamysticland.dao.ChangePasswordDAO;
 import org.talesof.talesofamysticland.dao.PlayerDAO;
+import org.talesof.talesofamysticland.dao.SaveDAO;
 import org.talesof.talesofamysticland.database.DatabaseManager;
 import org.talesof.talesofamysticland.injection.DependencyInjector;
 import org.talesof.talesofamysticland.service.EmailService;
@@ -28,14 +29,14 @@ public class TalesOfAMysticLandApplication extends Application {
 
     private Stage stage;
 
-    final int originalTileSize = 16;
-    final int scale = 5;
+    public final static int originalTileSize = 16;  // 16x16
+    public final static int scale = 5;
 
-    public final int tileSize = originalTileSize * scale;  
-    public final int maxScreenCol = 16; 
-    public final int maxScreenRow = 10; 
-    public final int screenWidth = tileSize * maxScreenCol;  
-    public final int screenHeight = tileSize * maxScreenRow;  
+    public final static int tileSize = originalTileSize * scale;
+    public final static int maxScreenCol = 16; 
+    public final static int maxScreenRow = 10; 
+    public final static int screenWidth = tileSize * maxScreenCol;  
+    public final static int screenHeight = tileSize * maxScreenRow;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -62,6 +63,7 @@ public class TalesOfAMysticLandApplication extends Application {
     private void setupDatabase() {
         //DatabaseManager.dropTables();
         DatabaseManager.createTables();
+        DatabaseManager.createViews();
         DatabaseManager.insertData();
     }
 
@@ -76,6 +78,7 @@ public class TalesOfAMysticLandApplication extends Application {
         // DAOs
         PlayerDAO playerDAO = new PlayerDAO();
         ChangePasswordDAO changePasswordDAO = new ChangePasswordDAO();
+        SaveDAO saveDAO = new SaveDAO();
 
         Callback<Class<?>, Object> changePasswordControllerFactory = param -> {
                 return new ChangePasswordController(
@@ -104,7 +107,9 @@ public class TalesOfAMysticLandApplication extends Application {
                 );
         };
 
-        Callback<Class<?>, Object> saveSelectionControllerFactory = param -> new SaveSelectionController(navigationService);
+        Callback<Class<?>, Object> saveSelectionControllerFactory = param -> {
+                return new SaveSelectionController(userService, navigationService, saveDAO, playerDAO);
+        };
 
         Callback<Class<?>, Object> settingsControllerFactory = param -> new SettingsController(userService);
 

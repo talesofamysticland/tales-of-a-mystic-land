@@ -7,6 +7,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.plaf.DimensionUIResource;
 
+import org.talesof.talesofamysticland.game.Game;
 import org.talesof.talesofamysticland.game.AI.PathFinder;
 import org.talesof.talesofamysticland.game.data.SaveLoad;
 import org.talesof.talesofamysticland.game.entity.Entity;
@@ -58,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
     EnvironmentManager eManager = new EnvironmentManager(this);
     WorldMap map = new WorldMap(this);
     SaveLoad saveLoad = new SaveLoad(this);
-    Config config = new Config(this);
+    public Config config = new Config(this);
     Thread gameThread;
 
     // Entity and object

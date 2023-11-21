@@ -3,6 +3,8 @@ package org.talesof.talesofamysticland.game.main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import org.talesof.talesofamysticland.game.Game;
+
 public class KeyHandler implements KeyListener {
 
     GamePanel gp;

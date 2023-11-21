@@ -1,5 +1,6 @@
 package org.talesof.talesofamysticland.game.main;
 
+import org.talesof.talesofamysticland.game.Game;
 import org.talesof.talesofamysticland.game.entity.Entity;
 import org.talesof.talesofamysticland.game.object.OBJ_BronzeCoin;
 import org.talesof.talesofamysticland.game.object.OBJ_Heart;

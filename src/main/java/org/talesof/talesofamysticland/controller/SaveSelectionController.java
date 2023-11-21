@@ -1,45 +1,149 @@
 package org.talesof.talesofamysticland.controller;
 
-import org.talesof.talesofamysticland.game.main.Game;
+import java.util.List;
+
+import org.talesof.talesofamysticland.dao.PlayerDAO;
+import org.talesof.talesofamysticland.dao.SaveDAO;
+import org.talesof.talesofamysticland.game.Game;
+import org.talesof.talesofamysticland.model.Player;
+import org.talesof.talesofamysticland.model.Save;
 import org.talesof.talesofamysticland.service.NavigationService;
+import org.talesof.talesofamysticland.service.UserService;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 public class SaveSelectionController {
 
+    private UserService userService;
     private NavigationService navigationService;
 
-    @FXML
-    private Label lblCharacterName1;
+    private SaveDAO saveDAO;
+    private PlayerDAO playerDAO;
+
+    // Save slot 1
 
     @FXML
-    private Label lblPlayTime1;
+    private HBox boxLastSaveState1;
 
     @FXML
-    private Label lblLastSaved1;
+    private ImageView imgCharacter1;
 
     @FXML
-    private Label lblCharacterName2;
+    private Label lblCharacterName1, lblPlayTime1, lblLastSaved1;
 
     @FXML
-    private Label lblPlayTime2;
+    private Label lblNewSave1;
+
+    // Save slot 2
 
     @FXML
-    private Label lblLastSaved2;
+    private HBox boxLastSaveState2;
 
     @FXML
-    private Label lblCharacterName3;
+    private ImageView imgCharacter2;
 
     @FXML
-    private Label lblPlayTime3;
+    private Label lblCharacterName2, lblPlayTime2, lblLastSaved2;
 
     @FXML
-    private Label lblLastSaved3;
+    private Label lblNewSave2;
+
+    // Save slot 3
+
+    @FXML
+    private HBox boxLastSaveState3;
+
+    @FXML
+    private ImageView imgCharacter3;
+
+    @FXML
+    private Label lblCharacterName3, lblPlayTime3, lblLastSaved3;
+
+    @FXML
+    private Label lblNewSave3;
+
+    private Save save1, save2, save3;
+
     
-    public SaveSelectionController(NavigationService navigationService) {
+    public SaveSelectionController(
+        UserService userService, 
+        NavigationService navigationService,
+        SaveDAO saveDAO,
+        PlayerDAO playerDAO) {
+
+        this.userService = userService;
         this.navigationService = navigationService;
+        this.saveDAO = saveDAO;
+        this.playerDAO = playerDAO;
     }
+
+    @FXML
+    public void initialize() {
+
+        Player player = userService.getCurrentPlayer();
+
+        List<Save> saves = saveDAO.findSavesListByPlayer(player);
+
+        for(Save save : saves) {
+            if(save != null) {
+                switch(save.getSlot()) {
+                    case 1 -> {
+                        save1 = save;
+
+                        hideNewSaveLabel(lblNewSave1);
+                        showSaveBox(boxLastSaveState1);
+                        setClassIcon(imgCharacter1, save.getCharacterClass());
+                        lblCharacterName1.setText(save.getCharacterName());
+                        // lblPlayTime1.setText(save.getPlayTime());
+                        // lblLastSaved1.setText(save.getLastSaved());
+                    }
+
+                    case 2 -> {
+                        save2 = save;
+
+                        hideNewSaveLabel(lblNewSave2);
+                        showSaveBox(boxLastSaveState2);
+                        setClassIcon(imgCharacter2, save.getCharacterClass());
+                        lblCharacterName2.setText(save.getCharacterName());
+                        // lblPlayTime2.setText(save.getPlayTime());
+                        // lblLastSaved2.setText(save.getLastSaved());
+                    }
+
+                    case 3 -> {
+                        save3 = save;
+
+                        hideNewSaveLabel(lblNewSave3);
+                        showSaveBox(boxLastSaveState3);
+                        setClassIcon(imgCharacter3, save.getCharacterClass());
+                        lblCharacterName3.setText(save.getCharacterName());
+                        // lblPlayTime3.setText(save.getPlayTime());
+                        // lblLastSaved3.setText(save.getLastSaved());
+                    }
+                }
+            }
+        }
+    }
+
+    private void setClassIcon(ImageView img, String characterClass) {
+        switch(characterClass) {
+            case "Warrior" -> img.getStyleClass().add("warrior-icon");
+            case "Wizard" -> img.getStyleClass().add("wizard-icon");
+            case "Archer" -> img.getStyleClass().add("archer-icon");
+        }
+    }
+
+    private void showSaveBox(HBox box) {
+        box.setVisible(true);
+        box.setManaged(true);
+    }
+
+    private void hideNewSaveLabel(Label label) {
+        label.setVisible(false);
+        label.setManaged(false);
+    } 
 
     @FXML 
     public void onClickImgOpenConfigurations() {
@@ -48,22 +152,28 @@ public class SaveSelectionController {
 
     @FXML
     public void onClickBoxSelectSave1() {
-        Game.start();
+        navigationService.startGame();
     }
 
     @FXML
     public void onClickBoxSelectSave2() {
-        navigationService.navigateTo("character-creation.fxml");
+        if(save2 == null) {
+            navigationService.navigateTo("character-creation.fxml");
+            return;
+        }
     }
 
     @FXML
     public void onClickBoxSelectSave3() {
-        navigationService.navigateTo("character-creation.fxml");
+        if(save3 == null) {
+            navigationService.navigateTo("character-creation.fxml");
+            return;
+        }
     }
 
     @FXML
     public void onClickImgDeleteSave() {
-
+        initialize();
     }
 
     @FXML

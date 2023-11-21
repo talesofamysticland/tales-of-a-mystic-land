@@ -1,6 +1,8 @@
-package org.talesof.talesofamysticland.game.main;
+package org.talesof.talesofamysticland.game;
 
 import javax.swing.JFrame;
+
+import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class Game {
 
@@ -21,12 +23,12 @@ public class Game {
 
         gamePanel.config.loadConfig();
 
-        if(gamePanel.fullScreenOn) {
-            window.setUndecorated(true);
-        }
+        window.setUndecorated(true);
 
         window.pack();
 
+        window.setAlwaysOnTop(true);
+        window.setFocusableWindowState(true);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 

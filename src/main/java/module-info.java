@@ -2,6 +2,7 @@ module org.talesof.talesofamysticland {
     requires javafx.controls;
     requires javafx.fxml;
     requires transitive javafx.graphics;
+    requires javafx.swing;
     requires java.sql;
     requires java.mail;
     requires java.desktop;

@@ -9,14 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.talesof.talesofamysticland.database.DatabaseManager;
+import org.talesof.talesofamysticland.model.Player;
 import org.talesof.talesofamysticland.model.Save;
 
 public class SaveDAO {
 
     public Save save(Save save) throws SQLException {
         String sql = """
-            INSERT INTO Save(player_id, character_name, character_class)
-            VALUES (?, ?, ?);
+            INSERT INTO Save(player_id, slot, character_name, character_class)
+            VALUES (?, ?, ?, ?);
         """;
         
         try (
@@ -26,8 +27,9 @@ public class SaveDAO {
         ) {
             
             statement.setInt(1, save.getPlayerId());
-            statement.setString(2, save.getCharacterName());
-            statement.setString(3, save.getCharacterClass());
+            statement.setInt(2, save.getSlot());
+            statement.setString(3, save.getCharacterName());
+            statement.setString(4, save.getCharacterClass());  
             statement.executeUpdate();
 
             ResultSet rs = statement.getGeneratedKeys();
@@ -45,7 +47,7 @@ public class SaveDAO {
     public Save update(Save save) throws SQLException {
         String sql = """
             UPDATE Save 
-            SET player_id = ?, character_name = ?, character_class = ?
+            SET player_id = ?, slot = ?, character_name = ?, character_class = ?
             WHERE id = ?;
         """;
 
@@ -55,9 +57,10 @@ public class SaveDAO {
         ) {
 
             statement.setInt(1, save.getPlayerId());
-            statement.setString(2, save.getCharacterName());
-            statement.setString(3, save.getCharacterClass());
-            statement.setInt(4, save.getId());
+            statement.setInt(2, save.getSlot());
+            statement.setString(3, save.getCharacterName());
+            statement.setString(4, save.getCharacterClass());
+            statement.setInt(5, save.getId());
             
             int linhasAfetadas = statement.executeUpdate();
 
@@ -114,6 +117,30 @@ public class SaveDAO {
         return null;
     }
 
+    public List<Save> findSavesListByPlayer(Player player) {
+        String sql = "SELECT * FROM saves_list WHERE player_id = ?;";
+        List<Save> saves = new ArrayList<>();
+
+        try (
+            Connection connection = DatabaseManager.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql);
+        ) {
+
+            statement.setInt(1, player.getId());
+            ResultSet rs = statement.executeQuery();
+
+            while(rs.next()) {
+                saves.add(resultSetToSave(rs));
+            }
+
+            return saves;
+        
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public List<Save> findAll() {
         String sql = "SELECT * FROM Save;";
         List<Save> saves = new ArrayList<>();
@@ -139,6 +166,7 @@ public class SaveDAO {
         return new Save(
             rs.getInt("id"),
             rs.getInt("player_id"),
+            rs.getInt("slot"),
             rs.getString("character_name"),
             rs.getString("character_class")
         );
