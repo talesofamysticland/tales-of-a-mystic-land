@@ -1,6 +1,6 @@
 # Tales of a Mystic Land
 
-Projeto Java, com JavaFX e integração com JDBC, usando Gradle.
+RPG 2D de aventura Java, com JavaFX, Swing e integração com MySQL, usando Gradle. Venha se aventurar nessa terra mística!
 
 ## Como executar
 
@@ -11,10 +11,12 @@ export JAVA_TOOL_OPTIONS="-Djava.net.useSystemProxies=true"
 chmod +x gradlew
 ```
 
-No mesmo terminal que foi configurado o proxy executar o comando:
+No mesmo terminal que foi configurado o proxy, executar o comando: 
 ```bash
 ./gradlew run
 ```
+
+Lembre-se de configurar o MySQL na classe \src\main\java\org\talesof\talesofamysticland\database\DatabaseManager.java.
 
 ## Modelagem de dados
 
@@ -22,6 +24,7 @@ Link para MER/DER da aplicação: https://drive.google.com/file/d/1g2Rp0lObuxiOE
 
 ### Código SQL
 
+```
 CREATE TABLE IF NOT EXISTS Player(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(30) NOT NULL,
@@ -78,7 +81,7 @@ CREATE TABLE IF NOT EXISTS Character_state(
     play_time DECIMAL(15) NOT NULL,
     experience INT NOT NULL,
     coins INT NOT NULL,
-    strenght INT NOT NULL,
+    strength INT NOT NULL,
     resistance INT NOT NULL,
     constitution INT NOT NULL,
     dexterity INT NOT NULL,
@@ -90,9 +93,9 @@ CREATE TABLE IF NOT EXISTS Save_state(
     save_id INT NOT NULL,
     character_state_id INT NOT NULL,
     save_point_id INT NOT NULL,
-	date DATETIME NOT NULL,
+	last_saved DATETIME NOT NULL,
     
-    FOREIGN KEY(save_id) REFERENCES Save(id),
+    FOREIGN KEY(save_id) REFERENCES Save(id) ON DELETE CASCADE,
     FOREIGN KEY(character_state_id) REFERENCES Character_state(id),
     FOREIGN KEY(save_point_id) REFERENCES Save_point(id)
 );
@@ -112,3 +115,4 @@ CREATE TABLE IF NOT EXISTS Item_in_inventory(
     FOREIGN KEY(character_state_id) REFERENCES Character_state(id),
     FOREIGN KEY(item_id) REFERENCES Item(id)
 );
+```

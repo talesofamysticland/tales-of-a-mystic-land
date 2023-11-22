@@ -6,18 +6,18 @@ public class ItemInInventory {
     private Integer characterStateId;
     private Integer itemId;
     private Integer amount;
-    private Integer position;
+    private boolean currentEquipped;
 
-    public ItemInInventory(Integer id, Integer characterStateId, Integer itemId, Integer amount, Integer position){
+    public ItemInInventory(Integer id, Integer characterStateId, Integer itemId, Integer amount, boolean currentEquipped){
         this.id = id;
         this.characterStateId = characterStateId;
         this.itemId = itemId;
         this.amount = amount;
-        this.position = position;
+        this.currentEquipped = currentEquipped;
     }
 
-    public ItemInInventory(Integer characterStateId, Integer itemId, Integer amount, Integer position){
-        this(null, characterStateId, itemId, amount, position);
+    public ItemInInventory(Integer characterStateId, Integer itemId, Integer amount, boolean currentEquipped){
+        this(null, characterStateId, itemId, amount, currentEquipped);
     }
     
     public Integer getId() {
@@ -53,17 +53,33 @@ public class ItemInInventory {
         this.amount = amount;
     }
 
-    public Integer getPosition() {
-        return position;
+    public Integer getCharacterStateId() {
+        return characterStateId;
     }
 
-    public void setPosition(Integer position) {
-        this.position = position;
+    public void setCharacterStateId(Integer characterStateId) {
+        this.characterStateId = characterStateId;
+    }
+
+    public Integer getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Integer itemId) {
+        this.itemId = itemId;
+    }
+
+    public boolean isCurrentEquipped() {
+        return currentEquipped;
+    }
+
+    public void setCurrentEquipped(boolean currentEquipped) {
+        this.currentEquipped = currentEquipped;
     }
 
     @Override
     public String toString() {
         return "ItemInInventory [id=" + id + ", characterStateId=" + characterStateId + ", itemId=" + itemId
-                + ", amount=" + amount + ", position=" + position + "]\n";
+                + ", amount=" + amount + ", currentEquipped=" + currentEquipped + "]\n";
     }
 }

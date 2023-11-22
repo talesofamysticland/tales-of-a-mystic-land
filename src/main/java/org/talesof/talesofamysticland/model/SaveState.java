@@ -8,18 +8,18 @@ public class SaveState {
     private Integer saveId;
     private Integer characterStateId;
     private Integer savePointId;
-    private LocalDateTime date;
+    private LocalDateTime lastSaved;
 
-    public SaveState (Integer id, Integer saveId, Integer characterStateId, Integer savePointId, LocalDateTime date) {
+    public SaveState (Integer id, Integer saveId, Integer characterStateId, Integer savePointId, LocalDateTime lastSaved) {
         this.id = id;
         this.saveId = saveId;
         this.characterStateId = characterStateId;
         this.savePointId = savePointId;
-        this.date = date;
+        this.lastSaved = lastSaved;
     }
 
-    public SaveState (Integer saveId, Integer characterStateId, Integer savePointId, LocalDateTime date) {
-        this(null, saveId, characterStateId, savePointId, date);
+    public SaveState(Integer saveId, Integer characterStateId, Integer savePointId, LocalDateTime lastSaved) {
+        this(null, saveId, characterStateId, savePointId, lastSaved);
     }
 
     public SaveState (Integer id, Integer saveId, Integer characterStateId, Integer savePointId) {
@@ -62,17 +62,17 @@ public class SaveState {
         this.savePointId = savePointId;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getLastSaved() {
+        return lastSaved;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setLastSaved(LocalDateTime lastSaved) {
+        this.lastSaved = lastSaved;
     }
 
     @Override
     public String toString() {
         return "SaveState [id=" + id + ", saveId=" + saveId + ", characterStateId=" + characterStateId
-                + ", savePointId=" + savePointId + ", date=" + date + "]\n";
+                + ", savePointId=" + savePointId + ", date=" + lastSaved + "]\n";
     }
 }

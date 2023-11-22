@@ -40,7 +40,6 @@ public class Archer extends PlayerCharacter {
 
         getImage();
         getAttackImage();
-        setItems();
     }
 
     @Override
@@ -118,7 +117,7 @@ public class Archer extends PlayerCharacter {
     }
 
     @Override
-    public void setItems() {
+    public void setDefaultItens() {
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(new OBJ_Key(gp));

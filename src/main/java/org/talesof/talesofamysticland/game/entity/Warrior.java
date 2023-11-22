@@ -37,7 +37,6 @@ public class Warrior extends PlayerCharacter {
 
         getImage();
         getAttackImage();
-        setItems();
         getGuardingImage();
     }
 
@@ -123,7 +122,7 @@ public class Warrior extends PlayerCharacter {
     }
 
     @Override
-    public void setItems() {
+    public void setDefaultItens() {
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);

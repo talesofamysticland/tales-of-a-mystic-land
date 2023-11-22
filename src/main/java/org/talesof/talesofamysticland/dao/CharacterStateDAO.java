@@ -60,7 +60,7 @@ public class CharacterStateDAO {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
 
-            if (rs.next()) {
+            if(rs.next()) {
                 return resultSetToCharacterState(rs);
             }
 
@@ -102,7 +102,7 @@ public class CharacterStateDAO {
             rs.getInt("experience"),
             rs.getInt("coins"),
             rs.getInt("strength"),
-            rs.getInt("resistence"),
+            rs.getInt("resistance"),
             rs.getInt("constitution"),
             rs.getInt("dexterity"),
             rs.getInt("wisdom")

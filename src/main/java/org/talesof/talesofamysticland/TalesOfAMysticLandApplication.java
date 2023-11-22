@@ -10,8 +10,10 @@ import org.talesof.talesofamysticland.controller.SaveSelectionController;
 import org.talesof.talesofamysticland.controller.SettingsController;
 import org.talesof.talesofamysticland.controller.TitleScreenController;
 import org.talesof.talesofamysticland.dao.ChangePasswordDAO;
+import org.talesof.talesofamysticland.dao.CharacterStateDAO;
 import org.talesof.talesofamysticland.dao.PlayerDAO;
 import org.talesof.talesofamysticland.dao.SaveDAO;
+import org.talesof.talesofamysticland.dao.SaveStateDAO;
 import org.talesof.talesofamysticland.database.DatabaseManager;
 import org.talesof.talesofamysticland.injection.DependencyInjector;
 import org.talesof.talesofamysticland.service.EmailService;
@@ -62,10 +64,9 @@ public class TalesOfAMysticLandApplication extends Application {
     }
 
     private void setupDatabase() {
-        //DatabaseManager.dropTables();
+        // DatabaseManager.dropTables();
         DatabaseManager.createTables();
-        DatabaseManager.createViews();
-        // DatabaseManager.insertData();
+        DatabaseManager.insertData();
     }
 
     private void setUpDependencyInjector() {
@@ -81,6 +82,8 @@ public class TalesOfAMysticLandApplication extends Application {
         PlayerDAO playerDAO = new PlayerDAO();
         ChangePasswordDAO changePasswordDAO = new ChangePasswordDAO();
         SaveDAO saveDAO = new SaveDAO();
+        SaveStateDAO saveStateDAO = new SaveStateDAO();
+        CharacterStateDAO characterStateDAO = new CharacterStateDAO();
 
         Callback<Class<?>, Object> changePasswordControllerFactory = param -> {
                 return new ChangePasswordController(
@@ -127,8 +130,9 @@ public class TalesOfAMysticLandApplication extends Application {
                         userService, 
                         navigationService, 
                         gameService, 
-                        saveDAO, 
-                        playerDAO
+                        saveDAO,
+                        saveStateDAO,
+                        characterStateDAO
                 );
         };
 

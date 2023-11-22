@@ -27,6 +27,8 @@ public class EntityGenerator {
             case OBJ_Tent.OBJ_NAME  -> obj = new OBJ_Tent(gp);
             case OBJ_Door.OBJ_NAME  -> obj = new OBJ_Door(gp);
             case OBJ_Chest.OBJ_NAME  -> obj = new OBJ_Chest(gp);
+            case OBJ_Bow.OBJ_NAME  -> obj = new OBJ_Bow(gp);
+            case OBJ_LiandryStaff.OBJ_NAME  -> obj = new OBJ_LiandryStaff(gp);
         }
 
         return obj;

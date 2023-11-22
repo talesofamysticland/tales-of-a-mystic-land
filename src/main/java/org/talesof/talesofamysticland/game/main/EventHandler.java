@@ -11,6 +11,8 @@ public class EventHandler {
     boolean canTouchEvent = true;
     int tempMap, tempCol, tempRow;
 
+    private int HEALING_POOL_SAVE_POINT_ID = 1;
+
     public EventHandler(GamePanel gp) {
         this.gp = gp;
 
@@ -49,15 +51,15 @@ public class EventHandler {
 
     public void setDialogue() {
 
-        eventMaster.dialogues[0][0] = "You fall into a pit!";
+        eventMaster.dialogues[0][0] = "Você caiu em um buraco!";
 
         eventMaster.dialogues[1][0] = """
-        You drink water.\s
-        Your life and mana have been recovered.
-        (The progress has been saved)
+        Você bebe a água.\s
+        Sua vida e mana são recuperadas.
+        (O progresso do jogo foi salvo.)
         """;
 
-        eventMaster.dialogues[1][1] = "Damn, this is good water.";
+        eventMaster.dialogues[1][1] = "Caramba, isso que é água boa.";
     }
 
     public void checkEvent() {
@@ -142,6 +144,7 @@ public class EventHandler {
             gp.player.mana = gp.player.maxMana;
             gp.aSetter.setMonster();
 
+            gp.saveGameState(HEALING_POOL_SAVE_POINT_ID);
             gp.saveLoad.save();
         }
     }

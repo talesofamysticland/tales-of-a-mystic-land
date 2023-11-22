@@ -25,8 +25,6 @@ public class Game {
         gamePanel = new GamePanel(gameService, navigationService);
         window.add(gamePanel);
 
-        gamePanel.config.loadConfig();
-
         window.setUndecorated(true);
 
         window.pack();
@@ -36,6 +34,7 @@ public class Game {
         window.setVisible(true);
 
         gamePanel.setupGame();
+
         gamePanel.startGameThread();
     }
 }

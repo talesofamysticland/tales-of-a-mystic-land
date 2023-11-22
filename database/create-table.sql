@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS Character_state(
     play_time DECIMAL(15) NOT NULL,
     experience INT NOT NULL,
     coins INT NOT NULL,
-    strenght INT NOT NULL,
+    strength INT NOT NULL,
     resistance INT NOT NULL,
     constitution INT NOT NULL,
     dexterity INT NOT NULL,
@@ -70,9 +70,9 @@ CREATE TABLE IF NOT EXISTS Save_state(
     save_id INT NOT NULL,
     character_state_id INT NOT NULL,
     save_point_id INT NOT NULL,
-	date DATETIME NOT NULL,
+	last_saved DATETIME NOT NULL,
     
-    FOREIGN KEY(save_id) REFERENCES Save(id),
+    FOREIGN KEY(save_id) REFERENCES Save(id) ON DELETE CASCADE,
     FOREIGN KEY(character_state_id) REFERENCES Character_state(id),
     FOREIGN KEY(save_point_id) REFERENCES Save_point(id)
 );

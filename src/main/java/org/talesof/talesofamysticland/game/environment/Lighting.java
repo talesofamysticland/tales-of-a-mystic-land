@@ -146,10 +146,10 @@ public class Lighting {
         String situation = "";
 
         switch(dayState) {
-            case day -> situation = "Day";
-            case dusk -> situation = "Dusk";
-            case night -> situation = "Night";
-            case dawn -> situation = "Dawn";
+            case day -> situation = "Dia";
+            case dusk -> situation = "Tarde";
+            case night -> situation = "Noite";
+            case dawn -> situation = "Amanhecer";
         }
 
         g2.setColor(Color.white);

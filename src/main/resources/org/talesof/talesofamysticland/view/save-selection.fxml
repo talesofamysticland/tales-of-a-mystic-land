@@ -46,7 +46,7 @@
                     styleClass="trash-icon" 
                     fitWidth="40"
                     preserveRatio="true"
-                    onMouseClicked="#onClickImgDeleteSave"
+                    onMouseClicked="#onClickImgDeleteSave1"
                 />
             </HBox>
 
@@ -74,7 +74,7 @@
                     styleClass="trash-icon" 
                     fitWidth="40"
                     preserveRatio="true"
-                    onMouseClicked="#onClickImgDeleteSave"
+                    onMouseClicked="#onClickImgDeleteSave2"
                 />
             </HBox>
 
@@ -102,7 +102,7 @@
                     styleClass="trash-icon" 
                     fitWidth="40"
                     preserveRatio="true"
-                    onMouseClicked="#onClickImgDeleteSave"
+                    onMouseClicked="#onClickImgDeleteSave3"
                 />
             </HBox>
         </VBox>

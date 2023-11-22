@@ -1,6 +1,5 @@
 package org.talesof.talesofamysticland.game.data;
 
-import org.talesof.talesofamysticland.game.entity.Entity;
 import org.talesof.talesofamysticland.game.main.GamePanel;
 
 import java.io.*;
@@ -8,6 +7,8 @@ import java.io.*;
 public class SaveLoad {
 
     GamePanel gp;
+
+    private static final long serialVersionUID = 9047733080742134121L;
 
     public SaveLoad(GamePanel gp) {
         this.gp = gp;
@@ -24,28 +25,6 @@ public class SaveLoad {
                     );
 
             DataStorage ds = new DataStorage();
-
-            // Player stats
-
-            ds.level = gp.player.level;
-            ds.maxLife = gp.player.maxLife;
-            ds.life = gp.player.life;
-            ds.maxMana = gp.player.maxMana;
-            ds.mana = gp.player.mana;
-            ds.strength = gp.player.strength;
-            ds.dexterity = gp.player.dexterity;
-            ds.exp = gp.player.exp;
-            ds.nextLevelExp = gp.player.nextLevelExp;
-            ds.coin = gp.player.coin;
-
-            // Player inventory
-            for(Entity item : gp.player.inventory) {
-                ds.itemNames.add(item.name);
-                ds.itemAmounts.add(item.amount);
-            }
-
-            ds.currentWeaponSlot = gp.player.getCurrentWeaponSlot();
-            ds.currentShieldSlot = gp.player.getCurrentShieldSlot();
 
             // Object on map
             ds.mapObjectNames = new String[gp.maxMap][gp.obj[1].length];
@@ -95,30 +74,6 @@ public class SaveLoad {
                     );
 
             DataStorage ds = (DataStorage) ois.readObject();
-
-            gp.player.level = ds.level;
-            gp.player.maxLife = ds.maxLife;
-            gp.player.life = ds.life;
-            gp.player.maxMana = ds.maxMana;
-            gp.player.mana = ds.mana;
-            gp.player.strength = ds.strength;
-            gp.player.dexterity = ds.dexterity;
-            gp.player.exp = ds.exp;
-            gp.player.nextLevelExp = ds.nextLevelExp;
-            gp.player.coin = ds.coin;
-
-            // Player inventory
-            gp.player.inventory.clear();
-            for(int i = 0; i < ds.itemNames.size(); i++) {
-                gp.player.inventory.add(gp.eGenerator.getObject(ds.itemNames.get(i)));
-                gp.player.inventory.get(i).amount = ds.itemAmounts.get(i);
-            }
-
-            gp.player.currentWeapon = gp.player.inventory.get(ds.currentWeaponSlot);
-            gp.player.currentShield = gp.player.inventory.get(ds.currentShieldSlot);
-            gp.player.getAttack();
-            gp.player.getDefense();
-            gp.player.getAttackImage();
 
             // Objects on map
             for(int mapNum = 0; mapNum < gp.maxMap; mapNum++) {

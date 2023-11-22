@@ -2,9 +2,17 @@ package org.talesof.talesofamysticland.game.entity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.sql.SQLException;
 
+import java.util.List;
+
+import org.talesof.talesofamysticland.dao.ItemDAO;
+import org.talesof.talesofamysticland.dao.ItemInInventoryDAO;
 import org.talesof.talesofamysticland.game.main.GamePanel;
 import org.talesof.talesofamysticland.game.main.KeyHandler;
+import org.talesof.talesofamysticland.model.CharacterState;
+import org.talesof.talesofamysticland.model.Item;
+import org.talesof.talesofamysticland.model.ItemInInventory;
 
 public abstract class PlayerCharacter extends Entity {
 
@@ -151,7 +159,7 @@ public abstract class PlayerCharacter extends Entity {
         return currentShieldSlot;
     }
 
-    public abstract void setItems();
+    public abstract void setDefaultItens();
 
     public void restoreStatus() {
         life = maxLife;
@@ -638,6 +646,82 @@ public abstract class PlayerCharacter extends Entity {
         }
 
         return canObtain;
+    }
+
+    public CharacterState getCharacterState() {
+        long elapsedTimeInSeconds = gp.elapsedTime / 1000;
+        return new CharacterState(
+            elapsedTimeInSeconds,
+            exp,
+            coin,
+            strength,
+            resistance,
+            constitution,
+            dexterity,
+            wisdom
+        );
+    }
+
+    public void saveInventory(CharacterState characterState) {
+
+        ItemDAO itemDAO = new ItemDAO();
+        ItemInInventoryDAO itemInInventoryDAO = new ItemInInventoryDAO();
+        
+        for(Entity item : inventory) {
+
+            boolean currentEquipped = false;
+
+            if(item == currentWeapon || item == currentShield || item == currentLight) {
+                currentEquipped = true;
+            }
+
+            ItemInInventory itemInInventory = new ItemInInventory(
+                characterState.getId(),
+                itemDAO.findByName(item.name).getId(),
+                item.amount,
+                currentEquipped
+            );
+
+            try {
+                itemInInventoryDAO.save(itemInInventory);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void loadInventory(List<ItemInInventory> itemsInInventory) {
+
+        ItemDAO itemDAO = new ItemDAO();
+
+        for(ItemInInventory itemInInventory : itemsInInventory) {
+
+            Item item = itemDAO.findById(itemInInventory.getItemId());
+
+            Entity newItem = gp.eGenerator.getObject(item.getName());
+            newItem.amount = itemInInventory.getAmount();
+
+            if(itemInInventory.isCurrentEquipped()) {
+                if(newItem.type == typeSword || newItem.type == typeAxe 
+                || newItem.type == typeStaff || newItem.type == typeBow) {
+                    currentWeapon = newItem;
+                    attack = getAttack();
+                    getAttackImage();
+                }
+
+                if(newItem.type == typeShield) {
+                    currentShield = newItem;
+                    defense = getDefense();
+                }
+
+                if(newItem.type == typeLight) {
+                    currentLight = newItem;
+                    lightUpdated = true;
+                }
+            }
+
+            inventory.add(newItem);
+        }
     }
 
     public void draw(Graphics2D g2) {

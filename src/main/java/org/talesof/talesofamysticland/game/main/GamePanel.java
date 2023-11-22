@@ -2,6 +2,7 @@ package org.talesof.talesofamysticland.game.main;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +10,10 @@ import java.util.stream.Collectors;
 import javax.swing.*;
 import javax.swing.plaf.DimensionUIResource;
 
+import org.talesof.talesofamysticland.dao.CharacterStateDAO;
+import org.talesof.talesofamysticland.dao.ItemInInventoryDAO;
+import org.talesof.talesofamysticland.dao.SavePointDAO;
+import org.talesof.talesofamysticland.dao.SaveStateDAO;
 import org.talesof.talesofamysticland.game.Game;
 import org.talesof.talesofamysticland.game.AI.PathFinder;
 import org.talesof.talesofamysticland.game.data.SaveLoad;
@@ -21,6 +26,10 @@ import org.talesof.talesofamysticland.game.environment.EnvironmentManager;
 import org.talesof.talesofamysticland.game.tile.TileManager;
 import org.talesof.talesofamysticland.game.tile.WorldMap;
 import org.talesof.talesofamysticland.game.tiles_interactive.InteractiveTile;
+import org.talesof.talesofamysticland.model.CharacterState;
+import org.talesof.talesofamysticland.model.ItemInInventory;
+import org.talesof.talesofamysticland.model.SavePoint;
+import org.talesof.talesofamysticland.model.SaveState;
 import org.talesof.talesofamysticland.service.GameService;
 import org.talesof.talesofamysticland.service.NavigationService;
 
@@ -103,6 +112,11 @@ public class GamePanel extends JPanel implements Runnable {
     public final int indoor = 51;
     public final int dungeon = 52;
 
+    // Time
+    long startTime;
+    long endTime;;
+    public long elapsedTime;
+
     public GamePanel(GameService gameService, NavigationService navigationService) {
 
         this.gameService = gameService;
@@ -122,6 +136,10 @@ public class GamePanel extends JPanel implements Runnable {
             case "Wizard" -> player = new Wizard(gameService.getCharacterName(), this, keyH);
             case "Archer" -> player = new Archer(gameService.getCharacterName(), this, keyH);
         }
+
+        loadPlayerPosition();
+        loadPlayerInventory();
+        saveLoad.load();
 
         aSetter.setObject();
         aSetter.setNPC();
@@ -154,6 +172,68 @@ public class GamePanel extends JPanel implements Runnable {
             aSetter.setObject();
             aSetter.setInteractiveTile();
             eManager.lighting.resetDay();
+        }
+    }
+
+    public void loadPlayerInventory() {
+
+        CharacterStateDAO characterStateDAO = new CharacterStateDAO();
+        SaveStateDAO saveStateDAO = new SaveStateDAO();
+        ItemInInventoryDAO itemInInventoryDAO = new ItemInInventoryDAO();
+
+        SaveState mostRecentSaveState = saveStateDAO.findBySave(gameService.getCurrentSave());
+
+        if(mostRecentSaveState != null) {
+
+            CharacterState characterState = characterStateDAO.findById(mostRecentSaveState.getCharacterStateId());
+
+            List<ItemInInventory> itemInInventoryList = itemInInventoryDAO.findByCharacterState(characterState);
+
+            if(itemInInventoryList.isEmpty()) {
+                player.setDefaultItens();
+                return;
+            }
+
+            player.loadInventory(itemInInventoryList);
+        }
+    }
+
+    public void loadPlayerPosition() {
+
+        SaveStateDAO saveStateDAO = new SaveStateDAO();
+        SavePointDAO savePointDAO = new SavePointDAO();
+
+        SaveState mostRecentSaveState = saveStateDAO.findBySave(gameService.getCurrentSave());
+
+        if(mostRecentSaveState != null) {
+            SavePoint savePoint = savePointDAO.findById(mostRecentSaveState.getSavePointId());
+
+            player.worldX = savePoint.getWorldX() * tileSize;
+            player.worldY = savePoint.getWorldY() * tileSize;
+            currentMap = savePoint.getMap();
+            player.direction = "down";
+
+        } else {
+            player.setDefaultPositions();
+        }
+    }   
+
+    public void saveGameState(int savePointId) {
+
+        endTime = System.currentTimeMillis();
+        elapsedTime = endTime - startTime;
+
+        CharacterStateDAO characterStateDAO = new CharacterStateDAO();
+        SaveStateDAO saveStateDAO = new SaveStateDAO();
+
+        try {
+            CharacterState currentCharacterState = characterStateDAO.save(player.getCharacterState());
+            player.saveInventory(currentCharacterState);
+
+            SaveState saveState = new SaveState(gameService.getCurrentSave().getId(), currentCharacterState.getId(), savePointId);
+            saveStateDAO.save(saveState);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -192,6 +272,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void run() {
+        startTime = System.currentTimeMillis();
 
         double drawInterval = 1000000000 / (double) FPS;
         double delta = 0;
@@ -341,7 +422,6 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics g = getGraphics();
         g.drawImage(tempScreen, 0, 0, screenWidth2, screenHeight2, null);
-        g.dispose();
     }
 
     public void playMusic(int i) {

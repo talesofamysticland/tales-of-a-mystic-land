@@ -5,7 +5,7 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class OBJ_Axe extends Entity {
 
-    public final static String OBJ_NAME = "Machado de Lenhador";
+    public final static String OBJ_NAME = "Machado do Lenhador";
 
     public OBJ_Axe(GamePanel gp) {
         super(gp);

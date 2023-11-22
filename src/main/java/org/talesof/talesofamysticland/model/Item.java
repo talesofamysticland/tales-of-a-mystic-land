@@ -1,6 +1,6 @@
 package org.talesof.talesofamysticland.model;
 
-public class Item{
+public class Item {
 
     private Integer id;
     private String name;

@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.talesof.talesofamysticland.database.DatabaseManager;
+import org.talesof.talesofamysticland.model.CharacterState;
 import org.talesof.talesofamysticland.model.ItemInInventory;
 
 public class ItemInInventoryDAO {
     
     public ItemInInventory save(ItemInInventory item) throws SQLException {
         String sql = """
-            INSERT INTO Item_in_inventory(character_state_id, item_id, amount, position)
+            INSERT INTO Item_in_inventory(character_state_id, item_id, amount, current_equipped)
             VALUES (?, ?, ?, ?);
         """;
         
@@ -27,7 +28,7 @@ public class ItemInInventoryDAO {
             statement.setInt(1, item.getcharacterStateId());
             statement.setInt(2, item.getitemId());
             statement.setInt(3, item.getAmount());
-            statement.setInt(4, item.getPosition());
+            statement.setBoolean(4, item.isCurrentEquipped());
             statement.executeUpdate();
 
             ResultSet rs = statement.getGeneratedKeys();
@@ -37,37 +38,6 @@ public class ItemInInventoryDAO {
             return item;    
         }
 
-    }
-
-    public ItemInInventory update(ItemInInventory item) throws SQLException {
-        String sql = """
-            UPDATE Item_in_inventory 
-            SET character_state_id = ?, item_id = ?, amount = ?, position = ?
-            WHERE id = ?;
-        """;
-
-        try (
-            Connection connection = DatabaseManager.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
-        ) {
-
-            statement.setInt(1, item.getcharacterStateId());
-            statement.setInt(2, item.getitemId());
-            statement.setInt(3, item.getAmount());
-            statement.setInt(4, item.getPosition());
-            statement.setInt(5, item.getId());
-            
-            int linhasAfetadas = statement.executeUpdate();
-
-            if (linhasAfetadas > 0) {
-                return item;
-            }
-            
-            return null;
-
-        } catch (SQLException e) {
-            return null;
-        }
     }
 
     public ItemInInventory findById(Integer id) {
@@ -94,28 +64,28 @@ public class ItemInInventoryDAO {
         return null;
     }
 
-    public ItemInInventory findByCharacterId(Integer characterStateId) {
+    public List<ItemInInventory> findByCharacterState(CharacterState characterState) {
         String sql = "SELECT * FROM Item_in_inventory WHERE character_state_id = ?;";
+
+        List<ItemInInventory> itemsInInventory = new ArrayList<>();
 
         try (
             Connection connection = DatabaseManager.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
         ) {
-            statement.setInt(1, characterStateId);
+            statement.setInt(1, characterState.getId());
             ResultSet rs = statement.executeQuery();
 
-            if (rs.next()) {
-                return resultSetToItemInInventory(rs);
+            while(rs.next()) {
+                itemsInInventory.add(resultSetToItemInInventory(rs));
             }
 
-            rs.close();
+            return itemsInInventory;
 
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-
-        return null;
     }
 
     public List<ItemInInventory> findAll() {
@@ -145,7 +115,7 @@ public class ItemInInventoryDAO {
             rs.getInt("character_state_id"),
             rs.getInt("item_id"),
             rs.getInt("amount"),
-            rs.getInt("position")
+            rs.getBoolean("current_equipped")
         );
     }
 }

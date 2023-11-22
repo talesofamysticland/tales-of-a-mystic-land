@@ -2,7 +2,6 @@ package org.talesof.talesofamysticland.controller;
 
 import java.sql.SQLException;
 
-import org.talesof.talesofamysticland.TalesOfAMysticLandApplication;
 import org.talesof.talesofamysticland.dao.SaveDAO;
 import org.talesof.talesofamysticland.model.Save;
 import org.talesof.talesofamysticland.service.FormErrorListeningService;

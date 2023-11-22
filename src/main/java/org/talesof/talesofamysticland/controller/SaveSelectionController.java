@@ -2,13 +2,21 @@ package org.talesof.talesofamysticland.controller;
 
 import java.util.List;
 
-import org.talesof.talesofamysticland.dao.PlayerDAO;
+import org.talesof.talesofamysticland.dao.CharacterStateDAO;
 import org.talesof.talesofamysticland.dao.SaveDAO;
+import org.talesof.talesofamysticland.dao.SaveStateDAO;
+import org.talesof.talesofamysticland.model.CharacterState;
 import org.talesof.talesofamysticland.model.Player;
 import org.talesof.talesofamysticland.model.Save;
+import org.talesof.talesofamysticland.model.SaveState;
 import org.talesof.talesofamysticland.service.GameService;
 import org.talesof.talesofamysticland.service.NavigationService;
 import org.talesof.talesofamysticland.service.UserService;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -22,7 +30,8 @@ public class SaveSelectionController {
     private GameService gameService;
 
     private SaveDAO saveDAO;
-    private PlayerDAO playerDAO;
+    private SaveStateDAO saveStateDAO;
+    private CharacterStateDAO characterStateDAO;
 
     // Save slot 1
 
@@ -74,60 +83,71 @@ public class SaveSelectionController {
         NavigationService navigationService,
         GameService gameService,
         SaveDAO saveDAO,
-        PlayerDAO playerDAO) {
+        SaveStateDAO saveStateDAO,
+        CharacterStateDAO characterStateDAO) {
 
         this.userService = userService;
         this.navigationService = navigationService;
         this.gameService = gameService;
         this.saveDAO = saveDAO;
-        this.playerDAO = playerDAO;
+        this.saveStateDAO = saveStateDAO;
+        this.characterStateDAO = characterStateDAO;
     }
 
     @FXML
     public void initialize() {
-
         Player player = userService.getCurrentPlayer();
-
-        List<Save> saves = saveDAO.findSavesListByPlayer(player);
+        List<Save> saves = saveDAO.findByPlayer(player);
 
         for(Save save : saves) {
-            if(save != null) {
+            if (save != null) {
                 switch(save.getSlot()) {
                     case 1 -> {
-                        save1 = save;
-
-                        hideNewSaveLabel(lblNewSave1);
-                        showSaveBox(boxLastSaveState1);
-                        setClassIcon(imgCharacter1, save.getCharacterClass());
-                        lblCharacterName1.setText(save.getCharacterName());
-                        // lblPlayTime1.setText(save.getPlayTime());
-                        // lblLastSaved1.setText(save.getLastSaved());
+                        save1 = save; 
+                        updateSaveBox(save, lblNewSave1, boxLastSaveState1, imgCharacter1, lblCharacterName1, lblPlayTime1, lblLastSaved1);
                     }
-
                     case 2 -> {
                         save2 = save;
-
-                        hideNewSaveLabel(lblNewSave2);
-                        showSaveBox(boxLastSaveState2);
-                        setClassIcon(imgCharacter2, save.getCharacterClass());
-                        lblCharacterName2.setText(save.getCharacterName());
-                        // lblPlayTime2.setText(save.getPlayTime());
-                        // lblLastSaved2.setText(save.getLastSaved());
-                    }
-
+                        updateSaveBox(save, lblNewSave2, boxLastSaveState2, imgCharacter2, lblCharacterName2, lblPlayTime2, lblLastSaved2);
+                    } 
                     case 3 -> {
                         save3 = save;
-
-                        hideNewSaveLabel(lblNewSave3);
-                        showSaveBox(boxLastSaveState3);
-                        setClassIcon(imgCharacter3, save.getCharacterClass());
-                        lblCharacterName3.setText(save.getCharacterName());
-                        // lblPlayTime3.setText(save.getPlayTime());
-                        // lblLastSaved3.setText(save.getLastSaved());
-                    }
+                        updateSaveBox(save, lblNewSave3, boxLastSaveState3, imgCharacter3, lblCharacterName3, lblPlayTime3, lblLastSaved3);
+                    } 
                 }
             }
         }
+    }
+
+    private void updateSaveBox(Save save, Label newSaveLabel, HBox saveBox, ImageView characterImage,
+    Label characterNameLabel, Label playTimeLabel, Label lastSavedLabel) {
+
+        gameService.setCharacterClass(save.getCharacterClass());
+        gameService.setCharacterName(save.getCharacterName());
+
+        SaveState mostRecentSaveState = saveStateDAO.findBySave(save);
+
+        if(mostRecentSaveState != null) {
+            CharacterState characterState = characterStateDAO.findById(mostRecentSaveState.getCharacterStateId());
+
+            hideNewSaveLabel(newSaveLabel);
+            showSaveBox(saveBox);
+            setClassIcon(characterImage, save.getCharacterClass());
+            characterNameLabel.setText(save.getCharacterName());
+            playTimeLabel.setText(formatPlayTime(characterState.getPlayTime()));
+            lastSavedLabel.setText(formatLastSaved(mostRecentSaveState.getLastSaved()));
+        }
+    }
+
+    private String formatPlayTime(Long playTime) {
+        Duration playTimeInSeconds = Duration.ofSeconds(playTime);
+        LocalTime playTimeFormatted = LocalTime.MIDNIGHT.plus(playTimeInSeconds);
+        return playTimeFormatted.toString();
+    }
+
+    private String formatLastSaved(LocalDateTime lastSaved) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd/MM/yyyy");
+        return lastSaved.format(formatter).toString();
     }
 
     private void setClassIcon(ImageView img, String characterClass) {
@@ -175,12 +195,30 @@ public class SaveSelectionController {
             return;
         }
 
+        gameService.setCurrentSave(save);
         navigationService.startGame(gameService);
     }
 
     @FXML
-    public void onClickImgDeleteSave() {
-        initialize();
+    public void onClickImgDeleteSave1() {
+        deleteSave(save1);
+    }
+
+    @FXML
+    public void onClickImgDeleteSave2() {
+        deleteSave(save2);
+    }
+
+    @FXML
+    public void onClickImgDeleteSave3() {
+        deleteSave(save3);
+    }
+
+    private void deleteSave(Save save) {
+        SaveDAO saveDAO = new SaveDAO();
+        saveDAO.delete(save);
+        save = null;
+        navigationService.navigateTo("save-selection.fxml");
     }
 
     @FXML

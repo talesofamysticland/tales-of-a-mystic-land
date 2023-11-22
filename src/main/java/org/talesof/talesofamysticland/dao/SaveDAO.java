@@ -117,8 +117,8 @@ public class SaveDAO {
         return null;
     }
 
-    public List<Save> findSavesListByPlayer(Player player) {
-        String sql = "SELECT * FROM saves_list WHERE player_id = ?;";
+    public List<Save> findByPlayer(Player player) {
+        String sql = "SELECT * FROM Save WHERE player_id = ?;";
         List<Save> saves = new ArrayList<>();
 
         try (
