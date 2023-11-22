@@ -699,9 +699,7 @@ public class Entity {
             }
         }
         else if(attacking) {
-            if(currentWeapon.type != typeBow) {
-                attacking();
-            }
+            attacking();
         }
         else {
             setAction();

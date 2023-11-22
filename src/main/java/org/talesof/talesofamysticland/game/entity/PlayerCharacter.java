@@ -275,8 +275,10 @@ public abstract class PlayerCharacter extends Entity {
             }
 
             if (keyH.enterPressed && !attackCanceled) {
-                gp.playSoundEffect(7);
-                attacking = true;
+                if(currentWeapon.type != typeBow) {
+                    gp.playSoundEffect(7);
+                    attacking = true;
+                }
                 spriteCounter = 0;
             }
 
