@@ -116,6 +116,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame () {
+
         switch(gameService.getCharacterClass()) {
             case "Warrior" -> player = new Warrior(gameService.getCharacterName(), this, keyH);
             case "Wizard" -> player = new Wizard(gameService.getCharacterName(), this, keyH);

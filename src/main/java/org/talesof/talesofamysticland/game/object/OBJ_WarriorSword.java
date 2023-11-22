@@ -3,11 +3,11 @@ package org.talesof.talesofamysticland.game.object;
 import org.talesof.talesofamysticland.game.entity.Entity;
 import org.talesof.talesofamysticland.game.main.GamePanel;
 
-public class OBJ_SwordNormal extends Entity {
+public class OBJ_WarriorSword extends Entity {
 
-    public final static String OBJ_NAME = "Espada Comum";
+    public final static String OBJ_NAME = "Espada do Guerreiro";
 
-    public OBJ_SwordNormal(GamePanel gp) {
+    public OBJ_WarriorSword(GamePanel gp) {
         super(gp);
 
         type = typeSword;
@@ -15,7 +15,7 @@ public class OBJ_SwordNormal extends Entity {
         name = OBJ_NAME;
         description = "[" + name + "]\nUma velha espada.";
 
-        down1 = setup("/objects/sword_normal");
+        down1 = setup("/objects/normal_sword");
 
         attackValue = 1;
         attackArea.width = 36;

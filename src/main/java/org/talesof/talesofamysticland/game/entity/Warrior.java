@@ -4,15 +4,16 @@ import org.talesof.talesofamysticland.game.main.GamePanel;
 import org.talesof.talesofamysticland.game.main.KeyHandler;
 import org.talesof.talesofamysticland.game.object.OBJ_Axe;
 import org.talesof.talesofamysticland.game.object.OBJ_Key;
+import org.talesof.talesofamysticland.game.object.OBJ_Potion;
 import org.talesof.talesofamysticland.game.object.OBJ_ShieldWood;
-import org.talesof.talesofamysticland.game.object.OBJ_SwordNormal;
+import org.talesof.talesofamysticland.game.object.OBJ_WarriorSword;
 
 public class Warrior extends PlayerCharacter {
 
     public Warrior(String name, GamePanel gp, KeyHandler keyH) {
         super(name, gp, keyH);
 
-        currentWeapon = new OBJ_SwordNormal(gp);
+        currentWeapon = new OBJ_WarriorSword(gp);
         currentShield = new OBJ_ShieldWood(gp);
 
         strength = 2;
@@ -31,11 +32,12 @@ public class Warrior extends PlayerCharacter {
         maxLife = getHealth();
         life = maxLife;
 
-        maxMana = getMana();
-        mana = maxMana;
+        maxMana = 0;
+        maxAmmo = 0;
 
+        getImage();
+        getAttackImage();
         setItems();
-
         getGuardingImage();
     }
 
@@ -68,12 +70,12 @@ public class Warrior extends PlayerCharacter {
         if(currentWeapon.type == typeAxe) {
             loadAxeImage();
 
-        } else if(currentWeapon.type == typeStaff) {
-            loadStaffImage();
+        } else if(currentWeapon.type == typeSword) {
+            loadSwordImage();
         }
     }
 
-    private void loadStaffImage() {
+    private void loadSwordImage() {
         attackUp1 = setup("/player/warrior/attacking/warrior_attack_up_1", gp.tileSize, gp.tileSize*2);
         attackUp2 = setup("/player/warrior/attacking/warrior_attack_up_2", gp.tileSize, gp.tileSize*2);
         attackUp3 = setup("/player/warrior/attacking/warrior_attack_up_3", gp.tileSize, gp.tileSize*2);
@@ -100,7 +102,7 @@ public class Warrior extends PlayerCharacter {
 
         attackDown1 = setup("/player/warrior/axe/warrior_axe_down_1", gp.tileSize, gp.tileSize*2);
         attackDown2 = setup("/player/warrior/axe/warrior_axe_down_2", gp.tileSize, gp.tileSize*2);
-        attackDown3 = setup("/player/warrior/axe/warrior_axe_down_3", gp.tileSize, gp.tileSize*2);
+        attackDown3 = setup("/player/warrior/axe/warrior_axe_down_2", gp.tileSize, gp.tileSize*2);
 
         attackLeft1 = setup("/player/warrior/axe/warrior_axe_left_1", gp.tileSize*2, gp.tileSize);
         attackLeft2 = setup("/player/warrior/axe/warrior_axe_left_2", gp.tileSize*2, gp.tileSize);
@@ -114,10 +116,10 @@ public class Warrior extends PlayerCharacter {
     }
 
     public void getGuardingImage() {
-        guardUp = setup("/player/boy_guard_up");
-        guardDown = setup("/player/boy_guard_down");
-        guardLeft = setup("/player/boy_guard_left");
-        guardRight = setup("/player/boy_guard_right");
+        guardUp = setup("/player/warrior/guarding/warrior_shield_up");
+        guardDown = setup("/player/warrior/guarding/warrior_shield_down");
+        guardLeft = setup("/player/warrior/guarding/warrior_shield_left");
+        guardRight = setup("/player/warrior/guarding/warrior_shield_right");
     }
 
     @Override
@@ -127,5 +129,14 @@ public class Warrior extends PlayerCharacter {
         inventory.add(currentShield);
         inventory.add(new OBJ_Key(gp));
         inventory.add(new OBJ_Axe(gp));
+        inventory.add(new OBJ_Potion(gp));
+    }
+
+    @Override
+    public void checkLevelUp() {
+        super.checkLevelUp();  
+        strength++;
+        resistance++;
+        maxMana = getMana();
     }
 }

@@ -2,6 +2,7 @@ package org.talesof.talesofamysticland.game.monster;
 
 import org.talesof.talesofamysticland.game.entity.Entity;
 import org.talesof.talesofamysticland.game.main.GamePanel;
+import org.talesof.talesofamysticland.game.object.OBJ_Arrow;
 import org.talesof.talesofamysticland.game.object.OBJ_BronzeCoin;
 import org.talesof.talesofamysticland.game.object.OBJ_Heart;
 import org.talesof.talesofamysticland.game.object.OBJ_ManaCrystal;
@@ -78,15 +79,19 @@ public class MON_GreenSlime extends Entity {
         int i = new Random().nextInt(100) + 1;
 
         // Set the monster drop
-        if(i < 50) {
+        if(i < 30) {
             dropItem(new OBJ_BronzeCoin(gp));
         }
 
-        if(i >= 50 && i < 75) {
+        if(i >= 30 && i < 60) {
             dropItem(new OBJ_Heart(gp));
         }
 
-        if(i >= 75 && i < 100) {
+        if(i >= 60 && i < 90) {
+            dropItem(new OBJ_Arrow(gp));
+        }
+
+        if(i >= 90 && i < 100) {
             dropItem(new OBJ_ManaCrystal(gp));
         }
     }

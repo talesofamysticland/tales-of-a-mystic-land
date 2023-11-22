@@ -127,6 +127,10 @@ public abstract class PlayerCharacter extends Entity {
         return (int) (maxMana + (0.75 * wisdom));
     }
 
+    public int getAmmo() {
+        return (int) (maxAmmo + (0.75 * constitution));
+    }
+
     public int getCurrentWeaponSlot() {
         int currentWeaponSlot = -1;
         for(int i = 0; i < inventory.size(); i++) {
@@ -325,27 +329,30 @@ public abstract class PlayerCharacter extends Entity {
             guardCounter = 0;
         }
 
-        if (gp.keyH.shotKeyPressed && !projectile.alive
-                && shotAvailableCounter == 30 && projectile.haveResource(this)
-                && gp.player.currentWeapon.type == typeStaff) {
+        if(projectile != null) {
 
-            // Set default coordinates, direction and user
-            projectile.set(worldX, worldY, direction, true, this);
+            if (gp.keyH.shotKeyPressed && !projectile.alive
+                    && shotAvailableCounter == 30 && projectile.haveResource(this)
+                    && (gp.player.currentWeapon.type == typeStaff || gp.player.currentWeapon.type == typeBow)) {
 
-            // Subtract the cost (Mana, AMMO)
-            projectile.subtractResource(this);
+                // Set default coordinates, direction and user
+                projectile.set(worldX, worldY, direction, true, this);
 
-            for (int i = 0; i < gp.projectile[1].length; i++) {
-                if (gp.projectile[gp.currentMap][i] == null) {
-                    gp.projectile[gp.currentMap][i] = projectile;
-                    break;
+                // Subtract the cost (Mana, AMMO)
+                projectile.subtractResource(this);
+
+                for (int i = 0; i < gp.projectile[1].length; i++) {
+                    if (gp.projectile[gp.currentMap][i] == null) {
+                        gp.projectile[gp.currentMap][i] = projectile;
+                        break;
+                    }
                 }
+
+                shotAvailableCounter = 0;
+
+                gp.player.attacking = true;
+                gp.playSoundEffect(10);
             }
-
-            shotAvailableCounter = 0;
-
-            gp.player.attacking = true;
-            gp.playSoundEffect(10);
         }
 
         if (invincible) {
@@ -533,7 +540,6 @@ public abstract class PlayerCharacter extends Entity {
             defense = getDefense();
             magic = getMagic();
             defaultSpeed = getSpeed();
-            maxMana = getMana();
             maxLife = getHealth();
 
             gp.playSoundEffect(8);
@@ -552,7 +558,8 @@ public abstract class PlayerCharacter extends Entity {
 
             Entity selectedItem = inventory.get(itemIndex);
 
-            if(selectedItem.type == typeSword || selectedItem.type == typeAxe || selectedItem.type == typeStaff) {
+            if(selectedItem.type == typeSword || selectedItem.type == typeAxe 
+            || selectedItem.type == typeStaff || selectedItem.type == typeBow) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getAttackImage();
@@ -654,6 +661,9 @@ public abstract class PlayerCharacter extends Entity {
                     if (spriteNumVertical == 4) image = attackUp3;
                     if (spriteNumVertical == 5) image = attackUp3;
                 }
+                if(guarding) {
+                    image = guardUp;
+                }
             }
             case "down" -> {
                 if(!attacking) {
@@ -670,6 +680,9 @@ public abstract class PlayerCharacter extends Entity {
                     if (spriteNumVertical == 4) image = attackDown3;
                     if (spriteNumVertical == 5) image = attackDown3;
                 }
+                if(guarding) {
+                    image = guardDown;
+                }
             }
             case "left" -> {
                 if(!attacking) {
@@ -685,6 +698,9 @@ public abstract class PlayerCharacter extends Entity {
                     if (spriteNumHorizontal == 3) image = attackLeft3;
                     if (spriteNumHorizontal == 4) image = attackLeft4;
                 }
+                if(guarding) {
+                    image = guardLeft;
+                }
             }
             case "right" -> {
                 if(!attacking) {
@@ -698,6 +714,9 @@ public abstract class PlayerCharacter extends Entity {
                     if (spriteNumHorizontal == 2) image = attackRight2;
                     if (spriteNumHorizontal == 3) image = attackRight3;
                     if (spriteNumHorizontal == 4) image = attackRight4;
+                }
+                if(guarding) {
+                    image = guardRight;
                 }
             }
         }

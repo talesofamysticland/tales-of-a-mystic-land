@@ -6,6 +6,7 @@ import org.talesof.talesofamysticland.game.object.OBJ_Axe;
 import org.talesof.talesofamysticland.game.object.OBJ_Fireball;
 import org.talesof.talesofamysticland.game.object.OBJ_Key;
 import org.talesof.talesofamysticland.game.object.OBJ_LiandryStaff;
+import org.talesof.talesofamysticland.game.object.OBJ_Potion;
 
 public class Wizard extends PlayerCharacter {
 
@@ -33,6 +34,8 @@ public class Wizard extends PlayerCharacter {
 
         maxMana = getMana();
         mana = maxMana;
+
+        maxAmmo = 0;
 
         getImage();
         getAttackImage();
@@ -119,6 +122,7 @@ public class Wizard extends PlayerCharacter {
         inventory.add(currentWeapon);
         inventory.add(new OBJ_Axe(gp));
         inventory.add(new OBJ_Key(gp));
+        inventory.add(new OBJ_Potion(gp));
     }    
 
     @Override

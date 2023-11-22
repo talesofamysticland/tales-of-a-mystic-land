@@ -18,8 +18,8 @@ public class OBJ_LiandryStaff extends Entity {
         down1 = setup("/objects/staff");
 
         attackValue = 0.5;
-        attackArea.width = 36;
-        attackArea.height = 36;
+        attackArea.width = 30;
+        attackArea.height = 30;
         knockBackPower = 1;
 
         motion1Duration = 10;

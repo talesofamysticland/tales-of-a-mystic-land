@@ -16,7 +16,7 @@ public class OBJ_Potion extends Entity {
         name = OBJ_NAME;
         heal = 5;
         description = "[" + name + "]\nCura sua vida em " + heal + ".";
-        down1 = setup("/objects/potion_red");
+        down1 = setup("/objects/health_potion");
         stackable = true;
 
         price = 25;
@@ -28,7 +28,7 @@ public class OBJ_Potion extends Entity {
         dialogues[0][0] = "Você bebeu a " + name + "!\n" +
                 "Sua vida foi curada em " + heal + ".";
 
-        dialogues[1][0] = "Sua vida esta cheia!";
+        dialogues[1][0] = "Sua vida está cheia!";
     }
 
     public boolean use(Entity entity) {

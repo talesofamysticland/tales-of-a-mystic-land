@@ -2,6 +2,7 @@ package org.talesof.talesofamysticland.game.main;
 
 import org.talesof.talesofamysticland.game.Game;
 import org.talesof.talesofamysticland.game.entity.Entity;
+import org.talesof.talesofamysticland.game.object.OBJ_Arrow;
 import org.talesof.talesofamysticland.game.object.OBJ_BronzeCoin;
 import org.talesof.talesofamysticland.game.object.OBJ_Heart;
 import org.talesof.talesofamysticland.game.object.OBJ_ManaCrystal;
@@ -18,7 +19,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     public Font maruMonica;
-    BufferedImage heart_full, heart_half, heart_blank, crystal_full, crystal_blank, coin;
+    BufferedImage heart_full, heart_half, heart_blank, crystal_full, crystal_blank, coin, arrow;
     ArrayList<String> message = new ArrayList<>();
     ArrayList<Integer> messageCounter = new ArrayList<>();
     public String currentDialogue = "";
@@ -57,6 +58,9 @@ public class UI {
         crystal_full = crystal.image;
         crystal_blank = crystal.image2;
 
+        Entity arrow = new OBJ_Arrow(gp);
+        this.arrow = arrow.image;
+
         Entity bronze_coin = new OBJ_BronzeCoin(gp);
         coin = bronze_coin.down1;
     }
@@ -74,19 +78,19 @@ public class UI {
 
         // Play State
         if(gp.gameState == gp.playState) {
-            drawPlayerLifeAndMana();
+            drawPlayerLifeAndResources();
             drawMessage();
         }
 
         // Pause State
         if(gp.gameState == gp.pauseState) {
-            drawPlayerLifeAndMana();
+            drawPlayerLifeAndResources();
             drawPauseScreen();
         }
 
         // Dialogue State
         if(gp.gameState == gp.dialogueState) {
-            drawPlayerLifeAndMana();
+            drawPlayerLifeAndResources();
             drawDialogueScreen();
         }
 
@@ -120,7 +124,7 @@ public class UI {
         }
     }
 
-    private void drawPlayerLifeAndMana() {
+    private void drawPlayerLifeAndResources() {
 
         int x = gp.tileSize / 2;
         int y = gp.tileSize / 2;
@@ -150,6 +154,7 @@ public class UI {
             x += gp.tileSize;
         }
 
+        
         // Draw max mana
         x = (gp.tileSize / 2) - 5;
         y = (int) (gp.tileSize * 1.5);
@@ -168,6 +173,17 @@ public class UI {
 
         while(i < gp.player.mana) {
             g2.drawImage(crystal_full, x, y, null);
+            i++;
+            x += 35;
+        }
+
+        // Draw arrows
+        x = (gp.tileSize / 2) - 5;
+        y = (int) (gp.tileSize * 1.5);
+        i = 0;
+
+        while(i < gp.player.ammo) {
+            g2.drawImage(arrow, x, y, null);
             i++;
             x += 35;
         }
@@ -809,6 +825,7 @@ public class UI {
             if(gp.keyH.enterPressed) {
                 commandNum = 0;
                 npc.startDialogue(npc, 1);
+                npc.getNPCImage();
             }
         }
     }

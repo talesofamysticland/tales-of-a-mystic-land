@@ -68,6 +68,7 @@ public class Entity {
     public int life;
     public int maxMana;
     public int mana;
+    public int maxAmmo;
     public int ammo;
     public int level;
 
@@ -119,6 +120,7 @@ public class Entity {
     public final int typeObstacle = 9;
     public final int typeLight = 10;
     public final int typeStaff = 11;
+    public final int typeBow = 12;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -189,9 +191,9 @@ public class Entity {
 
     public void damageReaction() { }
 
-    public void speak() {
+    public void speak() { }
 
-    }
+    public void getNPCImage() { }
 
     public void facePlayer() {
         switch(gp.player.direction) {
@@ -633,8 +635,10 @@ public class Entity {
 
                 int projectileIndex = gp.cChecker.checkEntity(this, gp.projectile);
                 
-                if(projectile.user != gp.player) {
-                    gp.player.damageProjectile(projectileIndex);
+                if(projectile != null) {
+                    if(projectile.user != gp.player) {
+                        gp.player.damageProjectile(projectileIndex);
+                    }
                 }
             }
 
@@ -695,7 +699,9 @@ public class Entity {
             }
         }
         else if(attacking) {
-            attacking();
+            if(currentWeapon.type != typeBow) {
+                attacking();
+            }
         }
         else {
             setAction();
