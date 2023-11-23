@@ -189,12 +189,10 @@ public class GamePanel extends JPanel implements Runnable {
 
             List<ItemInInventory> itemInInventoryList = itemInInventoryDAO.findByCharacterState(characterState);
 
-            if(itemInInventoryList.isEmpty()) {
-                player.setDefaultItens();
-                return;
-            }
-
             player.loadInventory(itemInInventoryList);
+            
+        } else {
+            player.setDefaultItens();
         }
     }
 
