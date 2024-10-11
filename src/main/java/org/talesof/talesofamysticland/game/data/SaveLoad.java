@@ -1,14 +1,16 @@
 package org.talesof.talesofamysticland.game.data;
 
-import org.talesof.talesofamysticland.game.main.GamePanel;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
-import java.io.*;
+import org.talesof.talesofamysticland.game.main.GamePanel;
 
 public class SaveLoad {
 
     GamePanel gp;
-
-    private static final long serialVersionUID = 9047733080742134121L;
 
     public SaveLoad(GamePanel gp) {
         this.gp = gp;
@@ -16,17 +18,17 @@ public class SaveLoad {
 
     public void save() {
 
-        try {
-            ObjectOutputStream oos =
-                    new ObjectOutputStream(
-                        new FileOutputStream(
-                                "save.dat"
-                        )
-                    );
+        try (ObjectOutputStream oos =
+                new ObjectOutputStream(
+                    new FileOutputStream(
+                            "save.dat"
+                    )
+                )
+        ) {
+            
 
             DataStorage ds = new DataStorage();
 
-            // Object on map
             ds.mapObjectNames = new String[gp.maxMap][gp.obj[1].length];
             ds.mapObjectWorldX = new int[gp.maxMap][gp.obj[1].length];
             ds.mapObjectWorldY = new int[gp.maxMap][gp.obj[1].length];
@@ -58,24 +60,22 @@ public class SaveLoad {
             oos.close();
 
         } catch(IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
     }
 
     public void load() {
 
-        try {
-            ObjectInputStream ois =
-                    new ObjectInputStream(
-                            new FileInputStream(
-                                    "save.dat"
-                            )
-                    );
+        try (ObjectInputStream ois = 
+                new ObjectInputStream(
+                    new FileInputStream(
+                        "save.dat"
+                    )
+                )
+        ) {
 
             DataStorage ds = (DataStorage) ois.readObject();
 
-            // Objects on map
             for(int mapNum = 0; mapNum < gp.maxMap; mapNum++) {
                 for(int i = 0; i < gp.obj[1].length; i++) {
 
@@ -101,9 +101,7 @@ public class SaveLoad {
 
             ois.close();
 
-        } catch(IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch(IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
